@@ -1,0 +1,2944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Last Summer — Shivu</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* ================================
+   THE LAST SUMMER — BOOK READER
+================================ */
+
+.book-reader{
+    max-width:900px;
+    margin:40px auto 100px;
+    padding:0 18px;
+}
+
+.book-page{
+    display:none;
+    min-height:520px;
+    padding:42px 34px;
+    border:1px solid rgba(155,108,255,.25);
+    border-radius:28px;
+    background:rgba(15,15,28,.78);
+    box-shadow:0 25px 80px rgba(0,0,0,.35);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+}
+
+.book-page:target{
+    display:block;
+}
+
+/* First page when no #hash exists */
+#page1{
+    display:block;
+}
+
+.book-page:target ~ #page1{
+    display:none;
+}
+
+.page-number{
+    color:#9b6cff;
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:25px;
+}
+
+.chapter-label{
+    color:#8f91a7;
+    font-size:13px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:12px;
+}
+
+.book-page h2{
+    font-size:34px;
+    line-height:1.15;
+    margin:0 0 25px;
+}
+
+.book-page h3{
+    font-size:22px;
+    margin:0 0 20px;
+}
+
+.book-page p{
+    color:#c8c8d5;
+    font-size:17px;
+    line-height:1.9;
+    margin:0 0 20px;
+}
+
+.book-nav{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-top:35px;
+    padding-top:25px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.book-nav a{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:110px;
+    padding:12px 18px;
+    border-radius:14px;
+    text-decoration:none;
+    color:#fff;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.1);
+    transition:.25s ease;
+}
+
+.book-nav a:hover{
+    transform:translateY(-2px);
+    border-color:rgba(155,108,255,.5);
+    background:rgba(155,108,255,.12);
+}
+
+.book-intro{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.book-intro .eyebrow{
+    margin-bottom:15px;
+}
+
+.book-intro h1{
+    font-size:clamp(42px,8vw,76px);
+    margin:0;
+    letter-spacing:-2px;
+}
+
+.book-intro p{
+    color:#999aad;
+    margin-top:12px;
+    font-size:17px;
+}
+
+@media(max-width:600px){
+    .book-reader{
+        margin-top:25px;
+        padding:0 12px;
+    }
+
+    .book-page{
+        min-height:560px;
+        padding:30px 22px;
+        border-radius:22px;
+    }
+
+    .book-page h2{
+        font-size:28px;
+    }
+
+    .book-page p{
+        font-size:16px;
+        line-height:1.8;
+    }
+
+    .book-nav a{
+        min-width:90px;
+        padding:11px 13px;
+        font-size:14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+    <div class="nav-container">
+
+        <a href="index.html" class="logo">
+            360° Universe
+        </a>
+
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">
+            ☰
+        </button>
+
+        <div class="nav-menu" id="navMenu">
+            <a href="index.html">Home</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="book.html" class="active">Book</a>
+            <a href="thoughts.html">Thoughts</a>
+            <a href="course.html">Growth Lab</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- ================= BOOK HERO ================= -->
+
+<section class="page-hero">
+    <div class="page-hero-content">
+
+        <span class="eyebrow">A Story By Shivu</span>
+
+        <h1>The Last Summer</h1>
+
+        <p>
+            Some summers stay forever.
+        </p>
+
+    </div>
+</section>
+
+
+<!-- ================= BOOK READER ================= -->
+
+<main class="book-reader">
+
+<div class="book-intro">
+    <span class="eyebrow">THE LAST SUMMER</span>
+    <h1>Some summers stay forever.</h1>
+    <p>
+        A story about a summer, a lake, two people,
+        and the memories that never really leave.
+    </p>
+</div>
+
+
+<!-- ================= PAGE 1 ================= -->
+
+<article class="book-page" id="page1">
+
+    <div class="page-number">Page 01</div>
+
+    <div class="chapter-label">Chapter 01</div>
+
+    <h2>The Boy at the Shore</h2>
+
+    <p>
+        The lake was quiet that afternoon.
+        The mountains stood beyond it like silent guardians,
+        their reflections breaking whenever the wind touched
+        the water.
+    </p>
+
+    <p>
+        Shiv sat alone at the end of the old wooden pier.
+        His notebook rested beside him, open to a blank page.
+        He had brought it with him almost every day that summer,
+        although he rarely knew what he wanted to write.
+    </p>
+
+    <p>
+        Sometimes he came here simply because the lake asked
+        nothing from him.
+    </p>
+
+    <div class="book-nav">
+        <span></span>
+        <a href="#page2">Next →</a>
+    </div>
+
+</article>
+
+
+<!-- ================= PAGE 2 ================= -->
+
+<article class="book-page" id="page2">
+
+    <div class="page-number">Page 02</div>
+
+    <h3>The Quiet Place</h3>
+
+    <p>
+        At home, everyone seemed to have an idea of who Shiv
+        was supposed to become.
+    </p>
+
+    <p>
+        His future was discussed over dinner, during phone calls,
+        and sometimes in conversations that were supposed to be
+        about something else.
+    </p>
+
+    <p>
+        Study. Career. Family. Responsibility.
+    </p>
+
+    <p>
+        The words were not cruel, but they were heavy.
+        Shiv understood why his family cared about him.
+        Still, there were days when he wondered whether anyone
+        had ever asked him what he actually wanted.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page1">← Previous</a>
+        <a href="#page3">Next →</a>
+    </div>
+
+</article>
+
+
+<!-- ================= PAGE 3 ================= -->
+
+<article class="book-page" id="page3">
+
+    <div class="page-number">Page 03</div>
+
+    <h3>A Presence</h3>
+
+    <p>
+        He looked across the lake.
+    </p>
+
+    <p>
+        For a moment, everything seemed exactly as it had been
+        for the last few weeks.
+    </p>
+
+    <p>
+        Then he noticed someone standing near the shore.
+    </p>
+
+    <p>
+        A girl.
+    </p>
+
+    <p>
+        She wasn't doing anything remarkable.
+        She was simply looking at the water, as if she had
+        forgotten the rest of the world existed.
+    </p>
+
+    <p>
+        Shiv looked away first.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page2">← Previous</a>
+        <a href="#page4">Next →</a>
+    </div>
+
+</article>
+
+
+<!-- ================= PAGE 4 ================= -->
+
+<article class="book-page" id="page4">
+
+    <div class="page-number">Page 04</div>
+
+    <h3>The First Glance</h3>
+
+    <p>
+        He tried to return to his notebook.
+    </p>
+
+    <p>
+        But the blank page suddenly felt less interesting.
+    </p>
+
+    <p>
+        He wondered who she was.
+    </p>
+
+    <p>
+        The thought surprised him.
+    </p>
+
+    <p>
+        Shiv wasn't someone who usually became curious about
+        strangers. He preferred observing people from a distance,
+        understanding them without becoming part of their story.
+    </p>
+
+    <p>
+        Yet something about that afternoon felt different.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page3">← Previous</a>
+        <a href="#page5">Next →</a>
+    </div>
+
+</article>
+
+
+<!-- ================= PAGE 5 ================= -->
+
+<article class="book-page" id="page5">
+
+    <div class="page-number">Page 05</div>
+
+    <h3>The Summer Begins</h3>
+
+    <p>
+        The girl eventually walked away.
+    </p>
+
+    <p>
+        Shiv watched her disappear into the old streets.
+    </p>
+
+    <p>
+        He closed his notebook.
+    </p>
+
+    <p>
+        He didn't know it yet, but that ordinary afternoon
+        would become one of the memories he carried for years.
+    </p>
+
+    <p>
+        Some stories begin with a conversation.
+    </p>
+
+    <p>
+        Others begin with nothing more than a glance.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page4">← Previous</a>
+        <a href="#page6">Next →</a>
+    </div>
+
+</article>
+
+
+<!-- ================= CHAPTER 2 ================= -->
+
+<article class="book-page" id="page6">
+
+    <div class="page-number">Page 06</div>
+
+    <div class="chapter-label">Chapter 02</div>
+
+    <h2>Her Name in the Wind</h2>
+
+    <p>
+        Three days later, Shiv saw her again.
+    </p>
+
+    <p>
+        This time she was sitting inside the small bookstore
+        on the corner of the oldest street in town.
+    </p>
+
+    <p>
+        Books surrounded her.
+    </p>
+
+    <p>
+        For some reason, that made Shiv smile.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page5">← Previous</a>
+        <a href="#page7">Next →</a>
+    </div>
+
+</article>
+
+
+<article class="book-page" id="page7">
+
+    <div class="page-number">Page 07</div>
+
+    <h3>Hello</h3>
+
+    <p>
+        Shiv walked past the shelf where she was standing.
+    </p>
+
+    <p>
+        Then he stopped.
+    </p>
+
+    <p>
+        He wasn't sure why.
+    </p>
+
+    <p>
+        "You like that book?"
+    </p>
+
+    <p>
+        The question came out more awkwardly than he expected.
+    </p>
+
+    <p>
+        She looked at him and smiled slightly.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page6">← Previous</a>
+        <a href="#page8">Next →</a>
+    </div>
+
+</article>
+
+
+<article class="book-page" id="page8">
+
+    <div class="page-number">Page 08</div>
+
+    <h3>Meera</h3>
+
+    <p>
+        "I've read it before," she said.
+    </p>
+
+    <p>
+        Her voice was calm.
+    </p>
+
+    <p>
+        "Then why are you holding it?"
+    </p>
+
+    <p>
+        She looked at the cover.
+    </p>
+
+    <p>
+        "Sometimes you return to things you already know."
+    </p>
+
+    <p>
+        Shiv didn't know what to say.
+    </p>
+
+    <p>
+        She smiled again.
+    </p>
+
+    <p>
+        "I'm Meera."
+    </p>
+
+    <div class="book-nav">
+        <a href="#page7">← Previous</a>
+        <a href="#page9">Next →</a>
+    </div>
+
+</article>
+
+
+<article class="book-page" id="page9">
+
+    <div class="page-number">Page 09</div>
+
+    <h3>A Name</h3>
+
+    <p>
+        "Shiv."
+    </p>
+
+    <p>
+        That was it.
+    </p>
+
+    <p>
+        Two names exchanged between shelves of old books.
+    </p>
+
+    <p>
+        Yet somehow, the moment stayed with him.
+    </p>
+
+    <p>
+        That evening, sitting by the lake, Shiv opened his
+        notebook.
+    </p>
+
+    <p>
+        Without thinking much, he wrote her name.
+    </p>
+
+    <p>
+        Meera.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page8">← Previous</a>
+        <a href="#page10">Next →</a>
+    </div>
+
+</article>
+
+
+<article class="book-page" id="page10">
+
+    <div class="page-number">Page 10</div>
+
+    <h3>The Café</h3>
+
+    <p>
+        Their next meeting happened at a quiet café near
+        the lake.
+    </p>
+
+    <p>
+        Meera was sitting by the window with a book.
+    </p>
+
+    <p>
+        Shiv ordered a drink and sat at the next table.
+    </p>
+
+    <p>
+        Neither of them spoke for several minutes.
+    </p>
+
+    <p>
+        Somehow, the silence didn't feel uncomfortable.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page9">← Previous</a>
+        <a href="#page11">Next →</a>
+    </div>
+
+</article>
+
+
+<article class="book-page" id="page11">
+
+    <div class="page-number">Page 11</div>
+
+    <h3>Small Conversations</h3>
+
+    <p>
+        "You write?"
+    </p>
+
+    <p>
+        Meera pointed toward the notebook beside him.
+    </p>
+
+    <p>
+        Shiv nodded.
+    </p>
+
+    <p>
+        "Sometimes."
+    </p>
+
+    <p>
+        "What do you write?"
+    </p>
+
+    <p>
+        "Things I don't know how to say."
+    </p>
+
+    <p>
+        Meera looked at him for a moment.
+    </p>
+
+    <p>
+        "That's usually what writing is for."
+    </p>
+
+    <div class="book-nav">
+        <a href="#page10">← Previous</a>
+        <a href="#page12">Next →</a>
+    </div>
+
+</article>
+
+
+<article class="book-page" id="page12">
+
+    <div class="page-number">Page 12</div>
+
+    <h3>The Old Streets</h3>
+
+    <p>
+        After that day, they started meeting more often.
+    </p>
+
+    <p>
+        Sometimes at the bookstore.
+        Sometimes at the café.
+        Sometimes beside the lake.
+    </p>
+
+    <p>
+        They walked through old streets without deciding
+        where they were going.
+    </p>
+
+    <p>
+        Their friendship didn't arrive suddenly.
+    </p>
+
+    <p>
+        It grew quietly.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page11">← Previous</a>
+        <a href="#page13">Next →</a>
+    </div>
+
+</article>
+
+
+<article class="book-page" id="page13">
+
+    <div class="page-number">Page 13</div>
+
+    <h3>The Pier</h3>
+
+    <p>
+        The wooden pier became their favourite place.
+    </p>
+
+    <p>
+        They would sit at opposite ends sometimes,
+        saying almost nothing.
+    </p>
+
+    <p>
+        Other times, they talked until the sky turned orange.
+    </p>
+
+    <p>
+        Shiv began to notice the small things about Meera.
+    </p>
+
+    <p>
+        The way she paused before answering difficult questions.
+        The way she looked at the lake when she was thinking.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page12">← Previous</a>
+        <a href="#page14">Next →</a>
+    </div>
+
+</article>
+
+
+<article class="book-page" id="page14">
+
+    <div class="page-number">Page 14</div>
+
+    <h3>Her Silence</h3>
+
+    <p>
+        Meera didn't talk much about her past.
+    </p>
+
+    <p>
+        Whenever conversations came close to certain subjects,
+        she changed the topic.
+    </p>
+
+    <p>
+        Shiv noticed.
+    </p>
+
+    <p>
+        But he didn't ask.
+    </p>
+
+    <p>
+        He understood that trust couldn't be demanded.
+    </p>
+
+    <p>
+        It had to be earned.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page13">← Previous</a>
+        <a href="#page15">Next →</a>
+    </div>
+
+</article>
+
+
+<article class="book-page" id="page15">
+
+    <div class="page-number">Page 15</div>
+
+    <h3>His Notebook</h3>
+
+    <p>
+        Shiv's notebook slowly filled with moments.
+    </p>
+
+    <p>
+        A sentence Meera had said.
+        A sunset they had watched.
+        A rainy afternoon at the café.
+        A walk through an empty street.
+    </p>
+
+    <p>
+        He never called them memories while they were happening.
+    </p>
+
+    <p>
+        They were simply days.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page14">← Previous</a>
+        <a href="#page16">Next →</a>
+    </div>
+
+</article>
+
+
+<article class="book-page" id="page16">
+
+    <div class="page-number">Page 16</div>
+
+    <h3>A Beginning</h3>
+
+    <p>
+        One evening, Shiv looked at the name he had written
+        weeks ago.
+    </p>
+
+    <p>
+        Meera.
+    </p>
+
+    <p>
+        He realized something.
+    </p>
+
+    <p>
+        A name could be more than a name.
+    </p>
+
+    <p>
+        Sometimes a name could be the beginning of a memory.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page15">← Previous</a>
+        <a href="#page17">Next →</a>
+    </div>
+
+</article>
+
+
+<article class="book-page" id="page17">
+
+    <div class="page-number">Page 17</div>
+
+    <h3>Summer Days</h3>
+
+    <p>
+        The days became warmer.
+    </p>
+
+    <p>
+        The town became busier.
+    </p>
+
+    <p>
+        And somehow, Shiv and Meera became closer.
+    </p>
+
+    <p>
+        Nothing was officially different.
+    </p>
+
+    <p>
+        Yet everything felt different.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page16">← Previous</a>
+        <a href="#page18">Next →</a>
+    </div>
+
+</article>
+
+
+<article class="book-page" id="page18">
+
+    <div class="page-number">Page 18</div>
+
+    <h3>The Unspoken</h3>
+
+    <p>
+        There were things neither of them said.
+    </p>
+
+    <p>
+        Feelings didn't always need words.
+    </p>
+
+    <p>
+        Sometimes they existed in the space between two people,
+        quietly waiting.
+    </p>
+
+    <p>
+        Shiv didn't know what their friendship would become.
+    </p>
+
+    <p>
+        He only knew he didn't want the summer to end.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page17">← Previous</a>
+        <a href="#page19">Next →</a>
+    </div>
+
+</article>
+
+
+<article class="book-page" id="page19">
+
+    <div class="page-number">Page 19</div>
+
+    <h3>Before the Sunset</h3>
+
+    <p>
+        That evening, they sat together on the pier.
+    </p>
+
+    <p>
+        The sun slowly disappeared behind the mountains.
+    </p>
+
+    <p>
+        Neither of them wanted to leave.
+    </p>
+
+    <p>
+        They didn't know it yet, but the quiet friendship
+        of those days was becoming something they would both
+        remember for a very long time.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page18">← Previous</a>
+        <a href="#page20">Next →</a>
+    </div>
+
+</article>
+
+
+<!-- ================= CHAPTER 3 ================= -->
+
+<article class="book-page" id="page20">
+
+    <div class="page-number">Page 20</div>
+
+    <div class="chapter-label">Chapter 03</div>
+
+    <h2>Sunsets and Secrets</h2>
+
+    <p>
+        Summer had become a rhythm.
+    </p>
+
+    <p>
+        Mornings belonged to the town.
+        Afternoons belonged to the lake.
+        Evenings belonged to conversations that neither of them
+        wanted to end.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page19">← Previous</a>
+        <a href="#page21">Next →</a>
+    </div>
+
+</article>
+
+
+<article class="book-page" id="page21">
+<div class="page-number">Page 21</div>
+<h3>Future</h3>
+<p>
+Shiv still thought about the future.
+</p>
+<p>
+Sometimes the pressure became too loud.
+</p>
+<p>
+Meera noticed even when he tried to hide it.
+</p>
+<p>
+"You think too much," she said one evening.
+</p>
+<div class="book-nav">
+<a href="#page20">← Previous</a>
+<a href="#page22">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page22">
+<div class="page-number">Page 22</div>
+<h3>Dreams</h3>
+<p>
+"What do you want?" Meera asked.
+</p>
+<p>
+Shiv looked at the lake.
+</p>
+<p>
+"I don't know."
+</p>
+<p>
+It was the most honest answer he had given in a long time.
+</p>
+<div class="book-nav">
+<a href="#page21">← Previous</a>
+<a href="#page23">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page23">
+<div class="page-number">Page 23</div>
+<h3>Her Fear</h3>
+<p>
+Meera didn't tell Shiv everything either.
+</p>
+<p>
+She had learned to keep certain parts of herself protected.
+</p>
+<p>
+Trust was difficult for her.
+</p>
+<p>
+But around Shiv, that wall had started becoming smaller.
+</p>
+<div class="book-nav">
+<a href="#page22">← Previous</a>
+<a href="#page24">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page24">
+<div class="page-number">Page 24</div>
+<h3>Rain at the Window</h3>
+<p>
+One afternoon, rain trapped them inside the café.
+</p>
+<p>
+Drops covered the glass while the town disappeared behind
+a silver curtain.
+</p>
+<p>
+They sat beside the window and watched.
+</p>
+<p>
+The silence between them felt peaceful.
+</p>
+<div class="book-nav">
+<a href="#page23">← Previous</a>
+<a href="#page25">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page25">
+<div class="page-number">Page 25</div>
+<h3>The Question</h3>
+<p>
+"Do you ever get scared of losing people?"
+</p>
+<p>
+Meera asked the question without looking at him.
+</p>
+<p>
+Shiv was quiet.
+</p>
+<p>
+"Yes."
+</p>
+<p>
+"So do I."
+</p>
+<div class="book-nav">
+<a href="#page24">← Previous</a>
+<a href="#page26">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page26">
+<div class="page-number">Page 26</div>
+<h3>The Rooftop</h3>
+<p>
+A few nights later, they climbed to a quiet rooftop overlooking
+the town.
+</p>
+<p>
+Small lights glowed across the old streets.
+</p>
+<p>
+Above them, the sky was clear.
+</p>
+<div class="book-nav">
+<a href="#page25">← Previous</a>
+<a href="#page27">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page27">
+<div class="page-number">Page 27</div>
+<h3>Stars</h3>
+<p>
+Meera looked upward.
+</p>
+<p>
+"Do you think people are meant to stay?"
+</p>
+<p>
+Shiv thought for a while.
+</p>
+<p>
+"Maybe some are."
+</p>
+<p>
+"And some?"
+</p>
+<p>
+"Maybe some are meant to change us."
+</p>
+<div class="book-nav">
+<a href="#page26">← Previous</a>
+<a href="#page28">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page28">
+<div class="page-number">Page 28</div>
+<h3>Understanding</h3>
+<p>
+Neither of them explained what they meant.
+</p>
+<p>
+They didn't need to.
+</p>
+<p>
+The night understood for them.
+</p>
+<div class="book-nav">
+<a href="#page27">← Previous</a>
+<a href="#page29">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page29">
+<div class="page-number">Page 29</div>
+<h3>A Walk</h3>
+<p>
+They walked through the old streets after midnight.
+</p>
+<p>
+The town was almost empty.
+</p>
+<p>
+Their footsteps echoed between the buildings.
+</p>
+<p>
+For once, Shiv wasn't thinking about tomorrow.
+</p>
+<div class="book-nav">
+<a href="#page28">← Previous</a>
+<a href="#page30">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page30">
+<div class="page-number">Page 30</div>
+<h3>The Bookstore</h3>
+<p>
+The bookstore was closed, but they stopped outside.
+</p>
+<p>
+Meera pointed toward the window.
+</p>
+<p>
+"That's where we met."
+</p>
+<p>
+Shiv smiled.
+</p>
+<p>
+"Feels like a long time ago."
+</p>
+<div class="book-nav">
+<a href="#page29">← Previous</a>
+<a href="#page31">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page31">
+<div class="page-number">Page 31</div>
+<h3>Changing</h3>
+<p>
+Shiv was beginning to realize that people could change
+without noticing it.
+</p>
+<p>
+Before Meera, he had spent most evenings alone.
+</p>
+<p>
+Now he looked forward to tomorrow because she might be there.
+</p>
+<div class="book-nav">
+<a href="#page30">← Previous</a>
+<a href="#page32">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page32">
+<div class="page-number">Page 32</div>
+<h3>Closer</h3>
+<p>
+Their conversations became deeper.
+</p>
+<p>
+They spoke about childhood, dreams, mistakes and fears.
+</p>
+<p>
+They discovered that their loneliness had different reasons,
+but somehow felt familiar.
+</p>
+<div class="book-nav">
+<a href="#page31">← Previous</a>
+<a href="#page33">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page33">
+<div class="page-number">Page 33</div>
+<h3>The Notebook</h3>
+<p>
+One afternoon, Meera noticed Shiv hiding his notebook.
+</p>
+<p>
+"Are you writing about me?"
+</p>
+<p>
+Shiv laughed.
+</p>
+<p>
+"Maybe."
+</p>
+<p>
+"Then someday I'll read it."
+</p>
+<p>
+He didn't tell her that she already filled more pages
+than anyone else.
+</p>
+<div class="book-nav">
+<a href="#page32">← Previous</a>
+<a href="#page34">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page34">
+<div class="page-number">Page 34</div>
+<h3>Almost</h3>
+<p>
+There were moments when Shiv wanted to say something more.
+</p>
+<p>
+Something important.
+</p>
+<p>
+But every time he tried, the words stayed somewhere
+between his thoughts and his voice.
+</p>
+<div class="book-nav">
+<a href="#page33">← Previous</a>
+<a href="#page35">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page35">
+<div class="page-number">Page 35</div>
+<h3>The Sunset</h3>
+<p>
+They watched another sunset from the pier.
+</p>
+<p>
+The sky turned gold before slowly becoming purple.
+</p>
+<p>
+Meera smiled.
+</p>
+<p>
+"Beautiful."
+</p>
+<p>
+Shiv wasn't sure whether she meant the sunset.
+</p>
+<div class="book-nav">
+<a href="#page34">← Previous</a>
+<a href="#page36">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page36">
+<div class="page-number">Page 36</div>
+<h3>More Than Summer</h3>
+<p>
+The summer had started as a collection of ordinary days.
+</p>
+<p>
+Now every day felt important.
+</p>
+<p>
+The lake.
+The streets.
+The books.
+The café.
+The rooftop.
+</p>
+<p>
+Everything had become part of their story.
+</p>
+<div class="book-nav">
+<a href="#page35">← Previous</a>
+<a href="#page37">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page37">
+<div class="page-number">Page 37</div>
+<h3>Quiet Feelings</h3>
+<p>
+Some feelings arrive loudly.
+</p>
+<p>
+Theirs didn't.
+</p>
+<p>
+They grew quietly, between conversations,
+shared silences and sunsets.
+</p>
+<p>
+Neither of them named them.
+</p>
+<div class="book-nav">
+<a href="#page36">← Previous</a>
+<a href="#page38">Next →</a>
+</div>
+</article>
+
+
+<!-- ================= CHAPTER 4 ================= -->
+
+<article class="book-page" id="page38">
+<div class="page-number">Page 38</div>
+<div class="chapter-label">Chapter 04</div>
+<h2>The Promise Under Stars</h2>
+<p>
+That night, the town was unusually quiet.
+</p>
+<p>
+Shiv and Meera walked toward their favourite viewpoint.
+</p>
+<div class="book-nav">
+<a href="#page37">← Previous</a>
+<a href="#page39">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page39">
+<div class="page-number">Page 39</div>
+<h3>The Viewpoint</h3>
+<p>
+From the hill, the lake looked like a dark mirror.
+</p>
+<p>
+Stars covered the sky above them.
+</p>
+<p>
+Neither spoke for a while.
+</p>
+<div class="book-nav">
+<a href="#page38">← Previous</a>
+<a href="#page40">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page40">
+<div class="page-number">Page 40</div>
+<h3>Meera's Fear</h3>
+<p>
+"I don't want this summer to end," Meera said.
+</p>
+<p>
+Shiv looked at her.
+</p>
+<p>
+"Why?"
+</p>
+<p>
+"Because good things don't always stay."
+</p>
+<div class="book-nav">
+<a href="#page39">← Previous</a>
+<a href="#page41">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page41">
+<div class="page-number">Page 41</div>
+<h3>Not Forever</h3>
+<p>
+Shiv didn't promise forever.
+</p>
+<p>
+He knew some promises were too big for anyone to make.
+</p>
+<p>
+Instead, he said,
+</p>
+<p>
+"I'll remember it."
+</p>
+<div class="book-nav">
+<a href="#page40">← Previous</a>
+<a href="#page42">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page42">
+<div class="page-number">Page 42</div>
+<h3>The Promise</h3>
+<p>
+Meera smiled.
+</p>
+<p>
+"Promise?"
+</p>
+<p>
+"Promise."
+</p>
+<p>
+It wasn't a promise about the future.
+</p>
+<p>
+It was a promise to honor the present.
+</p>
+<div class="book-nav">
+<a href="#page41">← Previous</a>
+<a href="#page43">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page43">
+<div class="page-number">Page 43</div>
+<h3>The Sky Above</h3>
+<p>
+They sat beneath the stars.
+</p>
+<p>
+The wind moved softly through the trees.
+</p>
+<p>
+For that moment, nothing else mattered.
+</p>
+<div class="book-nav">
+<a href="#page42">← Previous</a>
+<a href="#page44">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page44">
+<div class="page-number">Page 44</div>
+<h3>Everything They Didn't Say</h3>
+<p>
+There were words they could have said.
+</p>
+<p>
+But sometimes silence carries more meaning than a speech.
+</p>
+<p>
+They both understood what that night meant.
+</p>
+<div class="book-nav">
+<a href="#page43">← Previous</a>
+<a href="#page45">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page45">
+<div class="page-number">Page 45</div>
+<h3>The Walk Back</h3>
+<p>
+On the way back, they walked slowly.
+</p>
+<p>
+Neither wanted the night to finish.
+</p>
+<p>
+The old town looked different under moonlight.
+</p>
+<div class="book-nav">
+<a href="#page44">← Previous</a>
+<a href="#page46">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page46">
+<div class="page-number">Page 46</div>
+<h3>A Memory</h3>
+<p>
+Shiv knew that someday this night would become a memory.
+</p>
+<p>
+But he didn't know how important that memory would become.
+</p>
+<div class="book-nav">
+<a href="#page45">← Previous</a>
+<a href="#page47">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page47">
+<div class="page-number">Page 47</div>
+<h3>The Next Morning</h3>
+<p>
+The next morning felt ordinary.
+</p>
+<p>
+But ordinary mornings were becoming precious.
+</p>
+<div class="book-nav">
+<a href="#page46">← Previous</a>
+<a href="#page48">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page48">
+<div class="page-number">Page 48</div>
+<h3>Another Day</h3>
+<p>
+They met at the café.
+</p>
+<p>
+They laughed about something small.
+</p>
+<p>
+The previous night's promise remained between them,
+quiet but present.
+</p>
+<div class="book-nav">
+<a href="#page47">← Previous</a>
+<a href="#page49">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page49">
+<div class="page-number">Page 49</div>
+<h3>The Lake</h3>
+<p>
+They returned to the lake.
+</p>
+<p>
+The water was calm.
+</p>
+<p>
+Shiv thought about how quickly everything had changed.
+</p>
+<div class="book-nav">
+<a href="#page48">← Previous</a>
+<a href="#page50">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page50">
+<div class="page-number">Page 50</div>
+<h3>Closer</h3>
+<p>
+They had stopped being strangers.
+</p>
+<p>
+They had become important to each other.
+</p>
+<p>
+Neither needed to say it.
+</p>
+<div class="book-nav">
+<a href="#page49">← Previous</a>
+<a href="#page51">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page51">
+<div class="page-number">Page 51</div>
+<h3>The Future</h3>
+<p>
+Still, the future waited.
+</p>
+<p>
+Family expectations.
+Plans.
+Responsibilities.
+Things neither of them could control.
+</p>
+<div class="book-nav">
+<a href="#page50">← Previous</a>
+<a href="#page52">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page52">
+<div class="page-number">Page 52</div>
+<h3>Don't Ask Yet</h3>
+<p>
+Meera sometimes looked as if she wanted to say something.
+</p>
+<p>
+Shiv noticed.
+</p>
+<p>
+But he didn't ask.
+</p>
+<p>
+Maybe he was afraid of the answer.
+</p>
+<div class="book-nav">
+<a href="#page51">← Previous</a>
+<a href="#page53">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page53">
+<div class="page-number">Page 53</div>
+<h3>The Last Warm Evening</h3>
+<p>
+The air began to change.
+</p>
+<p>
+Summer was slowly moving toward its ending.
+</p>
+<p>
+Neither wanted to talk about it.
+</p>
+<div class="book-nav">
+<a href="#page52">← Previous</a>
+<a href="#page54">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page54">
+<div class="page-number">Page 54</div>
+<h3>Stay</h3>
+<p>
+"Stay a little longer," Shiv said.
+</p>
+<p>
+Meera smiled.
+</p>
+<p>
+"I will."
+</p>
+<div class="book-nav">
+<a href="#page53">← Previous</a>
+<a href="#page55">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page55">
+<div class="page-number">Page 55</div>
+<h3>The Promise Remains</h3>
+<p>
+Promises don't control the future.
+</p>
+<p>
+They simply honor what was real in the moment they were made.
+</p>
+<p>
+That night, Shiv believed the summer would somehow continue.
+</p>
+<div class="book-nav">
+<a href="#page54">← Previous</a>
+<a href="#page56">Next →</a>
+</div>
+</article>
+
+
+<!-- ================= CHAPTER 5 ================= -->
+
+<article class="book-page" id="page56">
+<div class="page-number">Page 56</div>
+<div class="chapter-label">Chapter 05</div>
+<h2>When Rain Replaced Summer</h2>
+<p>
+Then came the rain.
+</p>
+<p>
+At first, it was only a few clouds.
+</p>
+<p>
+Then the town changed completely.
+</p>
+<div class="book-nav">
+<a href="#page55">← Previous</a>
+<a href="#page57">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page57">
+<div class="page-number">Page 57</div>
+<h3>A Different Mood</h3>
+<p>
+The café windows stayed covered with rain.
+</p>
+<p>
+The pier was almost always empty.
+</p>
+<p>
+Their conversations became shorter.
+</p>
+<div class="book-nav">
+<a href="#page56">← Previous</a>
+<a href="#page58">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page58">
+<div class="page-number">Page 58</div>
+<h3>The Truth</h3>
+<p>
+Meera finally told Shiv that something had changed at home.
+</p>
+<p>
+Her family might leave the town.
+</p>
+<p>
+She didn't know when.
+</p>
+<p>
+She didn't know what would happen next.
+</p>
+<div class="book-nav">
+<a href="#page57">← Previous</a>
+<a href="#page59">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page59">
+<div class="page-number">Page 59</div>
+<h3>Silence</h3>
+<p>
+Shiv wanted to ask how long she would stay.
+</p>
+<p>
+Instead, he asked if she was okay.
+</p>
+<p>
+"I'm trying to be."
+</p>
+<div class="book-nav">
+<a href="#page58">← Previous</a>
+<a href="#page60">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page60">
+<div class="page-number">Page 60</div>
+<h3>The Heavy Silence</h3>
+<p>
+Their comfortable silence had changed.
+</p>
+<p>
+Before, silence meant peace.
+</p>
+<p>
+Now it meant things they were afraid to say.
+</p>
+<div class="book-nav">
+<a href="#page59">← Previous</a>
+<a href="#page61">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page61">
+<div class="page-number">Page 61</div>
+<h3>The Argument</h3>
+<p>
+One evening, Shiv finally lost his patience.
+</p>
+<p>
+"Why didn't you tell me?"
+</p>
+<p>
+Meera became quiet.
+</p>
+<p>
+"I didn't know how."
+</p>
+<div class="book-nav">
+<a href="#page60">← Previous</a>
+<a href="#page62">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page62">
+<div class="page-number">Page 62</div>
+<h3>Understanding</h3>
+<p>
+Shiv realized he wasn't angry with her.
+</p>
+<p>
+He was afraid.
+</p>
+<p>
+Afraid that something beautiful was already ending.
+</p>
+<div class="book-nav">
+<a href="#page61">← Previous</a>
+<a href="#page63">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page63">
+<div class="page-number">Page 63</div>
+<h3>Almost Goodbye</h3>
+<p>
+They sat beside the lake without speaking.
+</p>
+<p>
+Rain touched the surface of the water.
+</p>
+<p>
+Neither apologized.
+</p>
+<p>
+Neither needed to.
+</p>
+<div class="book-nav">
+<a href="#page62">← Previous</a>
+<a href="#page64">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page64">
+<div class="page-number">Page 64</div>
+<h3>The End of Summer</h3>
+<p>
+Summer had not officially ended.
+</p>
+<p>
+But somehow, they both knew it had.
+</p>
+<div class="book-nav">
+<a href="#page63">← Previous</a>
+<a href="#page65">Next →</a>
+</div>
+</article>
+
+
+<!-- ================= CHAPTER 6 ================= -->
+
+<article class="book-page" id="page65">
+<div class="page-number">Page 65</div>
+<div class="chapter-label">Chapter 06</div>
+<h2>Unread Messages</h2>
+<p>
+Distance began quietly.
+</p>
+<p>
+Not with a goodbye.
+</p>
+<p>
+With silence.
+</p>
+<div class="book-nav">
+<a href="#page64">← Previous</a>
+<a href="#page66">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page66">
+<div class="page-number">Page 66</div>
+<h3>Messages</h3>
+<p>
+Shiv sent messages.
+</p>
+<p>
+Sometimes Meera replied late.
+</p>
+<p>
+Sometimes she didn't reply at all.
+</p>
+<div class="book-nav">
+<a href="#page65">← Previous</a>
+<a href="#page67">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page67">
+<div class="page-number">Page 67</div>
+<h3>Drafts</h3>
+<p>
+Shiv wrote long messages and deleted them.
+</p>
+<p>
+He didn't want to sound worried.
+</p>
+<p>
+He didn't want to sound angry.
+</p>
+<p>
+Mostly, he didn't want to sound like someone who was afraid
+of being left behind.
+</p>
+<div class="book-nav">
+<a href="#page66">← Previous</a>
+<a href="#page68">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page68">
+<div class="page-number">Page 68</div>
+<h3>She Was Hiding Something</h3>
+<p>
+Shiv knew Meera wasn't telling him everything.
+</p>
+<p>
+But he also knew that forcing the truth out of her
+wouldn't make things better.
+</p>
+<div class="book-nav">
+<a href="#page67">← Previous</a>
+<a href="#page69">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page69">
+<div class="page-number">Page 69</div>
+<h3>The Pier Again</h3>
+<p>
+The pier looked different without her.
+</p>
+<p>
+Shiv sat at the same place.
+</p>
+<p>
+The lake was still beautiful.
+</p>
+<p>
+But beauty didn't feel the same anymore.
+</p>
+<div class="book-nav">
+<a href="#page68">← Previous</a>
+<a href="#page70">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page70">
+<div class="page-number">Page 70</div>
+<h3>The Empty Chair</h3>
+<p>
+At the café, the chair near the window remained empty.
+</p>
+<p>
+Shiv noticed it every time.
+</p>
+<div class="book-nav">
+<a href="#page69">← Previous</a>
+<a href="#page71">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page71">
+<div class="page-number">Page 71</div>
+<h3>Silence Grows</h3>
+<p>
+Days became weeks.
+</p>
+<p>
+Messages became fewer.
+</p>
+<p>
+The distance grew without anyone deciding to create it.
+</p>
+<div class="book-nav">
+<a href="#page70">← Previous</a>
+<a href="#page72">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page72">
+<div class="page-number">Page 72</div>
+<h3>Waiting</h3>
+<p>
+Shiv kept waiting for the day everything would make sense.
+</p>
+<p>
+He didn't know that sometimes answers arrive only after
+you stop waiting for them.
+</p>
+<div class="book-nav">
+<a href="#page71">← Previous</a>
+<a href="#page73">Next →</a>
+</div>
+</article>
+
+
+<!-- ================= CHAPTER 7 ================= -->
+
+<article class="book-page" id="page73">
+<div class="page-number">Page 73</div>
+<div class="chapter-label">Chapter 07</div>
+<h2>The Day She Left</h2>
+<p>
+Shiv heard the news almost by accident.
+</p>
+<p>
+Meera was leaving.
+</p>
+<div class="book-nav">
+<a href="#page72">← Previous</a>
+<a href="#page74">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page74">
+<div class="page-number">Page 74</div>
+<h3>There Was Time</h3>
+<p>
+His first thought was simple.
+</p>
+<p>
+There was still time.
+</p>
+<p>
+There had to be.
+</p>
+<div class="book-nav">
+<a href="#page73">← Previous</a>
+<a href="#page75">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page75">
+<div class="page-number">Page 75</div>
+<h3>The Last Day</h3>
+<p>
+But the last day arrived faster than he expected.
+</p>
+<p>
+The town looked exactly the same.
+</p>
+<p>
+Only Shiv felt different.
+</p>
+<div class="book-nav">
+<a href="#page74">← Previous</a>
+<a href="#page76">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page76">
+<div class="page-number">Page 76</div>
+<h3>Meeting</h3>
+<p>
+They met face to face.
+</p>
+<p>
+There was no shouting.
+</p>
+<p>
+No dramatic goodbye.
+</p>
+<p>
+Only two people standing quietly with too many things
+left unsaid.
+</p>
+<div class="book-nav">
+<a href="#page75">← Previous</a>
+<a href="#page77">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page77">
+<div class="page-number">Page 77</div>
+<h3>Why</h3>
+<p>
+"I didn't want our last memories to be filled with sadness,"
+Meera said.
+</p>
+<p>
+Shiv understood.
+</p>
+<p>
+He wished he didn't.
+</p>
+<div class="book-nav">
+<a href="#page76">← Previous</a>
+<a href="#page78">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page78">
+<div class="page-number">Page 78</div>
+<h3>The Words</h3>
+<p>
+There were so many things Shiv wanted to say.
+</p>
+<p>
+Thank you.
+</p>
+<p>
+Stay.
+</p>
+<p>
+I will miss you.
+</p>
+<p>
+But none of them felt enough.
+</p>
+<div class="book-nav">
+<a href="#page77">← Previous</a>
+<a href="#page79">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page79">
+<div class="page-number">Page 79</div>
+<h3>Goodbye</h3>
+<p>
+Meera looked at him.
+</p>
+<p>
+"Remember the promise?"
+</p>
+<p>
+Shiv nodded.
+</p>
+<p>
+"I'll remember."
+</p>
+<div class="book-nav">
+<a href="#page78">← Previous</a>
+<a href="#page80">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page80">
+<div class="page-number">Page 80</div>
+<h3>She Left</h3>
+<p>
+Then she walked away.
+</p>
+<p>
+Shiv didn't follow.
+</p>
+<p>
+Some goodbyes cannot be changed by running after someone.
+</p>
+<div class="book-nav">
+<a href="#page79">← Previous</a>
+<a href="#page81">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page81">
+<div class="page-number">Page 81</div>
+<h3>The Lake</h3>
+<p>
+That evening, Shiv returned to the lake.
+</p>
+<p>
+The pier was empty.
+</p>
+<p>
+The sunset looked almost exactly like the first one.
+</p>
+<div class="book-nav">
+<a href="#page80">← Previous</a>
+<a href="#page82">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page82">
+<div class="page-number">Page 82</div>
+<h3>Summer Over</h3>
+<p>
+Shiv opened his notebook.
+</p>
+<p>
+The first page still carried her name.
+</p>
+<p>
+Meera.
+</p>
+<p>
+The summer was over.
+</p>
+<p>
+But the story wasn't.
+</p>
+<div class="book-nav">
+<a href="#page81">← Previous</a>
+<a href="#page83">Next →</a>
+</div>
+</article>
+
+
+<!-- ================= CHAPTER 8 ================= -->
+
+<article class="book-page" id="page83">
+<div class="page-number">Page 83</div>
+<div class="chapter-label">Chapter 08</div>
+<h2>Letters Never Sent</h2>
+<p>
+After she left, Shiv began writing letters.
+</p>
+<p>
+He never sent them.
+</p>
+<div class="book-nav">
+<a href="#page82">← Previous</a>
+<a href="#page84">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page84">
+<div class="page-number">Page 84</div>
+<h3>Dear Meera</h3>
+<p>
+The first letter was about the lake.
+</p>
+<p>
+The second was about the bookstore.
+</p>
+<p>
+The third was about the rooftop.
+</p>
+<p>
+Every letter was really about something he couldn't say
+when she was still there.
+</p>
+<div class="book-nav">
+<a href="#page83">← Previous</a>
+<a href="#page85">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page85">
+<div class="page-number">Page 85</div>
+<h3>Unsent</h3>
+<p>
+He folded the letters carefully.
+</p>
+<p>
+Then placed them inside the notebook.
+</p>
+<p>
+Some words are written not to be delivered,
+but simply to be understood by the person writing them.
+</p>
+<div class="book-nav">
+<a href="#page84">← Previous</a>
+<a href="#page86">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page86">
+<div class="page-number">Page 86</div>
+<h3>Her Letters</h3>
+<p>
+Somewhere else, Meera had her own notebook.
+</p>
+<p>
+She had written letters too.
+</p>
+<p>
+She never sent them.
+</p>
+<p>
+Both of them carried the same silence differently.
+</p>
+<div class="book-nav">
+<a href="#page85">← Previous</a>
+<a href="#page87">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page87">
+<div class="page-number">Page 87</div>
+<h3>Time</h3>
+<p>
+Time passed.
+</p>
+<p>
+The letters remained.
+</p>
+<p>
+The memories remained.
+</p>
+<p>
+But the pain slowly became quieter.
+</p>
+<div class="book-nav">
+<a href="#page86">← Previous</a>
+<a href="#page88">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page88">
+<div class="page-number">Page 88</div>
+<h3>Growing Up</h3>
+<p>
+Shiv began to understand himself better.
+</p>
+<p>
+The summer had changed something inside him.
+</p>
+<p>
+Not because it lasted forever.
+</p>
+<p>
+Because it didn't.
+</p>
+<div class="book-nav">
+<a href="#page87">← Previous</a>
+<a href="#page89">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page89">
+<div class="page-number">Page 89</div>
+<h3>Still Remembering</h3>
+<p>
+He didn't try to forget Meera anymore.
+</p>
+<p>
+Some memories didn't need to be erased.
+</p>
+<p>
+They simply needed a place to belong.
+</p>
+<div class="book-nav">
+<a href="#page88">← Previous</a>
+<a href="#page90">Next →</a>
+</div>
+</article>
+
+
+<!-- ================= CHAPTER 9 ================= -->
+
+<article class="book-page" id="page90">
+<div class="page-number">Page 90</div>
+<div class="chapter-label">Chapter 09</div>
+<h2>Ghosts of Old Memories</h2>
+<p>
+Years later, Shiv returned to the town.
+</p>
+<p>
+The roads looked smaller than he remembered.
+</p>
+<div class="book-nav">
+<a href="#page89">← Previous</a>
+<a href="#page91">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page91">
+<div class="page-number">Page 91</div>
+<h3>The Bookstore</h3>
+<p>
+The old bookstore was still there.
+</p>
+<p>
+Shiv stood outside for a while.
+</p>
+<p>
+He remembered the first time he had seen Meera.
+</p>
+<div class="book-nav">
+<a href="#page90">← Previous</a>
+<a href="#page92">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page92">
+<div class="page-number">Page 92</div>
+<h3>The Streets</h3>
+<p>
+He walked through the streets where they had once wandered
+without a destination.
+</p>
+<p>
+The town had changed.
+</p>
+<p>
+So had he.
+</p>
+<div class="book-nav">
+<a href="#page91">← Previous</a>
+<a href="#page93">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page93">
+<div class="page-number">Page 93</div>
+<h3>The Café</h3>
+<p>
+The café had new chairs.
+</p>
+<p>
+The walls had been painted.
+</p>
+<p>
+But the window was still there.
+</p>
+<p>
+Shiv smiled.
+</p>
+<div class="book-nav">
+<a href="#page92">← Previous</a>
+<a href="#page94">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page94">
+<div class="page-number">Page 94</div>
+<h3>The Rooftop</h3>
+<p>
+He remembered the night beneath the stars.
+</p>
+<p>
+The promise.
+</p>
+<p>
+The fear.
+</p>
+<p>
+The hope.
+</p>
+<div class="book-nav">
+<a href="#page93">← Previous</a>
+<a href="#page95">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page95">
+<div class="page-number">Page 95</div>
+<h3>The Pier</h3>
+<p>
+Finally, he returned to the lake.
+</p>
+<p>
+The wooden pier was older now.
+</p>
+<p>
+Shiv sat at the same place.
+</p>
+<div class="book-nav">
+<a href="#page94">← Previous</a>
+<a href="#page96">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page96">
+<div class="page-number">Page 96</div>
+<h3>Acceptance</h3>
+<p>
+He understood something simple.
+</p>
+<p>
+The past didn't need to be erased to make room for the future.
+</p>
+<p>
+It could simply become part of who you were.
+</p>
+<div class="book-nav">
+<a href="#page95">← Previous</a>
+<a href="#page97">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page97">
+<div class="page-number">Page 97</div>
+<h3>Maybe</h3>
+<p>
+For the first time in years, Shiv wondered where Meera was.
+</p>
+<p>
+He didn't expect an answer.
+</p>
+<p>
+But sometimes life answers questions you stopped asking.
+</p>
+<div class="book-nav">
+<a href="#page96">← Previous</a>
+<a href="#page98">Next →</a>
+</div>
+</article>
+
+
+<!-- ================= CHAPTER 10 ================= -->
+
+<article class="book-page" id="page98">
+<div class="page-number">Page 98</div>
+<div class="chapter-label">Chapter 10</div>
+<h2>One Last Sunset</h2>
+<p>
+They met again unexpectedly.
+</p>
+<p>
+Years had passed.
+</p>
+<p>
+Yet somehow, the first moment felt familiar.
+</p>
+<div class="book-nav">
+<a href="#page97">← Previous</a>
+<a href="#page99">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page99">
+<div class="page-number">Page 99</div>
+<h3>Hello Again</h3>
+<p>
+"Hi."
+</p>
+<p>
+It was a simple word.
+</p>
+<p>
+But it carried years inside it.
+</p>
+<div class="book-nav">
+<a href="#page98">← Previous</a>
+<a href="#page100">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page100">
+<div class="page-number">Page 100</div>
+<h3>What Happened</h3>
+<p>
+They talked.
+</p>
+<p>
+About leaving.
+</p>
+<p>
+About the letters.
+</p>
+<p>
+About the summer.
+</p>
+<p>
+About everything they had never been able to explain.
+</p>
+<div class="book-nav">
+<a href="#page99">← Previous</a>
+<a href="#page101">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page101">
+<div class="page-number">Page 101</div>
+<h3>The Letters</h3>
+<p>
+Meera admitted she had written letters too.
+</p>
+<p>
+Shiv smiled.
+</p>
+<p>
+"Did you ever send them?"
+</p>
+<p>
+"No."
+</p>
+<p>
+"Neither did I."
+</p>
+<div class="book-nav">
+<a href="#page100">← Previous</a>
+<a href="#page102">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page102">
+<div class="page-number">Page 102</div>
+<h3>The Promise</h3>
+<p>
+They talked about the promise under the stars.
+</p>
+<p>
+It hadn't meant forever.
+</p>
+<p>
+It meant that neither of them would pretend
+the summer didn't matter.
+</p>
+<div class="book-nav">
+<a href="#page101">← Previous</a>
+<a href="#page103">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page103">
+<div class="page-number">Page 103</div>
+<h3>Different People</h3>
+<p>
+They were not the same people anymore.
+</p>
+<p>
+Life had changed them.
+</p>
+<p>
+But the memory of who they had once been
+still connected them.
+</p>
+<div class="book-nav">
+<a href="#page102">← Previous</a>
+<a href="#page104">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page104">
+<div class="page-number">Page 104</div>
+<h3>The Walk</h3>
+<p>
+They walked toward the lake.
+</p>
+<p>
+The town was quiet.
+</p>
+<p>
+The evening sky was turning gold.
+</p>
+<div class="book-nav">
+<a href="#page103">← Previous</a>
+<a href="#page105">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page105">
+<div class="page-number">Page 105</div>
+<h3>The Same Lake</h3>
+<p>
+The lake was still there.
+</p>
+<p>
+The mountains still reflected in the water.
+</p>
+<p>
+The pier was older.
+</p>
+<p>
+But the view was almost the same.
+</p>
+<div class="book-nav">
+<a href="#page104">← Previous</a>
+<a href="#page106">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page106">
+<div class="page-number">Page 106</div>
+<h3>One Last Sunset</h3>
+<p>
+They sat together and watched the sun disappear.
+</p>
+<p>
+Neither asked what would happen tomorrow.
+</p>
+<p>
+For once, tomorrow didn't matter.
+</p>
+<div class="book-nav">
+<a href="#page105">← Previous</a>
+<a href="#page107">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page107">
+<div class="page-number">Page 107</div>
+<h3>Just the Moment</h3>
+<p>
+They simply sat there.
+</p>
+<p>
+Two people who had once been strangers.
+</p>
+<p>
+Two people who had shared a summer.
+</p>
+<p>
+Two people who had finally learned that some endings
+can also be beginnings.
+</p>
+<div class="book-nav">
+<a href="#page106">← Previous</a>
+<a href="#page108">Next →</a>
+</div>
+</article>
+
+
+<!-- ================= EPILOGUE ================= -->
+
+<article class="book-page" id="page108">
+<div class="page-number">Page 108</div>
+<div class="chapter-label">Epilogue</div>
+<h2>Some Summers Stay Forever</h2>
+<p>
+Later that night, Shiv opened his old notebook.
+</p>
+<p>
+The pages were filled with years-old words.
+</p>
+<div class="book-nav">
+<a href="#page107">← Previous</a>
+<a href="#page109">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page109">
+<div class="page-number">Page 109</div>
+<h3>The Same Name</h3>
+<p>
+The first page still carried the same name.
+</p>
+<p>
+Meera.
+</p>
+<p>
+He smiled.
+</p>
+<p>
+Some things never really disappear.
+</p>
+<div class="book-nav">
+<a href="#page108">← Previous</a>
+<a href="#page110">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page110">
+<div class="page-number">Page 110</div>
+<h3>The Lake</h3>
+<p>
+The next morning, Shiv looked at the lake one more time.
+</p>
+<p>
+The town had changed.
+</p>
+<p>
+He had changed.
+</p>
+<p>
+The summer was long gone.
+</p>
+<p>
+But the memory remained.
+</p>
+<div class="book-nav">
+<a href="#page109">← Previous</a>
+<a href="#page111">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page111">
+<div class="page-number">Page 111</div>
+<h3>What Remains</h3>
+<p>
+People enter our lives for different reasons.
+</p>
+<p>
+Some stay for years.
+</p>
+<p>
+Some stay for only a season.
+</p>
+<p>
+But sometimes a person can leave a mark
+that lasts much longer than their presence.
+</p>
+<div class="book-nav">
+<a href="#page110">← Previous</a>
+<a href="#page112">Next →</a>
+</div>
+</article>
+
+
+<article class="book-page" id="page112">
+
+    <div class="page-number">Page 112</div>
+
+    <div class="chapter-label">The End</div>
+
+    <h2>Some Summers End.<br>Some Summers Stay Forever.</h2>
+
+    <p>
+        Shiv closed his notebook.
+    </p>
+
+    <p>
+        Outside, the lake reflected the last light of the evening.
+    </p>
+
+    <p>
+        He smiled—not because the summer had returned,
+        but because he no longer needed it to.
+    </p>
+
+    <p>
+        It had already become a part of him.
+    </p>
+
+    <p>
+        And perhaps that was what some summers were meant to do.
+    </p>
+
+    <p>
+        They arrive.
+        They change you.
+        They leave.
+    </p>
+
+    <p>
+        And somehow,
+        they stay forever.
+    </p>
+
+    <div class="book-nav">
+        <a href="#page111">← Previous</a>
+        <a href="index.html">Back to Home</a>
+    </div>
+
+</article>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2026 Shivu. All rights reserved.</p>
+    </div>
+</footer>
+
+
+<!-- ================= SIMPLE MENU JS ================= -->
+
+<script>
+function toggleMenu(){
+    var menu = document.getElementById("navMenu");
+
+    if(menu.className.indexOf("show") === -1){
+        menu.className += " show";
+    }else{
+        menu.className = menu.className.replace(" show","");
+    }
+}
+</script>
+
+</body>
+</html>
