@@ -1,413 +1,1174 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Thoughts — Shivu</title>
 
-    <title>My Thoughts — Shivu</title>
+<style>
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+}
 
-    <meta name="description"
-        content="My Thoughts — a personal collection of thoughts, ideas and reflections by Shivu.">
+html,
+body{
+  width:100%;
+  max-width:100%;
+  margin:0;
+  padding:0;
+  overflow-x:hidden;
+}
 
-    <link rel="stylesheet" href="style.css">
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:#fff;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(112,76,255,.18),transparent 28%),
+    radial-gradient(circle at 85% 25%,rgba(49,128,255,.13),transparent 30%),
+    linear-gradient(145deg,#07070e,#0b0b18 50%,#07070e);
+  min-height:100vh;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+  width:100%;
+  height:68px;
+  padding:0 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:relative;
+  z-index:100;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  background:rgba(10,10,20,.52);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+.logo{
+  color:#fff;
+  text-decoration:none;
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:.3px;
+  white-space:nowrap;
+}
+
+.nav-menu{
+  display:flex;
+  align-items:center;
+  gap:24px;
+}
+
+.nav-menu a{
+  color:rgba(255,255,255,.72);
+  text-decoration:none;
+  font-size:12px;
+  font-weight:600;
+  transition:.25s;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active{
+  color:#fff;
+}
+
+.menu-toggle{
+  display:none;
+  width:40px;
+  height:40px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:12px;
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+}
+
+.menu-toggle span{
+  width:18px;
+  height:2px;
+  display:block;
+  background:#fff;
+  border-radius:10px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  width:100%;
+  max-width:1050px;
+  margin:0 auto;
+  padding:95px 24px 65px;
+  text-align:center;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  padding:8px 14px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:30px;
+  background:rgba(255,255,255,.055);
+  color:rgba(255,255,255,.62);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+.hero h1{
+  margin:22px 0 15px;
+  font-size:clamp(42px,7vw,78px);
+  line-height:1;
+  font-weight:900;
+  letter-spacing:-3px;
+  background:linear-gradient(120deg,#fff,#c9c5ff,#8e82ff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  max-width:650px;
+  margin:0 auto;
+  color:rgba(255,255,255,.64);
+  font-size:16px;
+  line-height:1.8;
+  overflow-wrap:anywhere;
+}
+
+/* ================= SECTION ================= */
+
+.section{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  padding:20px 24px 90px;
+}
+
+.section-heading{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:28px;
+}
+
+.section-heading h2{
+  margin:0;
+  font-size:27px;
+  font-weight:850;
+  letter-spacing:-.8px;
+}
+
+.section-heading span{
+  color:rgba(255,255,255,.42);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+/* ================= FEATURED ================= */
+
+.featured{
+  position:relative;
+  width:100%;
+  padding:36px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 90% 10%,rgba(122,93,255,.18),transparent 35%),
+    rgba(255,255,255,.045);
+  box-shadow:0 25px 70px rgba(0,0,0,.28);
+  overflow:hidden;
+  margin-bottom:55px;
+}
+
+.featured::before{
+  content:"";
+  position:absolute;
+  width:230px;
+  height:230px;
+  border-radius:50%;
+  border:1px solid rgba(145,125,255,.14);
+  right:-90px;
+  top:-90px;
+}
+
+.featured-label{
+  color:#a99cff;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.featured h3{
+  max-width:750px;
+  margin:14px 0 14px;
+  font-size:clamp(27px,4vw,43px);
+  line-height:1.12;
+  font-weight:850;
+  letter-spacing:-1.5px;
+}
+
+.featured p{
+  max-width:760px;
+  margin:0;
+  color:rgba(255,255,255,.62);
+  font-size:15px;
+  line-height:1.8;
+}
+
+.main-thought{
+  margin-top:25px;
+  padding:18px 20px;
+  border-left:3px solid rgba(148,126,255,.9);
+  border-radius:0 15px 15px 0;
+  background:rgba(123,100,255,.08);
+  color:#eeeaff;
+  font-size:15px;
+  line-height:1.75;
+  font-weight:700;
+}
+
+/* ================= THOUGHT GRID ================= */
+
+.thought-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+
+.thought-card{
+  position:relative;
+  min-width:0;
+  padding:28px;
+  min-height:245px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:23px;
+  background:rgba(255,255,255,.035);
+  transition:transform .3s ease,border-color .3s ease,background .3s ease;
+  overflow:hidden;
+}
+
+.thought-card::after{
+  content:"";
+  position:absolute;
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  right:-55px;
+  bottom:-55px;
+  background:rgba(113,91,255,.10);
+  filter:blur(5px);
+}
+
+.thought-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(148,126,255,.28);
+  background:rgba(255,255,255,.055);
+}
+
+.thought-number{
+  color:rgba(255,255,255,.28);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:1.5px;
+}
+
+.thought-card h3{
+  margin:17px 0 12px;
+  font-size:21px;
+  line-height:1.25;
+  font-weight:850;
+  letter-spacing:-.5px;
+}
+
+.thought-card p{
+  margin:0;
+  color:rgba(255,255,255,.57);
+  font-size:14px;
+  line-height:1.75;
+  overflow-wrap:anywhere;
+}
+
+.thought-line{
+  margin-top:20px;
+  padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.08);
+  color:#ddd9ff;
+  font-size:13px;
+  line-height:1.65;
+  font-weight:700;
+}
+
+/* ================= HIDDEN THOUGHTS ================= */
+
+.more-thoughts{
+  display:none;
+  margin-top:18px;
+}
+
+.more-thoughts.show{
+  display:grid;
+}
+
+/* ================= SHOW MORE ================= */
+
+.show-more-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top:30px;
+}
+
+.show-more{
+  border:1px solid rgba(255,255,255,.13);
+  background:rgba(255,255,255,.055);
+  color:#fff;
+  padding:13px 22px;
+  border-radius:14px;
+  font-size:13px;
+  font-weight:750;
+  cursor:pointer;
+  transition:.25s;
+  backdrop-filter:blur(15px);
+  -webkit-backdrop-filter:blur(15px);
+}
+
+.show-more:hover{
+  background:rgba(255,255,255,.10);
+  transform:translateY(-2px);
+}
+
+/* ================= BELIEF ================= */
+
+.belief{
+  margin-top:75px;
+  padding:38px;
+  border-radius:25px;
+  border:1px solid rgba(255,255,255,.09);
+  background:
+    linear-gradient(135deg,rgba(117,91,255,.10),rgba(255,255,255,.025));
+  text-align:center;
+}
+
+.belief small{
+  color:rgba(255,255,255,.4);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.belief h3{
+  max-width:720px;
+  margin:18px auto 0;
+  font-size:clamp(24px,4vw,37px);
+  line-height:1.25;
+  font-weight:850;
+  letter-spacing:-1px;
+}
+
+/* ================= CTA ================= */
+
+.cta{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 24px 80px;
+}
+
+.cta-card{
+  padding:45px 35px;
+  border-radius:28px;
+  border:1px solid rgba(255,255,255,.10);
+  background:
+    radial-gradient(circle at 10% 10%,rgba(118,92,255,.16),transparent 35%),
+    rgba(255,255,255,.04);
+  text-align:center;
+}
+
+.cta-card h2{
+  margin:0 0 12px;
+  font-size:clamp(28px,5vw,43px);
+  font-weight:900;
+  letter-spacing:-1.5px;
+}
+
+.cta-card p{
+  max-width:560px;
+  margin:0 auto 25px;
+  color:rgba(255,255,255,.57);
+  font-size:14px;
+  line-height:1.7;
+}
+
+.cta-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:13px 21px;
+  border-radius:14px;
+  text-decoration:none;
+  color:#fff;
+  font-size:13px;
+  font-weight:800;
+  background:linear-gradient(135deg,#7864ff,#4b73ff);
+  box-shadow:0 12px 35px rgba(91,78,255,.25);
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+  padding:25px 20px 35px;
+  border-top:1px solid rgba(255,255,255,.07);
+  text-align:center;
+  color:rgba(255,255,255,.32);
+  font-size:11px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+  .navbar{
+    height:62px;
+    padding:0 18px;
+  }
+
+  .logo{
+    font-size:14px;
+  }
+
+  .menu-toggle{
+    display:flex;
+  }
+
+  .nav-menu{
+    display:none;
+    position:absolute;
+    top:69px;
+    left:12px;
+    right:12px;
+    width:auto;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    padding:8px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:18px;
+    background:rgba(13,13,25,.82);
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+    box-shadow:0 20px 55px rgba(0,0,0,.4);
+  }
+
+  .nav-menu.open{
+    display:flex;
+  }
+
+  .nav-menu a{
+    padding:13px 14px;
+    border-radius:11px;
+    font-size:12px;
+  }
+
+  .nav-menu a:hover{
+    background:rgba(255,255,255,.06);
+  }
+
+  .hero{
+    padding:72px 20px 50px;
+  }
+
+  .hero h1{
+    letter-spacing:-2px;
+  }
+
+  .hero p{
+    font-size:14px;
+  }
+
+  .section{
+    padding:15px 18px 70px;
+  }
+
+  .section-heading{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:7px;
+  }
+
+  .featured{
+    padding:27px 23px;
+    border-radius:22px;
+  }
+
+  .thought-grid{
+    grid-template-columns:1fr;
+  }
+
+  .thought-card{
+    min-height:auto;
+  }
+
+  .belief{
+    padding:30px 22px;
+  }
+
+  .cta{
+    padding:0 18px 60px;
+  }
+
+  .cta-card{
+    padding:36px 22px;
+    border-radius:22px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
+<!-- ================= NAVBAR ================= -->
 
-    <header class="navbar">
+<nav class="navbar">
 
-        <div class="nav-container">
+  <a href="index.html" class="logo">360° Universe</a>
 
-            <a href="index.html" class="logo">
-                360° <span>Universe</span>
-            </a>
+  <button type="button" class="menu-toggle" id="menuButton" aria-label="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 
-            <button
-                class="menu-toggle"
-                onclick="toggleMenu()"
-                aria-label="Open Menu">
+  <div class="nav-menu" id="navMenu">
+    <a href="index.html">Home</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="book.html">Book</a>
+    <a href="thoughts.html" class="active">Thoughts</a>
+    <a href="course.html">Growth Lab</a>
+    <a href="contact.html">Contact</a>
+  </div>
 
-                <span></span>
-                <span></span>
-                <span></span>
+</nav>
 
-            </button>
 
-            <nav class="nav-menu" id="navMenu">
+<!-- ================= HERO ================= -->
 
-                <a href="index.html">
-                    Home
-                </a>
+<section class="hero">
 
-                <a href="portfolio.html">
-                    Portfolio
-                </a>
+  <div class="eyebrow">A LITTLE SPACE FROM MY MIND</div>
 
-                <a href="book.html">
-                    The Last Summer
-                </a>
+  <h1>My Thoughts.</h1>
 
-                <a href="thoughts.html" class="active">
-                    Thoughts
-                </a>
+  <p>
+    Kuch thoughts aise hote hain jo bas soch kar khatam nahi hote.
+    Woh time ke saath aur meaningful lagne lagte hain.
+    Ye page unhi ideas, lessons aur observations ka collection hai.
+  </p>
 
-                <a href="course.html">
-                    Growth Lab
-                </a>
+</section>
 
-                <a href="contact.html">
-                    Contact
-                </a>
 
-            </nav>
+<!-- ================= MAIN CONTENT ================= -->
 
-        </div>
+<section class="section">
 
-    </header>
+  <div class="section-heading">
+    <h2>Thoughts Worth Keeping</h2>
+    <span>Ideas • Lessons • Life</span>
+  </div>
 
 
-    <!-- HERO -->
+  <!-- FEATURED -->
 
-    <main>
+  <div class="featured">
 
-        <section class="page-hero">
+    <div class="featured-label">Featured Thought</div>
 
-            <div class="hero-glow hero-glow-one"></div>
-            <div class="hero-glow hero-glow-two"></div>
+    <h3>
+      You don't need to have everything figured out before you begin.
+    </h3>
 
-            <div class="page-hero-content reveal">
+    <p>
+      Kabhi-kabhi hum perfect plan ka wait karte rehte hain.
+      Hume lagta hai ki pehle sab kuch clear hona chahiye,
+      phir hum start karenge. Lekin life aksar ulta kaam karti hai.
+      Clarity action lene ke baad aati hai.
+    </p>
 
-                <p class="eyebrow">
-                    PERSONAL JOURNAL
-                </p>
+    <div class="main-thought">
+      “Sometimes the first step doesn't need a perfect direction.
+      It just needs the courage to begin.”
+    </div>
 
-                <h1>
-                    My<br>
-                    <span>Thoughts.</span>
-                </h1>
+  </div>
 
-                <p>
-                    Random thoughts, small realizations,
-                    lessons and ideas that I don't want
-                    to forget.
-                </p>
 
-            </div>
+  <!-- FIRST 5 -->
 
-        </section>
+  <div class="thought-grid" id="firstThoughts">
 
+    <article class="thought-card">
 
-        <!-- FEATURED THOUGHT -->
+      <div class="thought-number">01</div>
 
-        <section class="quote-section section-padding">
+      <h3>Starting Before You're Ready</h3>
 
-            <div class="quote-box reveal">
+      <p>
+        Ready feel karna achha lagta hai, lekin har important cheez ke liye
+        ready feel hona zaroori nahi. Kabhi first step lene ke baad hi
+        confidence aata hai.
+      </p>
 
-                <div class="quote-mark">
-                    “
-                </div>
+      <div class="thought-line">
+        “Start small. Learn while moving.”
+      </div>
 
-                <blockquote>
-                    Keep creating, even when nobody
-                    is watching.
-                </blockquote>
+    </article>
 
-                <p>
-                    — Shivu
-                </p>
 
-            </div>
+    <article class="thought-card">
 
-        </section>
+      <div class="thought-number">02</div>
 
+      <h3>Failure Is Information</h3>
 
-        <!-- THOUGHT ARCHIVE -->
+      <p>
+        Har baar jab kuch expected way me work nahi karta,
+        iska matlab ye nahi ki tum fail ho gaye.
+        Kabhi-kabhi woh result bas bata raha hota hai ki next time kya
+        different karna hai.
+      </p>
 
-        <section class="section-padding">
+      <div class="thought-line">
+        “A bad result can still teach you something valuable.”
+      </div>
 
-            <div class="section-heading reveal">
+    </article>
 
-                <p class="eyebrow">
-                    THE JOURNAL
-                </p>
 
-                <h2>
-                    Little thoughts.<br>
-                    <span>Big meaning.</span>
-                </h2>
+    <article class="thought-card">
 
-                <p>
-                    A collection of thoughts from
-                    different moments.
-                </p>
+      <div class="thought-number">03</div>
 
-            </div>
+      <h3>Creativity Needs Space</h3>
 
+      <p>
+        Har idea force karke nahi aata. Kabhi thoda break,
+        thoda silence aur thoda apne saath time spend karna bhi creativity
+        ka part hota hai.
+      </p>
 
-            <div class="thoughts-grid">
+      <div class="thought-line">
+        “Not every quiet moment is an unproductive moment.”
+      </div>
 
+    </article>
 
-                <!-- THOUGHT 01 -->
 
-                <article class="thought-card reveal">
+    <article class="thought-card">
 
-                    <div class="thought-date">
-                        THOUGHT 01
-                    </div>
+      <div class="thought-number">04</div>
 
-                    <h3>
-                        Start before you're ready.
-                    </h3>
+      <h3>Your Future Isn't One Straight Road</h3>
 
-                    <p>
-                        Waiting for the perfect moment
-                        can make you miss the moment
-                        that was already good enough
-                        to begin.
-                    </p>
+      <p>
+        Future ko lekar direction change hona confusion nahi hota.
+        Hum grow karte hain, naye interests discover karte hain aur
+        apni priorities samajhte hain.
+      </p>
 
-                </article>
+      <div class="thought-line">
+        “Changing direction doesn't always mean losing your way.”
+      </div>
 
+    </article>
 
-                <!-- THOUGHT 02 -->
 
-                <article class="thought-card reveal">
+    <article class="thought-card">
 
-                    <div class="thought-date">
-                        THOUGHT 02
-                    </div>
+      <div class="thought-number">05</div>
 
-                    <h3>
-                        Small progress is still progress.
-                    </h3>
+      <h3>Consistency Is Quieter Than Motivation</h3>
 
-                    <p>
-                        You don't have to change
-                        everything in one day.
-                        Sometimes moving forward slowly
-                        is more than enough.
-                    </p>
+      <p>
+        Motivation kuch din bahut strong ho sakti hai,
+        lekin real progress aksar un normal days par hoti hai
+        jab tum bas thoda sa kaam karte rehte ho.
+      </p>
 
-                </article>
+      <div class="thought-line">
+        “Small effort repeated often becomes something big.”
+      </div>
 
+    </article>
 
-                <!-- THOUGHT 03 -->
+  </div>
 
-                <article class="thought-card reveal">
 
-                    <div class="thought-date">
-                        THOUGHT 03
-                    </div>
+  <!-- MORE THOUGHTS -->
 
-                    <h3>
-                        Protect your ideas.
-                    </h3>
+  <div class="thought-grid more-thoughts" id="moreThoughts">
 
-                    <p>
-                        Not every idea needs an audience
-                        immediately. Give some ideas
-                        enough time to grow first.
-                    </p>
+    <article class="thought-card">
 
-                </article>
+      <div class="thought-number">06</div>
 
+      <h3>Some Ideas Deserve Another Chance</h3>
 
-                <!-- THOUGHT 04 -->
+      <p>
+        Har idea first attempt me perfect nahi hota.
+        Kabhi idea kharab nahi hota, bas uska first version weak hota hai.
+        Thoda time baad usi idea ko better way me dekho.
+      </p>
 
-                <article class="thought-card reveal">
+      <div class="thought-line">
+        “Maybe the idea didn't fail. Maybe the version did.”
+      </div>
 
-                    <div class="thought-date">
-                        THOUGHT 04
-                    </div>
+    </article>
 
-                    <h3>
-                        Learn from everything.
-                    </h3>
 
-                    <p>
-                        A mistake, a conversation,
-                        a failure or even a random day
-                        can teach you something.
-                    </p>
+    <article class="thought-card">
 
-                </article>
+      <div class="thought-number">07</div>
 
+      <h3>Comparison Changes the Question</h3>
 
-                <!-- THOUGHT 05 -->
+      <p>
+        Jab hum doosron se compare karte hain,
+        toh focus ye nahi rehta ki hum kitna grow kar rahe hain.
+        Focus ye ho jata hai ki hum unke jitne kyun nahi hain.
+      </p>
 
-                <article class="thought-card reveal">
+      <div class="thought-line">
+        “Your journey becomes clearer when you stop measuring it against someone else's.”
+      </div>
 
-                    <div class="thought-date">
-                        THOUGHT 05
-                    </div>
+    </article>
 
-                    <h3>
-                        Create your own path.
-                    </h3>
 
-                    <p>
-                        Your journey doesn't have to
-                        look exactly like someone else's.
-                        Build something that feels like you.
-                    </p>
+    <article class="thought-card">
 
-                </article>
+      <div class="thought-number">08</div>
 
+      <h3>Learn To Enjoy The Process</h3>
 
-                <!-- THOUGHT 06 -->
+      <p>
+        Sirf final result ka wait karoge toh journey boring lag sakti hai.
+        Skills seekhna, mistakes karna aur dheere-dheere improve hona bhi
+        journey ka important part hai.
+      </p>
 
-                <article class="thought-card reveal">
+      <div class="thought-line">
+        “The process is not the part you have to survive. It's part of the story.”
+      </div>
 
-                    <div class="thought-date">
-                        THOUGHT 06
-                    </div>
+    </article>
 
-                    <h3>
-                        Keep going.
-                    </h3>
 
-                    <p>
-                        Some days will feel productive
-                        and some won't. What matters is
-                        that you don't stop believing
-                        in what you're building.
-                    </p>
+    <article class="thought-card">
 
-                </article>
+      <div class="thought-number">09</div>
 
+      <h3>Attention Is Valuable</h3>
 
-            </div>
+      <p>
+        Time important hai, lekin attention bhi utni hi important hai.
+        Jis cheez ko baar-baar attention doge,
+        wahi dheere-dheere tumhari life ka bada part banne lagegi.
+      </p>
 
-        </section>
+      <div class="thought-line">
+        “Protect your attention. It shapes your direction.”
+      </div>
 
+    </article>
 
-        <!-- SECOND QUOTE -->
 
-        <section class="quote-section section-padding">
+    <article class="thought-card">
 
-            <div class="quote-box reveal">
+      <div class="thought-number">10</div>
 
-                <div class="quote-mark">
-                    “
-                </div>
+      <h3>Not Everything Needs To Be Shared</h3>
 
-                <blockquote>
-                    Your story doesn't need to be
-                    perfect to be worth telling.
-                </blockquote>
+      <p>
+        Har achievement, har plan aur har thought ko duniya ke saamne
+        rakhna zaroori nahi. Kuch cheezein quietly grow karna bhi
+        deserve karti hain.
+      </p>
 
-                <p>
-                    — Shivu
-                </p>
+      <div class="thought-line">
+        “Some things become stronger when you give them privacy.”
+      </div>
 
-            </div>
+    </article>
 
-        </section>
 
+    <article class="thought-card">
 
-        <!-- FINAL CTA -->
+      <div class="thought-number">11</div>
 
-        <section class="final-cta section-padding">
+      <h3>Improvement Can Be Invisible</h3>
 
-            <div class="cta-content reveal">
+      <p>
+        Kabhi tumhe khud lagta hai ki kuch change nahi ho raha,
+        lekin actually tumhari thinking, habits aur skills quietly improve
+        ho rahi hoti hain.
+      </p>
 
-                <p class="eyebrow">
-                    KEEP EXPLORING
-                </p>
+      <div class="thought-line">
+        “Progress doesn't always make noise.”
+      </div>
 
-                <h2>
-                    More thoughts.<br>
-                    <span>More stories.</span>
-                </h2>
+    </article>
 
-                <p>
-                    There's always something new
-                    waiting inside the universe.
-                </p>
 
-                <a
-                    href="book.html"
-                    class="btn btn-primary">
+    <article class="thought-card">
 
-                    Read The Last Summer
+      <div class="thought-number">12</div>
 
-                </a>
+      <h3>Build Your Own Taste</h3>
 
-            </div>
+      <p>
+        Inspiration lena useful hai, lekin har cheez copy karna zaroori nahi.
+        Dheere-dheere apni style, apni thinking aur apna taste develop karo.
+      </p>
 
-        </section>
+      <div class="thought-line">
+        “Inspiration can start your journey. Identity makes it yours.”
+      </div>
 
-    </main>
+    </article>
 
 
-    <!-- FOOTER -->
+    <article class="thought-card">
 
-    <footer class="footer">
+      <div class="thought-number">13</div>
 
-        <div class="footer-container">
+      <h3>Small Decisions Shape Big Directions</h3>
 
-            <div class="footer-brand">
+      <p>
+        Life ke bade changes hamesha ek bade decision se nahi aate.
+        Kabhi daily ke chhote decisions hi future ki direction decide karte hain.
+      </p>
 
-                <a href="index.html" class="logo">
-                    360° <span>Universe</span>
-                </a>
+      <div class="thought-line">
+        “Your ordinary choices quietly create your extraordinary future.”
+      </div>
 
-                <p>
-                    Stories. Thoughts. Creativity. Growth.
-                </p>
+    </article>
 
-            </div>
 
+    <article class="thought-card">
 
-            <div class="footer-links">
+      <div class="thought-number">14</div>
 
-                <a href="portfolio.html">
-                    Portfolio
-                </a>
+      <h3>Being Curious Keeps You Growing</h3>
 
-                <a href="book.html">
-                    The Last Summer
-                </a>
+      <p>
+        Jab tum naye questions poochna band kar dete ho,
+        learning bhi slow hone lagti hai. Curiosity tumhe naye ideas,
+        naye skills aur naye possibilities tak le ja sakti hai.
+      </p>
 
-                <a href="thoughts.html">
-                    Thoughts
-                </a>
+      <div class="thought-line">
+        “Stay curious. There is always something left to discover.”
+      </div>
 
-                <a href="course.html">
-                    Growth Lab
-                </a>
+    </article>
 
-                <a href="contact.html">
-                    Contact
-                </a>
 
-            </div>
+    <article class="thought-card">
 
-        </div>
+      <div class="thought-number">15</div>
 
+      <h3>Your First Version Is Allowed To Be Simple</h3>
 
-        <div class="footer-bottom">
+      <p>
+        First project ko perfect banane ka pressure mat lo.
+        Pehla version tumhe bas ye sikhane ke liye hota hai ki
+        next version ko better kaise banana hai.
+      </p>
 
-            <p>
-                © 2026 Shivu. All rights reserved.
-            </p>
+      <div class="thought-line">
+        “Make the first version. Then make a better second one.”
+      </div>
 
-            <p>
-                Created by Shivu.
-            </p>
+    </article>
 
-        </div>
 
-    </footer>
+    <article class="thought-card">
 
+      <div class="thought-number">16</div>
 
-    <!-- JAVASCRIPT -->
+      <h3>Protect Your Original Ideas</h3>
 
-    <script src="script.js"></script>
+      <p>
+        Har idea sabko explain karna zaroori nahi.
+        Kuch ideas ko pehle quietly develop karo,
+        test karo aur phir duniya ke saamne lao.
+      </p>
+
+      <div class="thought-line">
+        “Give your ideas time to become real before asking everyone for an opinion.”
+      </div>
+
+    </article>
+
+
+    <article class="thought-card">
+
+      <div class="thought-number">17</div>
+
+      <h3>Skills Compound</h3>
+
+      <p>
+        Ek skill akeli shayad normal lage, lekin jab multiple skills
+        ek saath develop hoti hain toh unka combination powerful ho jata hai.
+      </p>
+
+      <div class="thought-line">
+        “Small skills can become a powerful identity when they grow together.”
+      </div>
+
+    </article>
+
+
+    <article class="thought-card">
+
+      <div class="thought-number">18</div>
+
+      <h3>Don't Rush Every Chapter</h3>
+
+      <p>
+        Har phase ko jaldi khatam karne ki zaroorat nahi.
+        Kuch stages tumhe woh lessons deti hain jo next stage me kaam aate hain.
+      </p>
+
+      <div class="thought-line">
+        “Some chapters are slow because they are teaching you something.”
+      </div>
+
+    </article>
+
+
+    <article class="thought-card">
+
+      <div class="thought-number">19</div>
+
+      <h3>Make Things You Would Personally Love</h3>
+
+      <p>
+        Jab tum kuch create karte ho jo tum khud genuinely pasand karte ho,
+        toh usme ek natural feeling aa jati hai jo sirf trends follow karne
+        se nahi aa sakti.
+      </p>
+
+      <div class="thought-line">
+        “Create from genuine interest, not only from what is popular.”
+      </div>
+
+    </article>
+
+
+    <article class="thought-card">
+
+      <div class="thought-number">20</div>
+
+      <h3>Keep Becoming</h3>
+
+      <p>
+        Tumhe ek fixed version of yourself banne ki zaroorat nahi.
+        Tum seekh sakte ho, change kar sakte ho aur naye versions discover
+        kar sakte ho.
+      </p>
+
+      <div class="thought-line">
+        “You are allowed to become someone you haven't imagined yet.”
+      </div>
+
+    </article>
+
+
+    <article class="thought-card">
+
+      <div class="thought-number">21</div>
+
+      <h3>Ideas Need Action</h3>
+
+      <p>
+        Ek brilliant idea bhi tab tak sirf idea hai jab tak us par kuch
+        banaya nahi jata. Action idea ko reality ke closer le aata hai.
+      </p>
+
+      <div class="thought-line">
+        “An idea becomes meaningful when you give it a form.”
+      </div>
+
+    </article>
+
+
+    <article class="thought-card">
+
+      <div class="thought-number">22</div>
+
+      <h3>Keep A Record Of Your Journey</h3>
+
+      <p>
+        Kabhi photos, notes, projects ya small memories save karna useful
+        hota hai. Baad me jab tum peeche dekhte ho,
+        toh growth zyada clearly nazar aati hai.
+      </p>
+
+      <div class="thought-line">
+        “Documenting your journey lets you see how far you've actually come.”
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <div class="show-more-wrap">
+    <button type="button" class="show-more" id="showMoreButton">
+      Show More Thoughts
+    </button>
+  </div>
+
+
+  <!-- BELIEF -->
+
+  <div class="belief">
+
+    <small>One Thing I Believe</small>
+
+    <h3>
+      “You don't have to become someone else to build something meaningful.
+      You just have to keep becoming a better version of yourself.”
+    </h3>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="cta">
+
+  <div class="cta-card">
+
+    <h2>Want To Learn More?</h2>
+
+    <p>
+      Growth, content creation aur online projects ko lekar jo cheezein
+      maine seekhi hain, unka ek dedicated space bhi hai.
+    </p>
+
+    <a href="course.html" class="cta-btn">
+      Explore Growth Lab →
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+  Made with ideas, curiosity & consistency — Shivu
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+(function(){
+
+  var button = document.getElementById("menuButton");
+  var menu = document.getElementById("navMenu");
+
+  if(button && menu){
+
+    button.onclick = function(event){
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      if(menu.classList.contains("open")){
+        menu.classList.remove("open");
+      }else{
+        menu.classList.add("open");
+      }
+
+    };
+
+    var links = menu.getElementsByTagName("a");
+    var i;
+
+    for(i = 0; i < links.length; i++){
+
+      links[i].onclick = function(){
+        menu.classList.remove("open");
+      };
+
+    }
+
+  }
+
+})();
+
+
+(function(){
+
+  var button = document.getElementById("showMoreButton");
+  var more = document.getElementById("moreThoughts");
+
+  if(!button || !more){
+    return;
+  }
+
+  button.onclick = function(){
+
+    if(more.classList.contains("show")){
+
+      more.classList.remove("show");
+      button.innerHTML = "Show More Thoughts";
+
+      window.scrollTo({
+        top:0,
+        behavior:"smooth"
+      });
+
+    }else{
+
+      more.classList.add("show");
+      button.innerHTML = "Show Less Thoughts";
+
+    }
+
+  };
+
+})();
+
+</script>
 
 </body>
-
 </html>

@@ -2,2942 +2,4251 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>The Last Summer — Shivu</title>
 
-<link rel="stylesheet" href="style.css">
-
 <style>
-/* ================================
-   THE LAST SUMMER — BOOK READER
-================================ */
-
-.book-reader{
-    max-width:900px;
-    margin:40px auto 100px;
-    padding:0 18px;
+*{
+  box-sizing:border-box;
 }
 
-.book-page{
-    display:none;
-    min-height:520px;
-    padding:42px 34px;
-    border:1px solid rgba(155,108,255,.25);
-    border-radius:28px;
-    background:rgba(15,15,28,.78);
-    box-shadow:0 25px 80px rgba(0,0,0,.35);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+  overflow-x:hidden;
+  background:#070711;
+  color:#f7f5ff;
+  font-family:Arial,Helvetica,sans-serif;
 }
 
-.book-page:target{
-    display:block;
+body{
+  background:
+    radial-gradient(circle at 15% 10%,rgba(112,72,255,.18),transparent 32%),
+    radial-gradient(circle at 85% 20%,rgba(43,120,255,.12),transparent 30%),
+    linear-gradient(145deg,#070711,#0b0a18 55%,#070711);
 }
 
-/* First page when no #hash exists */
-#page1{
-    display:block;
+a{
+  color:inherit;
+  text-decoration:none;
 }
 
-.book-page:target ~ #page1{
-    display:none;
+button{
+  font-family:inherit;
 }
 
-.page-number{
-    color:#9b6cff;
-    font-size:13px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    margin-bottom:25px;
+.navbar{
+  position:sticky;
+  top:12px;
+  z-index:1000;
+  width:calc(100% - 28px);
+  max-width:1120px;
+  margin:12px auto 0;
+  padding:9px 12px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:17px;
+  background:rgba(18,17,31,.58);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 12px 35px rgba(0,0,0,.24);
+}
+
+.nav-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.logo{
+  font-size:15px;
+  font-weight:800;
+  letter-spacing:.3px;
+  white-space:nowrap;
+}
+
+.nav-menu{
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+
+.nav-menu a{
+  padding:8px 10px;
+  border-radius:10px;
+  color:#aaa8b9;
+  font-size:12px;
+  font-weight:700;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active{
+  color:#fff;
+  background:rgba(255,255,255,.07);
+}
+
+.menu-toggle{
+  display:none;
+  width:37px;
+  height:37px;
+  padding:0;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:11px;
+  background:rgba(255,255,255,.06);
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:4px;
+}
+
+.menu-toggle span{
+  display:block;
+  width:17px;
+  height:2px;
+  border-radius:3px;
+  background:#fff;
+}
+
+/* COVER */
+
+.cover{
+  min-height:calc(100vh - 90px);
+  min-height:calc(100dvh - 90px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:50px 18px;
+}
+
+.cover-card{
+  position:relative;
+  width:100%;
+  max-width:760px;
+  padding:58px 34px;
+  text-align:center;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:30px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+  box-shadow:0 35px 90px rgba(0,0,0,.35);
+  overflow:hidden;
+}
+
+.cover-card:before{
+  content:"";
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:rgba(121,76,255,.20);
+  filter:blur(75px);
+  top:-130px;
+  left:-100px;
+}
+
+.cover-card:after{
+  content:"";
+  position:absolute;
+  width:230px;
+  height:230px;
+  border-radius:50%;
+  background:rgba(47,121,255,.13);
+  filter:blur(70px);
+  right:-100px;
+  bottom:-120px;
+}
+
+.cover-content{
+  position:relative;
+  z-index:2;
+}
+
+.cover-small{
+  color:#9c91ff;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:3px;
+  margin-bottom:20px;
+}
+
+.cover h1{
+  margin:0;
+  font-size:clamp(40px,8vw,76px);
+  line-height:.96;
+  letter-spacing:-3px;
+  font-weight:900;
+}
+
+.cover-subtitle{
+  margin:22px auto 8px;
+  color:#d7d4e1;
+  font-size:17px;
+  font-weight:600;
+}
+
+.cover-author{
+  color:#888596;
+  font-size:13px;
+  margin-top:12px;
+}
+
+.start-btn{
+  margin-top:32px;
+  border:0;
+  border-radius:14px;
+  padding:14px 26px;
+  color:#fff;
+  background:linear-gradient(135deg,#7455ff,#4d8dff);
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 12px 30px rgba(89,82,255,.28);
+}
+
+.start-btn:active{
+  transform:scale(.97);
+}
+
+/* READER */
+
+.reader{
+  display:none;
+  width:100%;
+  max-width:900px;
+  margin:0 auto;
+  padding:55px 18px 35px;
+}
+
+.reader-card{
+  width:100%;
+  min-height:650px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:28px;
+  background:rgba(14,13,25,.74);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 30px 80px rgba(0,0,0,.30);
+  padding:35px;
+}
+
+.reader-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding-bottom:22px;
+  border-bottom:1px solid rgba(255,255,255,.07);
 }
 
 .chapter-label{
-    color:#8f91a7;
-    font-size:13px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    margin-bottom:12px;
+  color:#9c91ff;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
 }
 
-.book-page h2{
-    font-size:34px;
-    line-height:1.15;
-    margin:0 0 25px;
+.page-title{
+  margin-top:7px;
+  font-size:25px;
+  line-height:1.2;
+  font-weight:900;
+  letter-spacing:-.5px;
 }
 
-.book-page h3{
-    font-size:22px;
-    margin:0 0 20px;
+.progress{
+  color:#777487;
+  font-size:11px;
+  font-weight:700;
+  white-space:nowrap;
 }
 
-.book-page p{
-    color:#c8c8d5;
-    font-size:17px;
-    line-height:1.9;
-    margin:0 0 20px;
+.language-switch{
+  display:flex;
+  gap:5px;
+  margin:24px 0 28px;
+  padding:4px;
+  width:max-content;
+  max-width:100%;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;
+  background:rgba(255,255,255,.035);
 }
 
-.book-nav{
+.lang-btn{
+  border:0;
+  border-radius:8px;
+  padding:8px 13px;
+  color:#888594;
+  background:transparent;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.lang-btn.active{
+  color:#fff;
+  background:rgba(255,255,255,.10);
+}
+
+.story{
+  color:#d8d5df;
+  font-size:16px;
+  line-height:1.95;
+  letter-spacing:.05px;
+}
+
+.story p{
+  margin:0 0 22px;
+  padding-right:5px;
+}
+
+.story-highlight{
+  margin:30px 0;
+  padding:20px 21px;
+  border-left:3px solid #7966ff;
+  border-radius:0 16px 16px 0;
+  background:
+    linear-gradient(90deg,rgba(116,82,255,.13),rgba(116,82,255,.025));
+  color:#f4f1ff;
+  font-size:15px;
+  line-height:1.75;
+  font-weight:700;
+}
+
+.thought-box{
+  margin-top:35px;
+  padding:23px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  background:rgba(255,255,255,.035);
+}
+
+.thought-label{
+  color:#9c91ff;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:11px;
+}
+
+.thought-text{
+  color:#efedf5;
+  font-size:15px;
+  line-height:1.75;
+  font-weight:700;
+}
+
+.page-footer{
+  margin-top:45px;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.07);
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  color:#777487;
+  font-size:11px;
+  font-weight:700;
+}
+
+.reader-controls{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-top:22px;
+}
+
+.reader-controls button{
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:12px;
+  padding:11px 17px;
+  color:#e9e7f1;
+  background:rgba(255,255,255,.045);
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.reader-controls button:hover{
+  background:rgba(255,255,255,.08);
+}
+
+.reader-controls button:disabled{
+  opacity:.35;
+  cursor:not-allowed;
+}
+
+.end-screen{
+  text-align:center;
+  padding:55px 10px;
+}
+
+.end-screen h2{
+  margin:0 0 18px;
+  font-size:34px;
+  font-weight:900;
+}
+
+.end-screen p{
+  max-width:600px;
+  margin:0 auto;
+  color:#aaa6b5;
+  line-height:1.8;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .navbar{
+    width:calc(100% - 20px);
+    margin-top:10px;
+    padding:8px 9px;
+  }
+
+  .logo{
+    font-size:14px;
+  }
+
+  .menu-toggle{
     display:flex;
-    justify-content:space-between;
-    gap:15px;
-    margin-top:35px;
-    padding-top:25px;
-    border-top:1px solid rgba(255,255,255,.08);
-}
+  }
 
-.book-nav a{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    min-width:110px;
-    padding:12px 18px;
-    border-radius:14px;
-    text-decoration:none;
-    color:#fff;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.1);
-    transition:.25s ease;
-}
+  .nav-menu{
+    display:none;
+    position:absolute;
+    top:58px;
+    left:0;
+    right:0;
+    width:100%;
+    padding:8px;
+    flex-direction:column;
+    align-items:stretch;
+    gap:3px;
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:15px;
+    background:rgba(17,16,29,.88);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    box-shadow:0 20px 45px rgba(0,0,0,.35);
+  }
 
-.book-nav a:hover{
-    transform:translateY(-2px);
-    border-color:rgba(155,108,255,.5);
-    background:rgba(155,108,255,.12);
-}
+  .nav-menu.open{
+    display:flex;
+  }
 
-.book-intro{
-    text-align:center;
-    margin-bottom:35px;
-}
+  .nav-menu a{
+    padding:11px 12px;
+  }
 
-.book-intro .eyebrow{
-    margin-bottom:15px;
-}
+  .cover{
+    padding:30px 14px;
+  }
 
-.book-intro h1{
-    font-size:clamp(42px,8vw,76px);
-    margin:0;
+  .cover-card{
+    padding:45px 22px;
+    border-radius:24px;
+  }
+
+  .cover h1{
     letter-spacing:-2px;
-}
+  }
 
-.book-intro p{
-    color:#999aad;
-    margin-top:12px;
-    font-size:17px;
-}
+  .reader{
+    padding:30px 12px;
+  }
 
-@media(max-width:600px){
-    .book-reader{
-        margin-top:25px;
-        padding:0 12px;
-    }
+  .reader-card{
+    padding:23px 18px;
+    border-radius:22px;
+    min-height:600px;
+  }
 
-    .book-page{
-        min-height:560px;
-        padding:30px 22px;
-        border-radius:22px;
-    }
+  .reader-top{
+    align-items:flex-start;
+  }
 
-    .book-page h2{
-        font-size:28px;
-    }
+  .page-title{
+    font-size:21px;
+  }
 
-    .book-page p{
-        font-size:16px;
-        line-height:1.8;
-    }
+  .progress{
+    font-size:10px;
+  }
 
-    .book-nav a{
-        min-width:90px;
-        padding:11px 13px;
-        font-size:14px;
-    }
+  .story{
+    font-size:15px;
+    line-height:1.9;
+  }
+
+  .story-highlight{
+    padding:17px;
+  }
+
+  .reader-controls button{
+    padding:10px 13px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
+<!-- NAVBAR -->
 
 <nav class="navbar">
-    <div class="nav-container">
+  <div class="nav-inner">
 
-        <a href="index.html" class="logo">
-            360° Universe
-        </a>
+    <a href="index.html" class="logo">360° Universe</a>
 
-        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">
-            ☰
-        </button>
-
-        <div class="nav-menu" id="navMenu">
-            <a href="index.html">Home</a>
-            <a href="portfolio.html">Portfolio</a>
-            <a href="book.html" class="active">Book</a>
-            <a href="thoughts.html">Thoughts</a>
-            <a href="course.html">Growth Lab</a>
-            <a href="contact.html">Contact</a>
-        </div>
-
+    <div class="nav-menu" id="navMenu">
+      <a href="index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="book.html" class="active">Book</a>
+      <a href="thoughts.html">Thoughts</a>
+      <a href="course.html">Growth Lab</a>
+      <a href="contact.html">Contact</a>
     </div>
+
+    <button type="button" class="menu-toggle" id="menuButton">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
 </nav>
 
 
-<!-- ================= BOOK HERO ================= -->
+<!-- COVER -->
 
-<section class="page-hero">
-    <div class="page-hero-content">
+<section class="cover" id="cover">
 
-        <span class="eyebrow">A Story By Shivu</span>
+  <div class="cover-card">
 
-        <h1>The Last Summer</h1>
+    <div class="cover-content">
 
-        <p>
-            Some summers stay forever.
-        </p>
+      <div class="cover-small">
+        A STORY BY SHIVU
+      </div>
+
+      <h1>THE LAST<br>SUMMER</h1>
+
+      <div class="cover-subtitle">
+        Some summers stay forever.
+      </div>
+
+      <div class="cover-author">
+        Written by Shivu
+      </div>
+
+      <button type="button" class="start-btn" id="startReading">
+        Start Reading
+      </button>
 
     </div>
+
+  </div>
+
 </section>
 
 
-<!-- ================= BOOK READER ================= -->
+<!-- READER -->
 
-<main class="book-reader">
+<main class="reader" id="reader">
 
-<div class="book-intro">
-    <span class="eyebrow">THE LAST SUMMER</span>
-    <h1>Some summers stay forever.</h1>
-    <p>
-        A story about a summer, a lake, two people,
-        and the memories that never really leave.
-    </p>
-</div>
+  <div class="reader-card">
 
+    <div class="reader-top">
 
-<!-- ================= PAGE 1 ================= -->
+      <div>
+        <div class="chapter-label" id="chapterLabel"></div>
+        <div class="page-title" id="pageTitle"></div>
+      </div>
 
-<article class="book-page" id="page1">
+      <div class="progress" id="progress"></div>
 
-    <div class="page-number">Page 01</div>
-
-    <div class="chapter-label">Chapter 01</div>
-
-    <h2>The Boy at the Shore</h2>
-
-    <p>
-        The lake was quiet that afternoon.
-        The mountains stood beyond it like silent guardians,
-        their reflections breaking whenever the wind touched
-        the water.
-    </p>
-
-    <p>
-        Shiv sat alone at the end of the old wooden pier.
-        His notebook rested beside him, open to a blank page.
-        He had brought it with him almost every day that summer,
-        although he rarely knew what he wanted to write.
-    </p>
-
-    <p>
-        Sometimes he came here simply because the lake asked
-        nothing from him.
-    </p>
-
-    <div class="book-nav">
-        <span></span>
-        <a href="#page2">Next →</a>
     </div>
 
-</article>
 
+    <div class="language-switch">
 
-<!-- ================= PAGE 2 ================= -->
+      <button type="button" class="lang-btn active" id="englishBtn">
+        English
+      </button>
 
-<article class="book-page" id="page2">
+      <button type="button" class="lang-btn" id="hinglishBtn">
+        Hinglish
+      </button>
 
-    <div class="page-number">Page 02</div>
-
-    <h3>The Quiet Place</h3>
-
-    <p>
-        At home, everyone seemed to have an idea of who Shiv
-        was supposed to become.
-    </p>
-
-    <p>
-        His future was discussed over dinner, during phone calls,
-        and sometimes in conversations that were supposed to be
-        about something else.
-    </p>
-
-    <p>
-        Study. Career. Family. Responsibility.
-    </p>
-
-    <p>
-        The words were not cruel, but they were heavy.
-        Shiv understood why his family cared about him.
-        Still, there were days when he wondered whether anyone
-        had ever asked him what he actually wanted.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page1">← Previous</a>
-        <a href="#page3">Next →</a>
     </div>
 
-</article>
+
+    <article class="story" id="story"></article>
 
 
-<!-- ================= PAGE 3 ================= -->
+    <div class="thought-box">
 
-<article class="book-page" id="page3">
+      <div class="thought-label">
+        Main Thought
+      </div>
 
-    <div class="page-number">Page 03</div>
+      <div class="thought-text" id="thought"></div>
 
-    <h3>A Presence</h3>
-
-    <p>
-        He looked across the lake.
-    </p>
-
-    <p>
-        For a moment, everything seemed exactly as it had been
-        for the last few weeks.
-    </p>
-
-    <p>
-        Then he noticed someone standing near the shore.
-    </p>
-
-    <p>
-        A girl.
-    </p>
-
-    <p>
-        She wasn't doing anything remarkable.
-        She was simply looking at the water, as if she had
-        forgotten the rest of the world existed.
-    </p>
-
-    <p>
-        Shiv looked away first.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page2">← Previous</a>
-        <a href="#page4">Next →</a>
     </div>
 
-</article>
 
+    <div class="page-footer">
 
-<!-- ================= PAGE 4 ================= -->
+      <span id="pageSection"></span>
+      <span id="pageNumber"></span>
 
-<article class="book-page" id="page4">
-
-    <div class="page-number">Page 04</div>
-
-    <h3>The First Glance</h3>
-
-    <p>
-        He tried to return to his notebook.
-    </p>
-
-    <p>
-        But the blank page suddenly felt less interesting.
-    </p>
-
-    <p>
-        He wondered who she was.
-    </p>
-
-    <p>
-        The thought surprised him.
-    </p>
-
-    <p>
-        Shiv wasn't someone who usually became curious about
-        strangers. He preferred observing people from a distance,
-        understanding them without becoming part of their story.
-    </p>
-
-    <p>
-        Yet something about that afternoon felt different.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page3">← Previous</a>
-        <a href="#page5">Next →</a>
     </div>
 
-</article>
 
+    <div class="reader-controls">
 
-<!-- ================= PAGE 5 ================= -->
+      <button type="button" id="prevButton">
+        ← Previous
+      </button>
 
-<article class="book-page" id="page5">
+      <button type="button" id="nextButton">
+        Next →
+      </button>
 
-    <div class="page-number">Page 05</div>
-
-    <h3>The Summer Begins</h3>
-
-    <p>
-        The girl eventually walked away.
-    </p>
-
-    <p>
-        Shiv watched her disappear into the old streets.
-    </p>
-
-    <p>
-        He closed his notebook.
-    </p>
-
-    <p>
-        He didn't know it yet, but that ordinary afternoon
-        would become one of the memories he carried for years.
-    </p>
-
-    <p>
-        Some stories begin with a conversation.
-    </p>
-
-    <p>
-        Others begin with nothing more than a glance.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page4">← Previous</a>
-        <a href="#page6">Next →</a>
     </div>
 
-</article>
-
-
-<!-- ================= CHAPTER 2 ================= -->
-
-<article class="book-page" id="page6">
-
-    <div class="page-number">Page 06</div>
-
-    <div class="chapter-label">Chapter 02</div>
-
-    <h2>Her Name in the Wind</h2>
-
-    <p>
-        Three days later, Shiv saw her again.
-    </p>
-
-    <p>
-        This time she was sitting inside the small bookstore
-        on the corner of the oldest street in town.
-    </p>
-
-    <p>
-        Books surrounded her.
-    </p>
-
-    <p>
-        For some reason, that made Shiv smile.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page5">← Previous</a>
-        <a href="#page7">Next →</a>
-    </div>
-
-</article>
-
-
-<article class="book-page" id="page7">
-
-    <div class="page-number">Page 07</div>
-
-    <h3>Hello</h3>
-
-    <p>
-        Shiv walked past the shelf where she was standing.
-    </p>
-
-    <p>
-        Then he stopped.
-    </p>
-
-    <p>
-        He wasn't sure why.
-    </p>
-
-    <p>
-        "You like that book?"
-    </p>
-
-    <p>
-        The question came out more awkwardly than he expected.
-    </p>
-
-    <p>
-        She looked at him and smiled slightly.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page6">← Previous</a>
-        <a href="#page8">Next →</a>
-    </div>
-
-</article>
-
-
-<article class="book-page" id="page8">
-
-    <div class="page-number">Page 08</div>
-
-    <h3>Meera</h3>
-
-    <p>
-        "I've read it before," she said.
-    </p>
-
-    <p>
-        Her voice was calm.
-    </p>
-
-    <p>
-        "Then why are you holding it?"
-    </p>
-
-    <p>
-        She looked at the cover.
-    </p>
-
-    <p>
-        "Sometimes you return to things you already know."
-    </p>
-
-    <p>
-        Shiv didn't know what to say.
-    </p>
-
-    <p>
-        She smiled again.
-    </p>
-
-    <p>
-        "I'm Meera."
-    </p>
-
-    <div class="book-nav">
-        <a href="#page7">← Previous</a>
-        <a href="#page9">Next →</a>
-    </div>
-
-</article>
-
-
-<article class="book-page" id="page9">
-
-    <div class="page-number">Page 09</div>
-
-    <h3>A Name</h3>
-
-    <p>
-        "Shiv."
-    </p>
-
-    <p>
-        That was it.
-    </p>
-
-    <p>
-        Two names exchanged between shelves of old books.
-    </p>
-
-    <p>
-        Yet somehow, the moment stayed with him.
-    </p>
-
-    <p>
-        That evening, sitting by the lake, Shiv opened his
-        notebook.
-    </p>
-
-    <p>
-        Without thinking much, he wrote her name.
-    </p>
-
-    <p>
-        Meera.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page8">← Previous</a>
-        <a href="#page10">Next →</a>
-    </div>
-
-</article>
-
-
-<article class="book-page" id="page10">
-
-    <div class="page-number">Page 10</div>
-
-    <h3>The Café</h3>
-
-    <p>
-        Their next meeting happened at a quiet café near
-        the lake.
-    </p>
-
-    <p>
-        Meera was sitting by the window with a book.
-    </p>
-
-    <p>
-        Shiv ordered a drink and sat at the next table.
-    </p>
-
-    <p>
-        Neither of them spoke for several minutes.
-    </p>
-
-    <p>
-        Somehow, the silence didn't feel uncomfortable.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page9">← Previous</a>
-        <a href="#page11">Next →</a>
-    </div>
-
-</article>
-
-
-<article class="book-page" id="page11">
-
-    <div class="page-number">Page 11</div>
-
-    <h3>Small Conversations</h3>
-
-    <p>
-        "You write?"
-    </p>
-
-    <p>
-        Meera pointed toward the notebook beside him.
-    </p>
-
-    <p>
-        Shiv nodded.
-    </p>
-
-    <p>
-        "Sometimes."
-    </p>
-
-    <p>
-        "What do you write?"
-    </p>
-
-    <p>
-        "Things I don't know how to say."
-    </p>
-
-    <p>
-        Meera looked at him for a moment.
-    </p>
-
-    <p>
-        "That's usually what writing is for."
-    </p>
-
-    <div class="book-nav">
-        <a href="#page10">← Previous</a>
-        <a href="#page12">Next →</a>
-    </div>
-
-</article>
-
-
-<article class="book-page" id="page12">
-
-    <div class="page-number">Page 12</div>
-
-    <h3>The Old Streets</h3>
-
-    <p>
-        After that day, they started meeting more often.
-    </p>
-
-    <p>
-        Sometimes at the bookstore.
-        Sometimes at the café.
-        Sometimes beside the lake.
-    </p>
-
-    <p>
-        They walked through old streets without deciding
-        where they were going.
-    </p>
-
-    <p>
-        Their friendship didn't arrive suddenly.
-    </p>
-
-    <p>
-        It grew quietly.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page11">← Previous</a>
-        <a href="#page13">Next →</a>
-    </div>
-
-</article>
-
-
-<article class="book-page" id="page13">
-
-    <div class="page-number">Page 13</div>
-
-    <h3>The Pier</h3>
-
-    <p>
-        The wooden pier became their favourite place.
-    </p>
-
-    <p>
-        They would sit at opposite ends sometimes,
-        saying almost nothing.
-    </p>
-
-    <p>
-        Other times, they talked until the sky turned orange.
-    </p>
-
-    <p>
-        Shiv began to notice the small things about Meera.
-    </p>
-
-    <p>
-        The way she paused before answering difficult questions.
-        The way she looked at the lake when she was thinking.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page12">← Previous</a>
-        <a href="#page14">Next →</a>
-    </div>
-
-</article>
-
-
-<article class="book-page" id="page14">
-
-    <div class="page-number">Page 14</div>
-
-    <h3>Her Silence</h3>
-
-    <p>
-        Meera didn't talk much about her past.
-    </p>
-
-    <p>
-        Whenever conversations came close to certain subjects,
-        she changed the topic.
-    </p>
-
-    <p>
-        Shiv noticed.
-    </p>
-
-    <p>
-        But he didn't ask.
-    </p>
-
-    <p>
-        He understood that trust couldn't be demanded.
-    </p>
-
-    <p>
-        It had to be earned.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page13">← Previous</a>
-        <a href="#page15">Next →</a>
-    </div>
-
-</article>
-
-
-<article class="book-page" id="page15">
-
-    <div class="page-number">Page 15</div>
-
-    <h3>His Notebook</h3>
-
-    <p>
-        Shiv's notebook slowly filled with moments.
-    </p>
-
-    <p>
-        A sentence Meera had said.
-        A sunset they had watched.
-        A rainy afternoon at the café.
-        A walk through an empty street.
-    </p>
-
-    <p>
-        He never called them memories while they were happening.
-    </p>
-
-    <p>
-        They were simply days.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page14">← Previous</a>
-        <a href="#page16">Next →</a>
-    </div>
-
-</article>
-
-
-<article class="book-page" id="page16">
-
-    <div class="page-number">Page 16</div>
-
-    <h3>A Beginning</h3>
-
-    <p>
-        One evening, Shiv looked at the name he had written
-        weeks ago.
-    </p>
-
-    <p>
-        Meera.
-    </p>
-
-    <p>
-        He realized something.
-    </p>
-
-    <p>
-        A name could be more than a name.
-    </p>
-
-    <p>
-        Sometimes a name could be the beginning of a memory.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page15">← Previous</a>
-        <a href="#page17">Next →</a>
-    </div>
-
-</article>
-
-
-<article class="book-page" id="page17">
-
-    <div class="page-number">Page 17</div>
-
-    <h3>Summer Days</h3>
-
-    <p>
-        The days became warmer.
-    </p>
-
-    <p>
-        The town became busier.
-    </p>
-
-    <p>
-        And somehow, Shiv and Meera became closer.
-    </p>
-
-    <p>
-        Nothing was officially different.
-    </p>
-
-    <p>
-        Yet everything felt different.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page16">← Previous</a>
-        <a href="#page18">Next →</a>
-    </div>
-
-</article>
-
-
-<article class="book-page" id="page18">
-
-    <div class="page-number">Page 18</div>
-
-    <h3>The Unspoken</h3>
-
-    <p>
-        There were things neither of them said.
-    </p>
-
-    <p>
-        Feelings didn't always need words.
-    </p>
-
-    <p>
-        Sometimes they existed in the space between two people,
-        quietly waiting.
-    </p>
-
-    <p>
-        Shiv didn't know what their friendship would become.
-    </p>
-
-    <p>
-        He only knew he didn't want the summer to end.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page17">← Previous</a>
-        <a href="#page19">Next →</a>
-    </div>
-
-</article>
-
-
-<article class="book-page" id="page19">
-
-    <div class="page-number">Page 19</div>
-
-    <h3>Before the Sunset</h3>
-
-    <p>
-        That evening, they sat together on the pier.
-    </p>
-
-    <p>
-        The sun slowly disappeared behind the mountains.
-    </p>
-
-    <p>
-        Neither of them wanted to leave.
-    </p>
-
-    <p>
-        They didn't know it yet, but the quiet friendship
-        of those days was becoming something they would both
-        remember for a very long time.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page18">← Previous</a>
-        <a href="#page20">Next →</a>
-    </div>
-
-</article>
-
-
-<!-- ================= CHAPTER 3 ================= -->
-
-<article class="book-page" id="page20">
-
-    <div class="page-number">Page 20</div>
-
-    <div class="chapter-label">Chapter 03</div>
-
-    <h2>Sunsets and Secrets</h2>
-
-    <p>
-        Summer had become a rhythm.
-    </p>
-
-    <p>
-        Mornings belonged to the town.
-        Afternoons belonged to the lake.
-        Evenings belonged to conversations that neither of them
-        wanted to end.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page19">← Previous</a>
-        <a href="#page21">Next →</a>
-    </div>
-
-</article>
-
-
-<article class="book-page" id="page21">
-<div class="page-number">Page 21</div>
-<h3>Future</h3>
-<p>
-Shiv still thought about the future.
-</p>
-<p>
-Sometimes the pressure became too loud.
-</p>
-<p>
-Meera noticed even when he tried to hide it.
-</p>
-<p>
-"You think too much," she said one evening.
-</p>
-<div class="book-nav">
-<a href="#page20">← Previous</a>
-<a href="#page22">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page22">
-<div class="page-number">Page 22</div>
-<h3>Dreams</h3>
-<p>
-"What do you want?" Meera asked.
-</p>
-<p>
-Shiv looked at the lake.
-</p>
-<p>
-"I don't know."
-</p>
-<p>
-It was the most honest answer he had given in a long time.
-</p>
-<div class="book-nav">
-<a href="#page21">← Previous</a>
-<a href="#page23">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page23">
-<div class="page-number">Page 23</div>
-<h3>Her Fear</h3>
-<p>
-Meera didn't tell Shiv everything either.
-</p>
-<p>
-She had learned to keep certain parts of herself protected.
-</p>
-<p>
-Trust was difficult for her.
-</p>
-<p>
-But around Shiv, that wall had started becoming smaller.
-</p>
-<div class="book-nav">
-<a href="#page22">← Previous</a>
-<a href="#page24">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page24">
-<div class="page-number">Page 24</div>
-<h3>Rain at the Window</h3>
-<p>
-One afternoon, rain trapped them inside the café.
-</p>
-<p>
-Drops covered the glass while the town disappeared behind
-a silver curtain.
-</p>
-<p>
-They sat beside the window and watched.
-</p>
-<p>
-The silence between them felt peaceful.
-</p>
-<div class="book-nav">
-<a href="#page23">← Previous</a>
-<a href="#page25">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page25">
-<div class="page-number">Page 25</div>
-<h3>The Question</h3>
-<p>
-"Do you ever get scared of losing people?"
-</p>
-<p>
-Meera asked the question without looking at him.
-</p>
-<p>
-Shiv was quiet.
-</p>
-<p>
-"Yes."
-</p>
-<p>
-"So do I."
-</p>
-<div class="book-nav">
-<a href="#page24">← Previous</a>
-<a href="#page26">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page26">
-<div class="page-number">Page 26</div>
-<h3>The Rooftop</h3>
-<p>
-A few nights later, they climbed to a quiet rooftop overlooking
-the town.
-</p>
-<p>
-Small lights glowed across the old streets.
-</p>
-<p>
-Above them, the sky was clear.
-</p>
-<div class="book-nav">
-<a href="#page25">← Previous</a>
-<a href="#page27">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page27">
-<div class="page-number">Page 27</div>
-<h3>Stars</h3>
-<p>
-Meera looked upward.
-</p>
-<p>
-"Do you think people are meant to stay?"
-</p>
-<p>
-Shiv thought for a while.
-</p>
-<p>
-"Maybe some are."
-</p>
-<p>
-"And some?"
-</p>
-<p>
-"Maybe some are meant to change us."
-</p>
-<div class="book-nav">
-<a href="#page26">← Previous</a>
-<a href="#page28">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page28">
-<div class="page-number">Page 28</div>
-<h3>Understanding</h3>
-<p>
-Neither of them explained what they meant.
-</p>
-<p>
-They didn't need to.
-</p>
-<p>
-The night understood for them.
-</p>
-<div class="book-nav">
-<a href="#page27">← Previous</a>
-<a href="#page29">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page29">
-<div class="page-number">Page 29</div>
-<h3>A Walk</h3>
-<p>
-They walked through the old streets after midnight.
-</p>
-<p>
-The town was almost empty.
-</p>
-<p>
-Their footsteps echoed between the buildings.
-</p>
-<p>
-For once, Shiv wasn't thinking about tomorrow.
-</p>
-<div class="book-nav">
-<a href="#page28">← Previous</a>
-<a href="#page30">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page30">
-<div class="page-number">Page 30</div>
-<h3>The Bookstore</h3>
-<p>
-The bookstore was closed, but they stopped outside.
-</p>
-<p>
-Meera pointed toward the window.
-</p>
-<p>
-"That's where we met."
-</p>
-<p>
-Shiv smiled.
-</p>
-<p>
-"Feels like a long time ago."
-</p>
-<div class="book-nav">
-<a href="#page29">← Previous</a>
-<a href="#page31">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page31">
-<div class="page-number">Page 31</div>
-<h3>Changing</h3>
-<p>
-Shiv was beginning to realize that people could change
-without noticing it.
-</p>
-<p>
-Before Meera, he had spent most evenings alone.
-</p>
-<p>
-Now he looked forward to tomorrow because she might be there.
-</p>
-<div class="book-nav">
-<a href="#page30">← Previous</a>
-<a href="#page32">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page32">
-<div class="page-number">Page 32</div>
-<h3>Closer</h3>
-<p>
-Their conversations became deeper.
-</p>
-<p>
-They spoke about childhood, dreams, mistakes and fears.
-</p>
-<p>
-They discovered that their loneliness had different reasons,
-but somehow felt familiar.
-</p>
-<div class="book-nav">
-<a href="#page31">← Previous</a>
-<a href="#page33">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page33">
-<div class="page-number">Page 33</div>
-<h3>The Notebook</h3>
-<p>
-One afternoon, Meera noticed Shiv hiding his notebook.
-</p>
-<p>
-"Are you writing about me?"
-</p>
-<p>
-Shiv laughed.
-</p>
-<p>
-"Maybe."
-</p>
-<p>
-"Then someday I'll read it."
-</p>
-<p>
-He didn't tell her that she already filled more pages
-than anyone else.
-</p>
-<div class="book-nav">
-<a href="#page32">← Previous</a>
-<a href="#page34">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page34">
-<div class="page-number">Page 34</div>
-<h3>Almost</h3>
-<p>
-There were moments when Shiv wanted to say something more.
-</p>
-<p>
-Something important.
-</p>
-<p>
-But every time he tried, the words stayed somewhere
-between his thoughts and his voice.
-</p>
-<div class="book-nav">
-<a href="#page33">← Previous</a>
-<a href="#page35">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page35">
-<div class="page-number">Page 35</div>
-<h3>The Sunset</h3>
-<p>
-They watched another sunset from the pier.
-</p>
-<p>
-The sky turned gold before slowly becoming purple.
-</p>
-<p>
-Meera smiled.
-</p>
-<p>
-"Beautiful."
-</p>
-<p>
-Shiv wasn't sure whether she meant the sunset.
-</p>
-<div class="book-nav">
-<a href="#page34">← Previous</a>
-<a href="#page36">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page36">
-<div class="page-number">Page 36</div>
-<h3>More Than Summer</h3>
-<p>
-The summer had started as a collection of ordinary days.
-</p>
-<p>
-Now every day felt important.
-</p>
-<p>
-The lake.
-The streets.
-The books.
-The café.
-The rooftop.
-</p>
-<p>
-Everything had become part of their story.
-</p>
-<div class="book-nav">
-<a href="#page35">← Previous</a>
-<a href="#page37">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page37">
-<div class="page-number">Page 37</div>
-<h3>Quiet Feelings</h3>
-<p>
-Some feelings arrive loudly.
-</p>
-<p>
-Theirs didn't.
-</p>
-<p>
-They grew quietly, between conversations,
-shared silences and sunsets.
-</p>
-<p>
-Neither of them named them.
-</p>
-<div class="book-nav">
-<a href="#page36">← Previous</a>
-<a href="#page38">Next →</a>
-</div>
-</article>
-
-
-<!-- ================= CHAPTER 4 ================= -->
-
-<article class="book-page" id="page38">
-<div class="page-number">Page 38</div>
-<div class="chapter-label">Chapter 04</div>
-<h2>The Promise Under Stars</h2>
-<p>
-That night, the town was unusually quiet.
-</p>
-<p>
-Shiv and Meera walked toward their favourite viewpoint.
-</p>
-<div class="book-nav">
-<a href="#page37">← Previous</a>
-<a href="#page39">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page39">
-<div class="page-number">Page 39</div>
-<h3>The Viewpoint</h3>
-<p>
-From the hill, the lake looked like a dark mirror.
-</p>
-<p>
-Stars covered the sky above them.
-</p>
-<p>
-Neither spoke for a while.
-</p>
-<div class="book-nav">
-<a href="#page38">← Previous</a>
-<a href="#page40">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page40">
-<div class="page-number">Page 40</div>
-<h3>Meera's Fear</h3>
-<p>
-"I don't want this summer to end," Meera said.
-</p>
-<p>
-Shiv looked at her.
-</p>
-<p>
-"Why?"
-</p>
-<p>
-"Because good things don't always stay."
-</p>
-<div class="book-nav">
-<a href="#page39">← Previous</a>
-<a href="#page41">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page41">
-<div class="page-number">Page 41</div>
-<h3>Not Forever</h3>
-<p>
-Shiv didn't promise forever.
-</p>
-<p>
-He knew some promises were too big for anyone to make.
-</p>
-<p>
-Instead, he said,
-</p>
-<p>
-"I'll remember it."
-</p>
-<div class="book-nav">
-<a href="#page40">← Previous</a>
-<a href="#page42">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page42">
-<div class="page-number">Page 42</div>
-<h3>The Promise</h3>
-<p>
-Meera smiled.
-</p>
-<p>
-"Promise?"
-</p>
-<p>
-"Promise."
-</p>
-<p>
-It wasn't a promise about the future.
-</p>
-<p>
-It was a promise to honor the present.
-</p>
-<div class="book-nav">
-<a href="#page41">← Previous</a>
-<a href="#page43">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page43">
-<div class="page-number">Page 43</div>
-<h3>The Sky Above</h3>
-<p>
-They sat beneath the stars.
-</p>
-<p>
-The wind moved softly through the trees.
-</p>
-<p>
-For that moment, nothing else mattered.
-</p>
-<div class="book-nav">
-<a href="#page42">← Previous</a>
-<a href="#page44">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page44">
-<div class="page-number">Page 44</div>
-<h3>Everything They Didn't Say</h3>
-<p>
-There were words they could have said.
-</p>
-<p>
-But sometimes silence carries more meaning than a speech.
-</p>
-<p>
-They both understood what that night meant.
-</p>
-<div class="book-nav">
-<a href="#page43">← Previous</a>
-<a href="#page45">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page45">
-<div class="page-number">Page 45</div>
-<h3>The Walk Back</h3>
-<p>
-On the way back, they walked slowly.
-</p>
-<p>
-Neither wanted the night to finish.
-</p>
-<p>
-The old town looked different under moonlight.
-</p>
-<div class="book-nav">
-<a href="#page44">← Previous</a>
-<a href="#page46">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page46">
-<div class="page-number">Page 46</div>
-<h3>A Memory</h3>
-<p>
-Shiv knew that someday this night would become a memory.
-</p>
-<p>
-But he didn't know how important that memory would become.
-</p>
-<div class="book-nav">
-<a href="#page45">← Previous</a>
-<a href="#page47">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page47">
-<div class="page-number">Page 47</div>
-<h3>The Next Morning</h3>
-<p>
-The next morning felt ordinary.
-</p>
-<p>
-But ordinary mornings were becoming precious.
-</p>
-<div class="book-nav">
-<a href="#page46">← Previous</a>
-<a href="#page48">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page48">
-<div class="page-number">Page 48</div>
-<h3>Another Day</h3>
-<p>
-They met at the café.
-</p>
-<p>
-They laughed about something small.
-</p>
-<p>
-The previous night's promise remained between them,
-quiet but present.
-</p>
-<div class="book-nav">
-<a href="#page47">← Previous</a>
-<a href="#page49">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page49">
-<div class="page-number">Page 49</div>
-<h3>The Lake</h3>
-<p>
-They returned to the lake.
-</p>
-<p>
-The water was calm.
-</p>
-<p>
-Shiv thought about how quickly everything had changed.
-</p>
-<div class="book-nav">
-<a href="#page48">← Previous</a>
-<a href="#page50">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page50">
-<div class="page-number">Page 50</div>
-<h3>Closer</h3>
-<p>
-They had stopped being strangers.
-</p>
-<p>
-They had become important to each other.
-</p>
-<p>
-Neither needed to say it.
-</p>
-<div class="book-nav">
-<a href="#page49">← Previous</a>
-<a href="#page51">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page51">
-<div class="page-number">Page 51</div>
-<h3>The Future</h3>
-<p>
-Still, the future waited.
-</p>
-<p>
-Family expectations.
-Plans.
-Responsibilities.
-Things neither of them could control.
-</p>
-<div class="book-nav">
-<a href="#page50">← Previous</a>
-<a href="#page52">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page52">
-<div class="page-number">Page 52</div>
-<h3>Don't Ask Yet</h3>
-<p>
-Meera sometimes looked as if she wanted to say something.
-</p>
-<p>
-Shiv noticed.
-</p>
-<p>
-But he didn't ask.
-</p>
-<p>
-Maybe he was afraid of the answer.
-</p>
-<div class="book-nav">
-<a href="#page51">← Previous</a>
-<a href="#page53">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page53">
-<div class="page-number">Page 53</div>
-<h3>The Last Warm Evening</h3>
-<p>
-The air began to change.
-</p>
-<p>
-Summer was slowly moving toward its ending.
-</p>
-<p>
-Neither wanted to talk about it.
-</p>
-<div class="book-nav">
-<a href="#page52">← Previous</a>
-<a href="#page54">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page54">
-<div class="page-number">Page 54</div>
-<h3>Stay</h3>
-<p>
-"Stay a little longer," Shiv said.
-</p>
-<p>
-Meera smiled.
-</p>
-<p>
-"I will."
-</p>
-<div class="book-nav">
-<a href="#page53">← Previous</a>
-<a href="#page55">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page55">
-<div class="page-number">Page 55</div>
-<h3>The Promise Remains</h3>
-<p>
-Promises don't control the future.
-</p>
-<p>
-They simply honor what was real in the moment they were made.
-</p>
-<p>
-That night, Shiv believed the summer would somehow continue.
-</p>
-<div class="book-nav">
-<a href="#page54">← Previous</a>
-<a href="#page56">Next →</a>
-</div>
-</article>
-
-
-<!-- ================= CHAPTER 5 ================= -->
-
-<article class="book-page" id="page56">
-<div class="page-number">Page 56</div>
-<div class="chapter-label">Chapter 05</div>
-<h2>When Rain Replaced Summer</h2>
-<p>
-Then came the rain.
-</p>
-<p>
-At first, it was only a few clouds.
-</p>
-<p>
-Then the town changed completely.
-</p>
-<div class="book-nav">
-<a href="#page55">← Previous</a>
-<a href="#page57">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page57">
-<div class="page-number">Page 57</div>
-<h3>A Different Mood</h3>
-<p>
-The café windows stayed covered with rain.
-</p>
-<p>
-The pier was almost always empty.
-</p>
-<p>
-Their conversations became shorter.
-</p>
-<div class="book-nav">
-<a href="#page56">← Previous</a>
-<a href="#page58">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page58">
-<div class="page-number">Page 58</div>
-<h3>The Truth</h3>
-<p>
-Meera finally told Shiv that something had changed at home.
-</p>
-<p>
-Her family might leave the town.
-</p>
-<p>
-She didn't know when.
-</p>
-<p>
-She didn't know what would happen next.
-</p>
-<div class="book-nav">
-<a href="#page57">← Previous</a>
-<a href="#page59">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page59">
-<div class="page-number">Page 59</div>
-<h3>Silence</h3>
-<p>
-Shiv wanted to ask how long she would stay.
-</p>
-<p>
-Instead, he asked if she was okay.
-</p>
-<p>
-"I'm trying to be."
-</p>
-<div class="book-nav">
-<a href="#page58">← Previous</a>
-<a href="#page60">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page60">
-<div class="page-number">Page 60</div>
-<h3>The Heavy Silence</h3>
-<p>
-Their comfortable silence had changed.
-</p>
-<p>
-Before, silence meant peace.
-</p>
-<p>
-Now it meant things they were afraid to say.
-</p>
-<div class="book-nav">
-<a href="#page59">← Previous</a>
-<a href="#page61">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page61">
-<div class="page-number">Page 61</div>
-<h3>The Argument</h3>
-<p>
-One evening, Shiv finally lost his patience.
-</p>
-<p>
-"Why didn't you tell me?"
-</p>
-<p>
-Meera became quiet.
-</p>
-<p>
-"I didn't know how."
-</p>
-<div class="book-nav">
-<a href="#page60">← Previous</a>
-<a href="#page62">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page62">
-<div class="page-number">Page 62</div>
-<h3>Understanding</h3>
-<p>
-Shiv realized he wasn't angry with her.
-</p>
-<p>
-He was afraid.
-</p>
-<p>
-Afraid that something beautiful was already ending.
-</p>
-<div class="book-nav">
-<a href="#page61">← Previous</a>
-<a href="#page63">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page63">
-<div class="page-number">Page 63</div>
-<h3>Almost Goodbye</h3>
-<p>
-They sat beside the lake without speaking.
-</p>
-<p>
-Rain touched the surface of the water.
-</p>
-<p>
-Neither apologized.
-</p>
-<p>
-Neither needed to.
-</p>
-<div class="book-nav">
-<a href="#page62">← Previous</a>
-<a href="#page64">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page64">
-<div class="page-number">Page 64</div>
-<h3>The End of Summer</h3>
-<p>
-Summer had not officially ended.
-</p>
-<p>
-But somehow, they both knew it had.
-</p>
-<div class="book-nav">
-<a href="#page63">← Previous</a>
-<a href="#page65">Next →</a>
-</div>
-</article>
-
-
-<!-- ================= CHAPTER 6 ================= -->
-
-<article class="book-page" id="page65">
-<div class="page-number">Page 65</div>
-<div class="chapter-label">Chapter 06</div>
-<h2>Unread Messages</h2>
-<p>
-Distance began quietly.
-</p>
-<p>
-Not with a goodbye.
-</p>
-<p>
-With silence.
-</p>
-<div class="book-nav">
-<a href="#page64">← Previous</a>
-<a href="#page66">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page66">
-<div class="page-number">Page 66</div>
-<h3>Messages</h3>
-<p>
-Shiv sent messages.
-</p>
-<p>
-Sometimes Meera replied late.
-</p>
-<p>
-Sometimes she didn't reply at all.
-</p>
-<div class="book-nav">
-<a href="#page65">← Previous</a>
-<a href="#page67">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page67">
-<div class="page-number">Page 67</div>
-<h3>Drafts</h3>
-<p>
-Shiv wrote long messages and deleted them.
-</p>
-<p>
-He didn't want to sound worried.
-</p>
-<p>
-He didn't want to sound angry.
-</p>
-<p>
-Mostly, he didn't want to sound like someone who was afraid
-of being left behind.
-</p>
-<div class="book-nav">
-<a href="#page66">← Previous</a>
-<a href="#page68">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page68">
-<div class="page-number">Page 68</div>
-<h3>She Was Hiding Something</h3>
-<p>
-Shiv knew Meera wasn't telling him everything.
-</p>
-<p>
-But he also knew that forcing the truth out of her
-wouldn't make things better.
-</p>
-<div class="book-nav">
-<a href="#page67">← Previous</a>
-<a href="#page69">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page69">
-<div class="page-number">Page 69</div>
-<h3>The Pier Again</h3>
-<p>
-The pier looked different without her.
-</p>
-<p>
-Shiv sat at the same place.
-</p>
-<p>
-The lake was still beautiful.
-</p>
-<p>
-But beauty didn't feel the same anymore.
-</p>
-<div class="book-nav">
-<a href="#page68">← Previous</a>
-<a href="#page70">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page70">
-<div class="page-number">Page 70</div>
-<h3>The Empty Chair</h3>
-<p>
-At the café, the chair near the window remained empty.
-</p>
-<p>
-Shiv noticed it every time.
-</p>
-<div class="book-nav">
-<a href="#page69">← Previous</a>
-<a href="#page71">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page71">
-<div class="page-number">Page 71</div>
-<h3>Silence Grows</h3>
-<p>
-Days became weeks.
-</p>
-<p>
-Messages became fewer.
-</p>
-<p>
-The distance grew without anyone deciding to create it.
-</p>
-<div class="book-nav">
-<a href="#page70">← Previous</a>
-<a href="#page72">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page72">
-<div class="page-number">Page 72</div>
-<h3>Waiting</h3>
-<p>
-Shiv kept waiting for the day everything would make sense.
-</p>
-<p>
-He didn't know that sometimes answers arrive only after
-you stop waiting for them.
-</p>
-<div class="book-nav">
-<a href="#page71">← Previous</a>
-<a href="#page73">Next →</a>
-</div>
-</article>
-
-
-<!-- ================= CHAPTER 7 ================= -->
-
-<article class="book-page" id="page73">
-<div class="page-number">Page 73</div>
-<div class="chapter-label">Chapter 07</div>
-<h2>The Day She Left</h2>
-<p>
-Shiv heard the news almost by accident.
-</p>
-<p>
-Meera was leaving.
-</p>
-<div class="book-nav">
-<a href="#page72">← Previous</a>
-<a href="#page74">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page74">
-<div class="page-number">Page 74</div>
-<h3>There Was Time</h3>
-<p>
-His first thought was simple.
-</p>
-<p>
-There was still time.
-</p>
-<p>
-There had to be.
-</p>
-<div class="book-nav">
-<a href="#page73">← Previous</a>
-<a href="#page75">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page75">
-<div class="page-number">Page 75</div>
-<h3>The Last Day</h3>
-<p>
-But the last day arrived faster than he expected.
-</p>
-<p>
-The town looked exactly the same.
-</p>
-<p>
-Only Shiv felt different.
-</p>
-<div class="book-nav">
-<a href="#page74">← Previous</a>
-<a href="#page76">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page76">
-<div class="page-number">Page 76</div>
-<h3>Meeting</h3>
-<p>
-They met face to face.
-</p>
-<p>
-There was no shouting.
-</p>
-<p>
-No dramatic goodbye.
-</p>
-<p>
-Only two people standing quietly with too many things
-left unsaid.
-</p>
-<div class="book-nav">
-<a href="#page75">← Previous</a>
-<a href="#page77">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page77">
-<div class="page-number">Page 77</div>
-<h3>Why</h3>
-<p>
-"I didn't want our last memories to be filled with sadness,"
-Meera said.
-</p>
-<p>
-Shiv understood.
-</p>
-<p>
-He wished he didn't.
-</p>
-<div class="book-nav">
-<a href="#page76">← Previous</a>
-<a href="#page78">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page78">
-<div class="page-number">Page 78</div>
-<h3>The Words</h3>
-<p>
-There were so many things Shiv wanted to say.
-</p>
-<p>
-Thank you.
-</p>
-<p>
-Stay.
-</p>
-<p>
-I will miss you.
-</p>
-<p>
-But none of them felt enough.
-</p>
-<div class="book-nav">
-<a href="#page77">← Previous</a>
-<a href="#page79">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page79">
-<div class="page-number">Page 79</div>
-<h3>Goodbye</h3>
-<p>
-Meera looked at him.
-</p>
-<p>
-"Remember the promise?"
-</p>
-<p>
-Shiv nodded.
-</p>
-<p>
-"I'll remember."
-</p>
-<div class="book-nav">
-<a href="#page78">← Previous</a>
-<a href="#page80">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page80">
-<div class="page-number">Page 80</div>
-<h3>She Left</h3>
-<p>
-Then she walked away.
-</p>
-<p>
-Shiv didn't follow.
-</p>
-<p>
-Some goodbyes cannot be changed by running after someone.
-</p>
-<div class="book-nav">
-<a href="#page79">← Previous</a>
-<a href="#page81">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page81">
-<div class="page-number">Page 81</div>
-<h3>The Lake</h3>
-<p>
-That evening, Shiv returned to the lake.
-</p>
-<p>
-The pier was empty.
-</p>
-<p>
-The sunset looked almost exactly like the first one.
-</p>
-<div class="book-nav">
-<a href="#page80">← Previous</a>
-<a href="#page82">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page82">
-<div class="page-number">Page 82</div>
-<h3>Summer Over</h3>
-<p>
-Shiv opened his notebook.
-</p>
-<p>
-The first page still carried her name.
-</p>
-<p>
-Meera.
-</p>
-<p>
-The summer was over.
-</p>
-<p>
-But the story wasn't.
-</p>
-<div class="book-nav">
-<a href="#page81">← Previous</a>
-<a href="#page83">Next →</a>
-</div>
-</article>
-
-
-<!-- ================= CHAPTER 8 ================= -->
-
-<article class="book-page" id="page83">
-<div class="page-number">Page 83</div>
-<div class="chapter-label">Chapter 08</div>
-<h2>Letters Never Sent</h2>
-<p>
-After she left, Shiv began writing letters.
-</p>
-<p>
-He never sent them.
-</p>
-<div class="book-nav">
-<a href="#page82">← Previous</a>
-<a href="#page84">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page84">
-<div class="page-number">Page 84</div>
-<h3>Dear Meera</h3>
-<p>
-The first letter was about the lake.
-</p>
-<p>
-The second was about the bookstore.
-</p>
-<p>
-The third was about the rooftop.
-</p>
-<p>
-Every letter was really about something he couldn't say
-when she was still there.
-</p>
-<div class="book-nav">
-<a href="#page83">← Previous</a>
-<a href="#page85">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page85">
-<div class="page-number">Page 85</div>
-<h3>Unsent</h3>
-<p>
-He folded the letters carefully.
-</p>
-<p>
-Then placed them inside the notebook.
-</p>
-<p>
-Some words are written not to be delivered,
-but simply to be understood by the person writing them.
-</p>
-<div class="book-nav">
-<a href="#page84">← Previous</a>
-<a href="#page86">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page86">
-<div class="page-number">Page 86</div>
-<h3>Her Letters</h3>
-<p>
-Somewhere else, Meera had her own notebook.
-</p>
-<p>
-She had written letters too.
-</p>
-<p>
-She never sent them.
-</p>
-<p>
-Both of them carried the same silence differently.
-</p>
-<div class="book-nav">
-<a href="#page85">← Previous</a>
-<a href="#page87">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page87">
-<div class="page-number">Page 87</div>
-<h3>Time</h3>
-<p>
-Time passed.
-</p>
-<p>
-The letters remained.
-</p>
-<p>
-The memories remained.
-</p>
-<p>
-But the pain slowly became quieter.
-</p>
-<div class="book-nav">
-<a href="#page86">← Previous</a>
-<a href="#page88">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page88">
-<div class="page-number">Page 88</div>
-<h3>Growing Up</h3>
-<p>
-Shiv began to understand himself better.
-</p>
-<p>
-The summer had changed something inside him.
-</p>
-<p>
-Not because it lasted forever.
-</p>
-<p>
-Because it didn't.
-</p>
-<div class="book-nav">
-<a href="#page87">← Previous</a>
-<a href="#page89">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page89">
-<div class="page-number">Page 89</div>
-<h3>Still Remembering</h3>
-<p>
-He didn't try to forget Meera anymore.
-</p>
-<p>
-Some memories didn't need to be erased.
-</p>
-<p>
-They simply needed a place to belong.
-</p>
-<div class="book-nav">
-<a href="#page88">← Previous</a>
-<a href="#page90">Next →</a>
-</div>
-</article>
-
-
-<!-- ================= CHAPTER 9 ================= -->
-
-<article class="book-page" id="page90">
-<div class="page-number">Page 90</div>
-<div class="chapter-label">Chapter 09</div>
-<h2>Ghosts of Old Memories</h2>
-<p>
-Years later, Shiv returned to the town.
-</p>
-<p>
-The roads looked smaller than he remembered.
-</p>
-<div class="book-nav">
-<a href="#page89">← Previous</a>
-<a href="#page91">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page91">
-<div class="page-number">Page 91</div>
-<h3>The Bookstore</h3>
-<p>
-The old bookstore was still there.
-</p>
-<p>
-Shiv stood outside for a while.
-</p>
-<p>
-He remembered the first time he had seen Meera.
-</p>
-<div class="book-nav">
-<a href="#page90">← Previous</a>
-<a href="#page92">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page92">
-<div class="page-number">Page 92</div>
-<h3>The Streets</h3>
-<p>
-He walked through the streets where they had once wandered
-without a destination.
-</p>
-<p>
-The town had changed.
-</p>
-<p>
-So had he.
-</p>
-<div class="book-nav">
-<a href="#page91">← Previous</a>
-<a href="#page93">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page93">
-<div class="page-number">Page 93</div>
-<h3>The Café</h3>
-<p>
-The café had new chairs.
-</p>
-<p>
-The walls had been painted.
-</p>
-<p>
-But the window was still there.
-</p>
-<p>
-Shiv smiled.
-</p>
-<div class="book-nav">
-<a href="#page92">← Previous</a>
-<a href="#page94">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page94">
-<div class="page-number">Page 94</div>
-<h3>The Rooftop</h3>
-<p>
-He remembered the night beneath the stars.
-</p>
-<p>
-The promise.
-</p>
-<p>
-The fear.
-</p>
-<p>
-The hope.
-</p>
-<div class="book-nav">
-<a href="#page93">← Previous</a>
-<a href="#page95">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page95">
-<div class="page-number">Page 95</div>
-<h3>The Pier</h3>
-<p>
-Finally, he returned to the lake.
-</p>
-<p>
-The wooden pier was older now.
-</p>
-<p>
-Shiv sat at the same place.
-</p>
-<div class="book-nav">
-<a href="#page94">← Previous</a>
-<a href="#page96">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page96">
-<div class="page-number">Page 96</div>
-<h3>Acceptance</h3>
-<p>
-He understood something simple.
-</p>
-<p>
-The past didn't need to be erased to make room for the future.
-</p>
-<p>
-It could simply become part of who you were.
-</p>
-<div class="book-nav">
-<a href="#page95">← Previous</a>
-<a href="#page97">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page97">
-<div class="page-number">Page 97</div>
-<h3>Maybe</h3>
-<p>
-For the first time in years, Shiv wondered where Meera was.
-</p>
-<p>
-He didn't expect an answer.
-</p>
-<p>
-But sometimes life answers questions you stopped asking.
-</p>
-<div class="book-nav">
-<a href="#page96">← Previous</a>
-<a href="#page98">Next →</a>
-</div>
-</article>
-
-
-<!-- ================= CHAPTER 10 ================= -->
-
-<article class="book-page" id="page98">
-<div class="page-number">Page 98</div>
-<div class="chapter-label">Chapter 10</div>
-<h2>One Last Sunset</h2>
-<p>
-They met again unexpectedly.
-</p>
-<p>
-Years had passed.
-</p>
-<p>
-Yet somehow, the first moment felt familiar.
-</p>
-<div class="book-nav">
-<a href="#page97">← Previous</a>
-<a href="#page99">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page99">
-<div class="page-number">Page 99</div>
-<h3>Hello Again</h3>
-<p>
-"Hi."
-</p>
-<p>
-It was a simple word.
-</p>
-<p>
-But it carried years inside it.
-</p>
-<div class="book-nav">
-<a href="#page98">← Previous</a>
-<a href="#page100">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page100">
-<div class="page-number">Page 100</div>
-<h3>What Happened</h3>
-<p>
-They talked.
-</p>
-<p>
-About leaving.
-</p>
-<p>
-About the letters.
-</p>
-<p>
-About the summer.
-</p>
-<p>
-About everything they had never been able to explain.
-</p>
-<div class="book-nav">
-<a href="#page99">← Previous</a>
-<a href="#page101">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page101">
-<div class="page-number">Page 101</div>
-<h3>The Letters</h3>
-<p>
-Meera admitted she had written letters too.
-</p>
-<p>
-Shiv smiled.
-</p>
-<p>
-"Did you ever send them?"
-</p>
-<p>
-"No."
-</p>
-<p>
-"Neither did I."
-</p>
-<div class="book-nav">
-<a href="#page100">← Previous</a>
-<a href="#page102">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page102">
-<div class="page-number">Page 102</div>
-<h3>The Promise</h3>
-<p>
-They talked about the promise under the stars.
-</p>
-<p>
-It hadn't meant forever.
-</p>
-<p>
-It meant that neither of them would pretend
-the summer didn't matter.
-</p>
-<div class="book-nav">
-<a href="#page101">← Previous</a>
-<a href="#page103">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page103">
-<div class="page-number">Page 103</div>
-<h3>Different People</h3>
-<p>
-They were not the same people anymore.
-</p>
-<p>
-Life had changed them.
-</p>
-<p>
-But the memory of who they had once been
-still connected them.
-</p>
-<div class="book-nav">
-<a href="#page102">← Previous</a>
-<a href="#page104">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page104">
-<div class="page-number">Page 104</div>
-<h3>The Walk</h3>
-<p>
-They walked toward the lake.
-</p>
-<p>
-The town was quiet.
-</p>
-<p>
-The evening sky was turning gold.
-</p>
-<div class="book-nav">
-<a href="#page103">← Previous</a>
-<a href="#page105">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page105">
-<div class="page-number">Page 105</div>
-<h3>The Same Lake</h3>
-<p>
-The lake was still there.
-</p>
-<p>
-The mountains still reflected in the water.
-</p>
-<p>
-The pier was older.
-</p>
-<p>
-But the view was almost the same.
-</p>
-<div class="book-nav">
-<a href="#page104">← Previous</a>
-<a href="#page106">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page106">
-<div class="page-number">Page 106</div>
-<h3>One Last Sunset</h3>
-<p>
-They sat together and watched the sun disappear.
-</p>
-<p>
-Neither asked what would happen tomorrow.
-</p>
-<p>
-For once, tomorrow didn't matter.
-</p>
-<div class="book-nav">
-<a href="#page105">← Previous</a>
-<a href="#page107">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page107">
-<div class="page-number">Page 107</div>
-<h3>Just the Moment</h3>
-<p>
-They simply sat there.
-</p>
-<p>
-Two people who had once been strangers.
-</p>
-<p>
-Two people who had shared a summer.
-</p>
-<p>
-Two people who had finally learned that some endings
-can also be beginnings.
-</p>
-<div class="book-nav">
-<a href="#page106">← Previous</a>
-<a href="#page108">Next →</a>
-</div>
-</article>
-
-
-<!-- ================= EPILOGUE ================= -->
-
-<article class="book-page" id="page108">
-<div class="page-number">Page 108</div>
-<div class="chapter-label">Epilogue</div>
-<h2>Some Summers Stay Forever</h2>
-<p>
-Later that night, Shiv opened his old notebook.
-</p>
-<p>
-The pages were filled with years-old words.
-</p>
-<div class="book-nav">
-<a href="#page107">← Previous</a>
-<a href="#page109">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page109">
-<div class="page-number">Page 109</div>
-<h3>The Same Name</h3>
-<p>
-The first page still carried the same name.
-</p>
-<p>
-Meera.
-</p>
-<p>
-He smiled.
-</p>
-<p>
-Some things never really disappear.
-</p>
-<div class="book-nav">
-<a href="#page108">← Previous</a>
-<a href="#page110">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page110">
-<div class="page-number">Page 110</div>
-<h3>The Lake</h3>
-<p>
-The next morning, Shiv looked at the lake one more time.
-</p>
-<p>
-The town had changed.
-</p>
-<p>
-He had changed.
-</p>
-<p>
-The summer was long gone.
-</p>
-<p>
-But the memory remained.
-</p>
-<div class="book-nav">
-<a href="#page109">← Previous</a>
-<a href="#page111">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page111">
-<div class="page-number">Page 111</div>
-<h3>What Remains</h3>
-<p>
-People enter our lives for different reasons.
-</p>
-<p>
-Some stay for years.
-</p>
-<p>
-Some stay for only a season.
-</p>
-<p>
-But sometimes a person can leave a mark
-that lasts much longer than their presence.
-</p>
-<div class="book-nav">
-<a href="#page110">← Previous</a>
-<a href="#page112">Next →</a>
-</div>
-</article>
-
-
-<article class="book-page" id="page112">
-
-    <div class="page-number">Page 112</div>
-
-    <div class="chapter-label">The End</div>
-
-    <h2>Some Summers End.<br>Some Summers Stay Forever.</h2>
-
-    <p>
-        Shiv closed his notebook.
-    </p>
-
-    <p>
-        Outside, the lake reflected the last light of the evening.
-    </p>
-
-    <p>
-        He smiled—not because the summer had returned,
-        but because he no longer needed it to.
-    </p>
-
-    <p>
-        It had already become a part of him.
-    </p>
-
-    <p>
-        And perhaps that was what some summers were meant to do.
-    </p>
-
-    <p>
-        They arrive.
-        They change you.
-        They leave.
-    </p>
-
-    <p>
-        And somehow,
-        they stay forever.
-    </p>
-
-    <div class="book-nav">
-        <a href="#page111">← Previous</a>
-        <a href="index.html">Back to Home</a>
-    </div>
-
-</article>
+  </div>
 
 </main>
 
 
-<!-- ================= FOOTER ================= -->
-
-<footer class="footer">
-    <div class="container">
-        <p>© 2026 Shivu. All rights reserved.</p>
-    </div>
-</footer>
-
-
-<!-- ================= SIMPLE MENU JS ================= -->
-
 <script>
-function toggleMenu(){
-    var menu = document.getElementById("navMenu");
 
-    if(menu.className.indexOf("show") === -1){
-        menu.className += " show";
-    }else{
-        menu.className = menu.className.replace(" show","");
-    }
+/* =========================================================
+   BOOK DATA
+   English and Hinglish are completely separate.
+   ========================================================= */
+
+var pages = [];
+
+
+/* ---------------------------------------------------------
+   CHAPTER 1 — THE BOY AT THE SHORE
+   Pages 1–5
+   --------------------------------------------------------- */
+
+pages.push({
+
+page:1,
+chapter:"Chapter 1",
+title:"The Boy at the Shore",
+
+english:[
+"Shiv had always liked the lake more than crowded places. There was something about its quiet surface that made the noise inside his head feel smaller. Whenever the town became too loud, he walked toward the water.",
+"That evening, the sky was slowly turning orange. The wooden pier stretched into the lake, almost empty except for the sound of water touching the old boards.",
+"Shiv sat near the end of the pier with his notebook beside him. He was not writing anything. He was simply watching the evening disappear."
+],
+
+hinglish:[
+"Shiv ko bheed-bhaad wali jagahon se zyada lake pasand thi. Uski shaant si surface ko dekhkar uske dimaag ka shor thoda kam lagne lagta tha. Jab bhi town zyada loud lagta, woh seedha lake ki taraf chala aata.",
+"Us shaam aasman dheere-dheere orange ho raha tha. Wooden pier lake ke andar tak gaya hua tha aur wahan bas paani ke saath takraati purani lakdi ki halki si awaaz aa rahi thi.",
+"Shiv pier ke end ke paas apni notebook lekar baitha tha. Us waqt woh kuch likh nahi raha tha. Bas shaam ko dheere-dheere khatam hote dekh raha tha."
+],
+
+highlightEnglish:"Sometimes, silence is not empty. Sometimes, it is the only place where we can finally hear ourselves.",
+highlightHinglish:"Kabhi-kabhi khamoshi khaali nahi hoti. Kabhi-kabhi wahi ek jagah hoti hai jahan hum khud ko sach mein sun paate hain.",
+
+thoughtEnglish:"You do not always need an answer. Sometimes you only need a quiet place to understand the question.",
+thoughtHinglish:"Har baar answer milna zaroori nahi hota. Kabhi-kabhi bas ek shaant jagah chahiye hoti hai jahan hum apne sawaal ko samajh sakein."
+
+});
+
+
+pages.push({
+
+page:2,
+chapter:"Chapter 1",
+title:"The Notebook",
+
+english:[
+"The notebook had followed Shiv through most of the summer. Its pages were filled with unfinished thoughts, small observations, and questions he never asked anyone.",
+"He wrote about the future more often than he admitted. Everyone around him seemed to have an idea of what life should look like. Shiv was still trying to understand what he wanted his own life to become.",
+"He closed the notebook and looked across the water. For a moment, he wished the future could be as simple as a blank page."
+],
+
+hinglish:[
+"Ye notebook poori summer Shiv ke saath rahi thi. Uske pages adhure thoughts, chhoti-chhoti observations aur un sawaalon se bhare the jo woh kisi se pooch nahi paata tha.",
+"Woh future ke baare mein jitna sochta tha, utna kisi ko batata nahi tha. Uske aas-paas har kisi ko lagta tha ki life kaisi honi chahiye. Shiv abhi tak ye samajhne ki koshish kar raha tha ki uski apni life kaisi honi chahiye.",
+"Usne notebook band ki aur lake ke paar dekha. Ek pal ke liye usse laga ki kaash future bhi ek blank page ki tarah simple hota."
+],
+
+highlightEnglish:"A blank page can be frightening, but it can also mean that your story has not been written yet.",
+highlightHinglish:"Blank page darawna lag sakta hai, lekin iska matlab ye bhi ho sakta hai ki tumhari story abhi likhi hi nahi gayi.",
+
+thoughtEnglish:"Not knowing your direction does not mean you are lost.",
+thoughtHinglish:"Apni direction na pata hona iska matlab ye nahi ki tum lost ho."
+
+});
+
+
+pages.push({
+
+page:3,
+chapter:"Chapter 1",
+title:"A Strange Feeling",
+
+english:[
+"The wind became colder as the sun disappeared. Shiv stood up, ready to leave, when he noticed something near the far side of the pier.",
+"Someone had been sitting there a few minutes earlier. He could not see the person clearly, only the outline against the fading light.",
+"Shiv looked again. The place was empty."
+],
+
+hinglish:[
+"Suraj ke doobte hi hawa thodi thandi ho gayi. Shiv jaane ke liye khada hi hua tha ki uski nazar pier ke doosre side par gayi.",
+"Kuch der pehle wahan koi baitha hua tha. Roshni kam hone ki wajah se Shiv usse clearly dekh nahi paaya, bas uski halki si outline nazar aa rahi thi.",
+"Shiv ne dobara dekha. Wahan ab koi nahi tha."
+],
+
+highlightEnglish:"Some people enter your story before you even know their name.",
+highlightHinglish:"Kuch log tumhari story mein tumhe unka naam pata hone se pehle hi aa jaate hain.",
+
+thoughtEnglish:"The smallest moments can become the beginning of memories we never expected.",
+thoughtHinglish:"Sabse chhote moments kabhi-kabhi un memories ki beginning ban jaate hain jinki humein kabhi expectation nahi hoti."
+
+});
+
+
+pages.push({
+
+page:4,
+chapter:"Chapter 1",
+title:"The First Question",
+
+english:[
+"On his way home, Shiv kept thinking about the empty space on the pier. He knew it was nothing important, yet the thought stayed with him.",
+"The town looked different after sunset. Small cafés were closing, streetlights reflected on the wet road, and the smell of rain remained in the air.",
+"Shiv reached home, placed the notebook on his desk, and wrote one sentence before going to sleep."
+],
+
+hinglish:[
+"Ghar jaate waqt Shiv baar-baar pier ki us empty jagah ke baare mein soch raha tha. Usse pata tha ki shayad ye koi important baat nahi thi, phir bhi woh thought uske dimaag se nahi nikla.",
+"Sunset ke baad town bilkul alag lag raha tha. Chhote cafés band ho rahe the, streetlights wet road par reflect ho rahi thi aur hawa mein rain ki halki si smell thi.",
+"Shiv ghar pahucha, notebook table par rakhi aur sone se pehle usne ek line likhi."
+],
+
+highlightEnglish:"Who was she?",
+highlightHinglish:"Woh kaun thi?",
+
+thoughtEnglish:"Curiosity often arrives before connection.",
+thoughtHinglish:"Connection se pehle aksar curiosity aati hai."
+
+});
+
+
+pages.push({
+
+page:5,
+chapter:"Chapter 1",
+title:"The Beginning",
+
+english:[
+"The next morning, Shiv almost forgot about the girl at the pier. Almost.",
+"By afternoon, he found himself walking toward the lake again. He told himself he only wanted some fresh air.",
+"But somewhere inside, he knew he was hoping to see the stranger again."
+],
+
+hinglish:[
+"Agli subah Shiv lagbhag us ladki ko bhool gaya tha jo pier par dikhi thi. Lagbhag.",
+"Dopahar tak woh phir lake ki taraf ja raha tha. Usne khud se kaha ki bas fresh air lene ja raha hai.",
+"Lekin andar se woh jaanta tha ki shayad woh us stranger ko dobara dekhna chahta tha."
+],
+
+highlightEnglish:"Some beginnings are so quiet that you only recognize them after they have already started.",
+highlightHinglish:"Kuch beginnings itni quietly hoti hain ki jab tak humein pata chalta hai, tab tak story already start ho chuki hoti hai.",
+
+thoughtEnglish:"Every unforgettable story begins with an ordinary moment.",
+thoughtHinglish:"Har unforgettable story ek ordinary moment se hi start hoti hai."
+
+});
+
+
+/* ---------------------------------------------------------
+   CHAPTER 2 — HER NAME IN THE WIND
+   Pages 6–19
+   --------------------------------------------------------- */
+
+pages.push({
+
+page:6,
+chapter:"Chapter 2",
+title:"Her Name in the Wind",
+
+english:[
+"The girl was there again.",
+"She sat a little away from the end of the pier, holding a book with a worn blue cover. Shiv recognized her immediately, although they had never spoken.",
+"He considered leaving. Instead, he walked closer."
+],
+
+hinglish:[
+"Woh ladki phir wahan thi.",
+"Woh pier ke end se thoda door baithi thi aur uske haath mein purani blue cover wali ek book thi. Shiv ne use turant pehchaan liya, chahe unki kabhi baat nahi hui thi.",
+"Ek pal ke liye usne socha ki wapas chala jaaye. Phir woh dheere se uski taraf badh gaya."
+],
+
+highlightEnglish:"Sometimes courage is simply choosing not to walk away.",
+highlightHinglish:"Kabhi-kabhi courage ka matlab bas itna hota hai ki tum wapas mudne ke bajaye ek step aage badha do.",
+
+thoughtEnglish:"A first conversation does not have to be perfect. It only has to be real.",
+thoughtHinglish:"Pehli conversation perfect hona zaroori nahi hoti. Bas real honi chahiye."
+
+});
+
+
+pages.push({
+
+page:7,
+chapter:"Chapter 2",
+title:"The First Hello",
+
+english:[
+"Shiv stopped a few steps away. He looked at the book in her hands and then at the lake.",
+"'Good book?' he asked.",
+"She looked up. There was a small pause before she smiled."
+],
+
+hinglish:[
+"Shiv kuch steps door ruk gaya. Usne pehle uske haath wali book ko dekha aur phir lake ki taraf dekha.",
+"Usne poocha, 'Book achhi hai?'",
+"Ladki ne uski taraf dekha. Ek chhota sa pause hua aur phir uske face par halki si smile aa gayi."
+],
+
+highlightEnglish:"The first hello was simple. That was what made it memorable.",
+highlightHinglish:"Pehla hello simple tha. Shayad isi wajah se woh yaad reh gaya.",
+
+thoughtEnglish:"Real connections rarely begin with perfect words.",
+thoughtHinglish:"Real connections aksar perfect words se start nahi hote."
+
+});
+
+
+pages.push({
+
+page:8,
+chapter:"Chapter 2",
+title:"Meera",
+
+english:[
+"Her name was Meera.",
+"She told Shiv that she liked the lake because it did not ask questions. Shiv laughed softly because he understood exactly what she meant.",
+"They talked about books, school, and the strange feeling of not knowing what came next."
+],
+
+hinglish:[
+"Uska naam Meera tha.",
+"Meera ne bataya ki use lake isliye pasand thi kyunki lake questions nahi poochti thi. Shiv halkasa hansa, kyunki woh uski baat ko bilkul samajh gaya tha.",
+"Dono ne books, school aur us ajeeb feeling ke baare mein baat ki jahan future mein kya hone wala hai, ye kisi ko properly pata nahi hota."
+],
+
+highlightEnglish:"A name can be the beginning of a memory.",
+highlightHinglish:"Ek naam kabhi-kabhi ek poori memory ki beginning ban sakta hai.",
+
+thoughtEnglish:"Sometimes you recognize a feeling in another person before you understand your own.",
+thoughtHinglish:"Kabhi-kabhi hum kisi doosre insaan mein apni woh feeling pehchaan lete hain jo hum khud nahi samajh paate."
+
+});
+
+
+pages.push({
+
+page:9,
+chapter:"Chapter 2",
+title:"A Shared Silence",
+
+english:[
+"They did not talk for the entire evening. There were long pauses between their conversations, but neither of them seemed uncomfortable.",
+"Shiv wrote something in his notebook while Meera continued reading.",
+"The silence between them slowly stopped feeling like silence."
+],
+
+hinglish:[
+"Un dono ne poori shaam baat nahi ki. Beech-beech mein kaafi long pauses aate rahe, lekin dono mein se kisi ko awkward feel nahi hua.",
+"Shiv apni notebook mein kuch likhta raha aur Meera apni book padhti rahi.",
+"Dheere-dheere unke beech ki khamoshi awkward nahi, comfortable lagne lagi."
+],
+
+highlightEnglish:"Comfort is when silence no longer needs to be filled.",
+highlightHinglish:"Comfort tab hota hai jab khamoshi ko baar-baar words se fill karna zaroori nahi lagta.",
+
+thoughtEnglish:"Being understood does not always require a conversation.",
+thoughtHinglish:"Samjhe jaane ke liye har baar conversation zaroori nahi hoti."
+
+});
+
+
+pages.push({
+
+page:10,
+chapter:"Chapter 2",
+title:"The Old Bookstore",
+
+english:[
+"The next afternoon, Meera mentioned an old bookstore near the market.",
+"Shiv had passed it many times but had never entered. They decided to go together.",
+"The shop smelled of paper, dust, and old wooden shelves. Meera looked happier there than she had at the lake."
+],
+
+hinglish:[
+"Agli afternoon Meera ne market ke paas ek purani bookstore ka zikr kiya.",
+"Shiv us shop ke saamne se kai baar guzra tha, lekin kabhi andar nahi gaya tha. Dono ne saath jaane ka decide kiya.",
+"Shop ke andar old paper, dust aur wooden shelves ki smell thi. Meera wahan lake se bhi zyada khush lag rahi thi."
+],
+
+highlightEnglish:"Some places become special because of the person you discover them with.",
+highlightHinglish:"Kuch jagah special isliye ban jaati hain kyunki unhe hum kisi khaas insaan ke saath discover karte hain.",
+
+thoughtEnglish:"Memories are often attached to places, not because of the place itself, but because of who stood beside us.",
+thoughtHinglish:"Memories aksar places se jud jaati hain, jagah ki wajah se nahi, balki isliye kyunki wahan hamare saath kaun tha."
+
+});
+
+
+pages.push({
+
+page:11,
+chapter:"Chapter 2",
+title:"Between the Shelves",
+
+english:[
+"Meera moved slowly between the shelves, touching book covers as if each one carried a story she already knew.",
+"Shiv watched her for a moment before choosing a random book.",
+"'You read everything?' he asked.",
+"'Not everything,' she said. 'Only the things that stay with me.'"
+],
+
+hinglish:[
+"Meera shelves ke beech dheere-dheere chal rahi thi aur books ke covers ko touch kar rahi thi, jaise har book ke andar koi aisi story ho jise woh pehle se jaanti ho.",
+"Shiv kuch der use dekhta raha aur phir randomly ek book utha li.",
+"Usne poocha, 'Tum sab kuch padhti ho?'",
+"Meera ne kaha, 'Sab kuch nahi. Bas woh jo mere saath reh jaaye.'"
+],
+
+highlightEnglish:"Only the things that stay with me.",
+highlightHinglish:"Bas woh jo mere saath reh jaaye.",
+
+thoughtEnglish:"The stories we remember usually leave something behind inside us.",
+thoughtHinglish:"Jo stories humein yaad reh jaati hain, woh humare andar kuch na kuch chhod jaati hain."
+
+});
+
+
+pages.push({
+
+page:12,
+chapter:"Chapter 2",
+title:"The Café Window",
+
+english:[
+"They stopped at a quiet café after leaving the bookstore.",
+"Rain began tapping against the window. Neither of them rushed to leave.",
+"Shiv realized that he had spent the entire afternoon without checking the time."
+],
+
+hinglish:[
+"Bookstore se nikalne ke baad dono ek quiet café mein ruk gaye.",
+"Bahar rain window par halki-halki tap kar rahi thi. Dono mein se kisi ko jaldi jaane ka mann nahi tha.",
+"Shiv ko realize hua ki poori afternoon nikal gayi thi aur usne ek baar bhi time check nahi kiya."
+],
+
+highlightEnglish:"Time feels different when you are exactly where you want to be.",
+highlightHinglish:"Jab tum exactly wahi ho jahan rehna chahte ho, tab time bhi alag feel hota hai.",
+
+thoughtEnglish:"The best moments rarely announce how important they will become.",
+thoughtHinglish:"Best moments kabhi pehle se nahi batate ki woh future mein kitne important banne wale hain."
+
+});
+
+
+pages.push({
+
+page:13,
+chapter:"Chapter 2",
+title:"Small Conversations",
+
+english:[
+"Their conversations became easier after that day.",
+"They talked about small things: favorite places, strange habits, songs they liked, and things they wanted to learn.",
+"Nothing sounded important, yet Shiv remembered almost everything Meera said."
+],
+
+hinglish:[
+"Us din ke baad unki conversations aur easy ho gayi.",
+"Woh chhoti-chhoti baaton par baat karte: favorite places, ajeeb habits, pasand ke songs aur woh cheezein jo dono future mein seekhna chahte the.",
+"Koi bhi baat bahut important nahi lagti thi, phir bhi Shiv ko Meera ki almost har baat yaad reh jaati thi."
+],
+
+highlightEnglish:"Sometimes the little things are the things we remember the longest.",
+highlightHinglish:"Kabhi-kabhi chhoti-chhoti baatein hi sabse zyada time tak yaad rehti hain.",
+
+thoughtEnglish:"Pay attention to ordinary moments. They may become extraordinary memories.",
+thoughtHinglish:"Ordinary moments ko notice karo. Ho sakta hai wahi kal extraordinary memories ban jaayein."
+
+});
+
+
+pages.push({
+
+page:14,
+chapter:"Chapter 2",
+title:"The Notebook Again",
+
+english:[
+"One evening, Meera noticed Shiv writing in his notebook.",
+"'What do you write?' she asked.",
+"Shiv closed it before answering. 'Things I don't know how to say.'",
+"Meera did not laugh. She simply nodded."
+],
+
+hinglish:[
+"Ek evening Meera ne Shiv ko notebook mein likhte hue dekh liya.",
+"Usne poocha, 'Tum kya likhte ho?'",
+"Shiv ne notebook band kar di aur bola, 'Woh cheezein jo main bol nahi paata.'",
+"Meera nahi hansi. Bas quietly nod kar diya."
+],
+
+highlightEnglish:"Things I don't know how to say.",
+highlightHinglish:"Woh cheezein jo main bol nahi paata.",
+
+thoughtEnglish:"Some feelings become clearer when we write them instead of speaking them.",
+thoughtHinglish:"Kuch feelings bolne ke bajaye likhne par zyada clear ho jaati hain."
+
+});
+
+
+pages.push({
+
+page:15,
+chapter:"Chapter 2",
+title:"A Quiet Friendship",
+
+english:[
+"By the middle of the summer, seeing Meera had become part of Shiv's routine.",
+"Sometimes they met at the lake. Sometimes at the bookstore. Sometimes they simply walked through the old streets without a plan.",
+"They never called it friendship. They did not need to."
+],
+
+hinglish:[
+"Summer ke middle tak Meera se milna Shiv ki routine ka part ban gaya tha.",
+"Kabhi dono lake par milte. Kabhi bookstore mein. Aur kabhi bina kisi plan ke old streets mein bas walk karte rehte.",
+"Unhone kabhi apne relation ko friendship ka naam nahi diya. Shayad zaroorat hi nahi thi."
+],
+
+highlightEnglish:"They never called it friendship. They did not need to.",
+highlightHinglish:"Unhone kabhi ise friendship ka naam nahi diya. Shayad zaroorat hi nahi thi.",
+
+thoughtEnglish:"Some connections are understood before they are defined.",
+thoughtHinglish:"Kuch connections define hone se pehle hi samajh aa jaate hain."
+
+});
+
+
+pages.push({
+
+page:16,
+chapter:"Chapter 2",
+title:"The Wind",
+
+english:[
+"One evening, strong wind moved through the trees near the lake.",
+"Meera held her hair back and laughed when a few loose pages from Shiv's notebook almost flew away.",
+"He caught them just in time.",
+"She looked at him and smiled. Shiv remembered that smile long after the evening ended."
+],
+
+hinglish:[
+"Ek evening lake ke paas trees ke beech se kaafi tez hawa chal rahi thi.",
+"Meera apne baal sambhal rahi thi aur jab Shiv ki notebook ke kuch loose pages hawa mein udne lage, toh woh hans padi.",
+"Shiv ne pages time par pakad liye.",
+"Meera ne uski taraf dekha aur smile ki. Shaam khatam hone ke baad bhi Shiv ko woh smile yaad rahi."
+],
+
+highlightEnglish:"Some smiles stay in memory longer than they stay on a face.",
+highlightHinglish:"Kuch smiles face par jitni der rehti hain, memory mein usse kahin zyada der tak rehti hain.",
+
+thoughtEnglish:"You may forget the words, but you rarely forget how a moment made you feel.",
+thoughtHinglish:"Words bhool sakte ho, lekin kisi moment ne tumhe kaisa feel karwaya tha, woh aksar nahi bhoolta."
+
+});
+
+
+pages.push({
+
+page:17,
+chapter:"Chapter 2",
+title:"A Name in the Notebook",
+
+english:[
+"That night, Shiv opened his notebook.",
+"He wrote Meera's name for the first time.",
+"He stared at it for a few seconds, then closed the notebook without adding anything else.",
+"It felt strange how a simple name could suddenly carry so much meaning."
+],
+
+hinglish:[
+"Us raat Shiv ne apni notebook kholi.",
+"Usne pehli baar usmein Meera ka naam likha.",
+"Kuch seconds tak woh us naam ko dekhta raha aur phir bina kuch aur likhe notebook band kar di.",
+"Use ajeeb laga ki ek simple sa naam achanak itna meaningful kaise ho gaya."
+],
+
+highlightEnglish:"A name can become a place where a memory begins.",
+highlightHinglish:"Ek naam kabhi-kabhi woh jagah ban jaata hai jahan se ek memory shuru hoti hai.",
+
+thoughtEnglish:"When someone becomes important, even their name starts to feel different.",
+thoughtHinglish:"Jab koi important ho jaata hai, toh uska naam bhi alag sa feel hone lagta hai."
+
+});
+
+
+pages.push({
+
+page:18,
+chapter:"Chapter 2",
+title:"The Unspoken Part",
+
+english:[
+"Shiv noticed that Meera avoided questions about her past.",
+"Whenever the conversation came close to family or old memories, she gently changed the subject.",
+"He did not push her.",
+"Trust, he understood, was not something you demanded. It was something you gave time to."
+],
+
+hinglish:[
+"Shiv ne notice kiya ki Meera apne past ke questions avoid karti thi.",
+"Jab bhi baat family ya purani memories ke paas pahunchti, woh quietly topic change kar deti.",
+"Shiv ne kabhi force nahi kiya.",
+"Usse samajh aa gaya tha ki trust koi cheez nahi jo demand ki jaaye. Trust ko time dena padta hai."
+],
+
+highlightEnglish:"Trust is not demanded. It is earned quietly.",
+highlightHinglish:"Trust demand nahi kiya jaata. Woh quietly earn kiya jaata hai.",
+
+thoughtEnglish:"Respecting someone's silence can be the first step toward understanding them.",
+thoughtHinglish:"Kisi ki silence ko respect karna unhe samajhne ki first step ho sakti hai."
+
+});
+
+
+pages.push({
+
+page:19,
+chapter:"Chapter 2",
+title:"The Beginning of Something",
+
+english:[
+"The summer continued.",
+"Shiv and Meera still did not know what their connection would become. Maybe neither wanted to name it yet.",
+"They simply kept meeting, talking, walking, and sharing pieces of their lives.",
+"Sometimes a story becomes important before anyone realizes that it has begun."
+],
+
+hinglish:[
+"Summer chalti rahi.",
+"Shiv aur Meera ko abhi nahi pata tha ki unka connection aage kya banega. Shayad dono mein se koi bhi use abhi naam nahi dena chahta tha.",
+"Woh bas milte rahe, baat karte rahe, walks karte rahe aur apni life ke chhote-chhote pieces ek doosre ke saath share karte rahe.",
+"Kabhi-kabhi story important tab ban jaati hai jab humein realize bhi nahi hota ki woh start ho chuki hai."
+],
+
+highlightEnglish:"Some stories begin long before we realize they matter.",
+highlightHinglish:"Kuch stories tab shuru ho jaati hain jab humein abhi tak ye realize bhi nahi hota ki woh important hain.",
+
+thoughtEnglish:"Do not rush to name every beautiful connection. Let some things become what they are meant to become.",
+thoughtHinglish:"Har beautiful connection ko jaldi naam dene ki zaroorat nahi. Kuch cheezon ko bas naturally grow hone do."
+
+});
+
+
+/* ---------------------------------------------------------
+   CHAPTER 3 — SUNSETS AND SECRETS
+   Pages 20–37
+   --------------------------------------------------------- */
+
+pages.push({
+
+page:20,
+chapter:"Chapter 3",
+title:"Sunsets and Secrets",
+
+english:[
+"Their friendship became deeper without either of them planning it.",
+"Some evenings were spent at the lake. Others ended on the rooftop above the old town.",
+"Shiv began sharing things he had never said aloud before."
+],
+
+hinglish:[
+"Unki friendship bina kisi planning ke aur deep hoti gayi.",
+"Kuch evenings lake par guzarti. Kuch old town ki rooftop par khatam hoti.",
+"Shiv ab woh baatein bhi share karne laga jo usne pehle kabhi kisi ke saamne nahi boli thi."
+],
+
+highlightEnglish:"Trust grows in the spaces where we feel safe enough to be honest.",
+highlightHinglish:"Trust unhi jagahon par grow karta hai jahan humein honest hone mein safe feel hota hai.",
+
+thoughtEnglish:"The people who matter are often the ones who make honesty feel easy.",
+thoughtHinglish:"Jo log important hote hain, woh aksar honesty ko easy bana dete hain."
+
+});
+
+
+pages.push({
+
+page:21,
+chapter:"Chapter 3",
+title:"The Rooftop",
+
+english:[
+"The rooftop overlooked the entire town.",
+"At night, the streetlights looked like small stars scattered across the streets.",
+"Meera sat beside Shiv, keeping a comfortable distance between them.",
+"They talked about where they wanted to be years from now."
+],
+
+hinglish:[
+"Rooftop se poora town dikhai deta tha.",
+"Raat mein streetlights aise lagti thi jaise poori streets par chhote-chhote stars bikhre hue hon.",
+"Meera Shiv ke paas baithi thi, dono ke beech ek comfortable sa distance tha.",
+"Woh baat karne lage ki kuch saal baad woh khud ko kahan dekhna chahte hain."
+],
+
+highlightEnglish:"The future felt less frightening when they talked about it together.",
+highlightHinglish:"Future thoda kam scary lagta tha jab woh dono uske baare mein saath baat karte the.",
+
+thoughtEnglish:"Sometimes another person's presence does not solve the future. It simply makes it easier to face.",
+thoughtHinglish:"Kabhi kisi ka saath future solve nahi karta. Bas uska saamna karna thoda easy bana deta hai."
+
+});
+
+
+pages.push({
+
+page:22,
+chapter:"Chapter 3",
+title:"Shiv's Fear",
+
+english:[
+"Shiv admitted that he was afraid of choosing the wrong path.",
+"He wanted to make his family proud, but he also wanted to build a life that felt like his own.",
+"Meera listened without interrupting.",
+"That silence meant more to him than advice would have."
+],
+
+hinglish:[
+"Shiv ne maana ki use wrong path choose karne ka darr tha.",
+"Woh apni family ko proud feel karwana chahta tha, lekin saath hi woh aisi life bhi banana chahta tha jo uski apni lage.",
+"Meera bina interrupt kiye sunti rahi.",
+"Uski woh silence kisi advice se zyada meaningful thi."
+],
+
+highlightEnglish:"Being heard can sometimes be more comforting than being advised.",
+highlightHinglish:"Kabhi-kabhi suna jaana advice milne se bhi zyada comforting hota hai.",
+
+thoughtEnglish:"You do not always need someone to fix your fear. Sometimes you only need someone willing to sit beside it.",
+thoughtHinglish:"Har baar kisi ko tumhara fear fix karne ki zaroorat nahi hoti. Kabhi bas koi aisa chahiye jo us fear ke paas tumhare saath baith sake."
+
+});
+
+
+pages.push({
+
+page:23,
+chapter:"Chapter 3",
+title:"Meera's Silence",
+
+english:[
+"When Shiv asked Meera what she was afraid of, she took longer to answer.",
+"She finally said she was afraid of getting attached to people who eventually leave.",
+"Shiv wanted to ask who had left before.",
+"He decided not to."
+],
+
+hinglish:[
+"Jab Shiv ne Meera se poocha ki use kis cheez ka darr hai, toh Meera ne answer dene mein thoda zyada time liya.",
+"Phir usne kaha ki use un logon se attach hone ka darr hai jo aakhir mein chale jaate hain.",
+"Shiv ke mann mein aaya ki pooche ki pehle kaun gaya tha.",
+"Lekin usne nahi poocha."
+],
+
+highlightEnglish:"Some wounds do not need questions. They need patience.",
+highlightHinglish:"Kuch wounds ko questions ki nahi, patience ki zaroorat hoti hai.",
+
+thoughtEnglish:"Respect can be as simple as knowing when not to ask.",
+thoughtHinglish:"Respect kabhi-kabhi itna simple hota hai ki tumhe pata ho kab question nahi poochna hai."
+
+});
+
+
+pages.push({
+
+page:24,
+chapter:"Chapter 3",
+title:"Rain on the Window",
+
+english:[
+"Rain trapped them inside the café one afternoon.",
+"They watched drops race down the glass while the town outside slowly disappeared behind the weather.",
+"Meera drew a small circle on the fogged window.",
+"Shiv smiled but did not ask what it meant."
+],
+
+hinglish:[
+"Ek afternoon rain ki wajah se dono café ke andar hi ruk gaye.",
+"Woh window ke glass par drops ko neeche slide karte dekhte rahe aur bahar ka town dheere-dheere rain ke peeche blur hota gaya.",
+"Meera ne fogged window par ek chhota sa circle banaya.",
+"Shiv smile kiya, lekin usne nahi poocha ki uska matlab kya tha."
+],
+
+highlightEnglish:"Not every mystery needs to be solved immediately.",
+highlightHinglish:"Har mystery ko turant solve karna zaroori nahi hota.",
+
+thoughtEnglish:"Leaving space for mystery can sometimes protect the beauty of a moment.",
+thoughtHinglish:"Thodi mystery ko space dena kabhi-kabhi moment ki beauty ko protect karta hai."
+
+});
+
+
+pages.push({
+
+page:25,
+chapter:"Chapter 3",
+title:"The Walk Home",
+
+english:[
+"They walked home after the rain stopped.",
+"The streets were wet and quiet.",
+"Meera talked about a book she wanted to write someday. Shiv told her he would read it if she ever did.",
+"She smiled and said she might remember that."
+],
+
+hinglish:[
+"Rain rukne ke baad dono walk karte hue ghar ki taraf nikle.",
+"Streets wet aur quiet thi.",
+"Meera ne bataya ki someday woh ek book likhna chahti hai. Shiv ne kaha ki agar woh kabhi likhegi toh woh zaroor padhega.",
+"Meera smile karke boli ki shayad woh ye baat yaad rakhegi."
+],
+
+highlightEnglish:"Some promises are tiny, but they stay with us.",
+highlightHinglish:"Kuch promises bahut chhote hote hain, lekin phir bhi dil mein reh jaate hain.",
+
+thoughtEnglish:"Never underestimate the importance of a small promise made sincerely.",
+thoughtHinglish:"Dil se kiya gaya chhota sa promise bhi kabhi-kabhi bahut important ban jaata hai."
+
+});
+
+
+pages.push({
+
+page:26,
+chapter:"Chapter 3",
+title:"A Different Kind of Day",
+
+english:[
+"Not every day was perfect.",
+"Sometimes Shiv was quiet. Sometimes Meera was distant.",
+"They were learning that closeness did not mean every silence needed an explanation.",
+"Some days simply needed to pass."
+],
+
+hinglish:[
+"Har din perfect nahi tha.",
+"Kabhi Shiv quiet ho jaata, kabhi Meera thodi distant lagti.",
+"Dono dheere-dheere samajh rahe the ki close hone ka matlab ye nahi ki har silence ka explanation hona zaroori hai.",
+"Kuch days ko bas pass hone dena padta hai."
+],
+
+highlightEnglish:"Closeness does not mean constant conversation.",
+highlightHinglish:"Close hone ka matlab har waqt conversation karna nahi hota.",
+
+thoughtEnglish:"Healthy connections have room for quiet days too.",
+thoughtHinglish:"Achhe connections mein quiet days ke liye bhi space hoti hai."
+
+});
+
+
+pages.push({
+
+page:27,
+chapter:"Chapter 3",
+title:"The Old Streets",
+
+english:[
+"They discovered a narrow street behind the bookstore.",
+"It had old walls, small windows, and flowers growing from cracks in the stone.",
+"Meera called it their hidden street.",
+"Shiv liked the way she gave ordinary places new names."
+],
+
+hinglish:[
+"Bookstore ke peeche unhe ek narrow si street mili.",
+"Wahan old walls, chhoti windows aur stone ki cracks se nikle hue flowers the.",
+"Meera ne us jagah ko unki hidden street keh diya.",
+"Shiv ko achha lagta tha ki Meera ordinary places ko bhi naye names de deti thi."
+],
+
+highlightEnglish:"The right person can make ordinary places feel unforgettable.",
+highlightHinglish:"Sahi insaan ke saath ordinary places bhi unforgettable feel hone lagti hain.",
+
+thoughtEnglish:"Memories are not always made in extraordinary places. Sometimes they are made in ordinary corners with extraordinary people.",
+thoughtHinglish:"Memories hamesha extraordinary places mein nahi banti. Kabhi ordinary corners bhi kisi khaas insaan ke saath extraordinary ban jaate hain."
+
+});
+
+
+pages.push({
+
+page:28,
+chapter:"Chapter 3",
+title:"The Question",
+
+english:[
+"One evening, Meera asked Shiv why he always carried his notebook.",
+"He told her it helped him remember things.",
+"'What are you afraid of forgetting?' she asked.",
+"Shiv looked at her before answering."
+],
+
+hinglish:[
+"Ek evening Meera ne poocha ki Shiv hamesha notebook kyun carry karta hai.",
+"Usne kaha ki notebook uski memories ko yaad rakhne mein help karti hai.",
+"Meera ne poocha, 'Tumhe kis cheez ko bhoolne ka darr hai?'",
+"Answer dene se pehle Shiv ne kuch seconds uski taraf dekha."
+],
+
+highlightEnglish:"What are you afraid of forgetting?",
+highlightHinglish:"Tumhe kis cheez ko bhoolne ka darr hai?",
+
+thoughtEnglish:"The things we fear losing often tell us what matters most.",
+thoughtHinglish:"Jin cheezon ko lose karne ka darr hota hai, wahi aksar batati hain ki humare liye sabse important kya hai."
+
+});
+
+
+pages.push({
+
+page:29,
+chapter:"Chapter 3",
+title:"The Answer",
+
+english:[
+"I think I'm afraid of forgetting how this summer feels,' Shiv said.",
+"Meera did not answer immediately.",
+"Then she said, 'Maybe some things are meant to stay even after the summer ends.'",
+"Shiv remembered those words."
+],
+
+hinglish:[
+"Shiv ne kaha, 'Shayad mujhe darr hai ki summer khatam hone ke baad main ye feeling bhool jaunga.'",
+"Meera ne turant answer nahi diya.",
+"Phir usne kaha, 'Shayad kuch cheezein summer khatam hone ke baad bhi rehne ke liye hoti hain.'",
+"Shiv ko woh words yaad reh gaye."
+],
+
+highlightEnglish:"Maybe some things are meant to stay even after the summer ends.",
+highlightHinglish:"Shayad kuch cheezein summer khatam hone ke baad bhi rehne ke liye hoti hain.",
+
+thoughtEnglish:"Not every memory needs to last forever to be meaningful.",
+thoughtHinglish:"Har memory ka forever rehna zaroori nahi hota taaki woh meaningful ho."
+
+});
+
+
+pages.push({
+
+page:30,
+chapter:"Chapter 3",
+title:"Closer",
+
+english:[
+"After that conversation, something changed.",
+"They trusted each other a little more.",
+"Shiv began talking about his dreams. Meera began sharing pieces of her past.",
+"Neither noticed exactly when friendship became something deeper."
+],
+
+hinglish:[
+"Us conversation ke baad kuch change sa hua.",
+"Dono ek doosre par thoda aur trust karne lage.",
+"Shiv apne dreams ke baare mein zyada baat karne laga. Meera bhi apne past ke chhote-chhote pieces share karne lagi.",
+"Dono ko exact moment pata hi nahi chala jab friendship kuch aur deep banne lagi."
+],
+
+highlightEnglish:"Some feelings grow so quietly that there is no single moment when they begin.",
+highlightHinglish:"Kuch feelings itni quietly grow karti hain ki unki beginning ka koi ek exact moment hota hi nahi.",
+
+thoughtEnglish:"Growth is often invisible while it is happening.",
+thoughtHinglish:"Growth aksar tab dikhai nahi deti jab woh ho rahi hoti hai."
+
+});
+
+
+pages.push({
+
+page:31,
+chapter:"Chapter 3",
+title:"The Almost Confession",
+
+english:[
+"One night, Shiv almost told Meera how important she had become.",
+"He started speaking, then stopped.",
+"Meera looked at him as if she understood what he was trying to say.",
+"Neither continued."
+],
+
+hinglish:[
+"Ek raat Shiv almost Meera ko bata dene wala tha ki woh uske liye kitni important ban chuki hai.",
+"Woh bolna start hua, phir ruk gaya.",
+"Meera ne uski taraf dekha jaise woh samajh gayi ho ki Shiv kya kehne ki koshish kar raha hai.",
+"Dono mein se kisi ne baat aage nahi badhai."
+],
+
+highlightEnglish:"Some words remain unspoken because the moment does not feel ready for them.",
+highlightHinglish:"Kuch words isliye nahi bole jaate kyunki moment unke liye abhi ready nahi hota.",
+
+thoughtEnglish:"Timing can matter as much as honesty.",
+thoughtHinglish:"Honesty jitni important hai, kabhi-kabhi timing bhi utni hi important hoti hai."
+
+});
+
+
+pages.push({
+
+page:32,
+chapter:"Chapter 3",
+title:"The Lake Again",
+
+english:[
+"They returned to the lake the next evening.",
+"The water was calm and the sky was almost clear.",
+"Meera sat beside Shiv and said nothing.",
+"Shiv did not need her to."
+],
+
+hinglish:[
+"Agli evening dono phir lake par aaye.",
+"Paani bilkul calm tha aur aasman almost clear tha.",
+"Meera Shiv ke paas baithi aur kuch nahi boli.",
+"Shiv ko us silence mein bhi kuch missing nahi laga."
+],
+
+highlightEnglish:"Sometimes being beside someone is enough.",
+highlightHinglish:"Kabhi-kabhi kisi ke paas hona hi enough hota hai.",
+
+thoughtEnglish:"Presence can speak when words cannot.",
+thoughtHinglish:"Jab words fail ho jaate hain, tab presence bahut kuch keh deti hai."
+
+});
+
+
+pages.push({
+
+page:33,
+chapter:"Chapter 3",
+title:"The Hidden Fear",
+
+english:[
+"Meera finally admitted that she had been thinking about leaving town.",
+"Shiv tried to keep his expression calm.",
+"She said nothing was decided yet.",
+"Still, the possibility changed the way he looked at the summer."
+],
+
+hinglish:[
+"Meera ne finally bataya ki woh town chhodne ke baare mein soch rahi thi.",
+"Shiv ne apna expression normal rakhne ki koshish ki.",
+"Usne kaha ki abhi kuch decide nahi hua tha.",
+"Phir bhi us possibility ne Shiv ki summer ko dekhne ka way badal diya."
+],
+
+highlightEnglish:"Sometimes the possibility of losing something changes the way we value it.",
+highlightHinglish:"Kabhi-kabhi kisi cheez ko lose karne ki possibility hi humein uski value aur zyada samjha deti hai.",
+
+thoughtEnglish:"We often notice the value of a moment when we realize it may not last.",
+thoughtHinglish:"Kisi moment ki value aksar tab samajh aati hai jab lagta hai ki shayad woh zyada time tak nahi rahega."
+
+});
+
+
+pages.push({
+
+page:34,
+chapter:"Chapter 3",
+title:"The Next Morning",
+
+english:[
+"The next morning felt normal, but Shiv knew it was not.",
+"He looked at the lake from his window.",
+"For the first time, the thought of summer ending felt real."
+],
+
+hinglish:[
+"Agli morning sab normal lag raha tha, lekin Shiv jaanta tha ki ab kuch different tha.",
+"Usne window se lake ki taraf dekha.",
+"Pehli baar summer ke khatam hone ka thought usse actually real laga."
+],
+
+highlightEnglish:"The end of something can begin long before the final day.",
+highlightHinglish:"Kisi cheez ka end final day se bahut pehle feel hona start ho sakta hai.",
+
+thoughtEnglish:"Sometimes endings announce themselves quietly.",
+thoughtHinglish:"Kabhi-kabhi endings bina shor ke quietly aa jaati hain."
+
+});
+
+
+pages.push({
+
+page:35,
+chapter:"Chapter 3",
+title:"Another Sunset",
+
+english:[
+"They watched another sunset together.",
+"Neither mentioned leaving.",
+"They simply sat there, letting the colors disappear from the sky.",
+"Shiv wanted to remember every detail."
+],
+
+hinglish:[
+"Dono ne ek aur sunset saath dekha.",
+"Kisi ne leaving ke baare mein baat nahi ki.",
+"Bas dono baithe rahe aur aasman ke colors ko dheere-dheere disappear hote dekhte rahe.",
+"Shiv chahta tha ki woh us moment ki har detail yaad rakhe."
+],
+
+highlightEnglish:"He wanted to remember every detail.",
+highlightHinglish:"Woh us moment ki har detail yaad rakhna chahta tha.",
+
+thoughtEnglish:"When a moment feels precious, even silence becomes something worth remembering.",
+thoughtHinglish:"Jab koi moment precious lagta hai, tab uski silence bhi yaad rakhne layak lagti hai."
+
+});
+
+
+pages.push({
+
+page:36,
+chapter:"Chapter 3",
+title:"The Summer Feeling",
+
+english:[
+"The summer had become more than a season.",
+"It was the lake, the bookstore, the café, the rooftop, the old streets, and the conversations that had slowly become part of Shiv's life.",
+"And somewhere inside all of it was Meera."
+],
+
+hinglish:[
+"Summer ab sirf ek season nahi reh gayi thi.",
+"Ab summer mein lake, bookstore, café, rooftop, old streets aur woh conversations sab shamil the jo dheere-dheere Shiv ki life ka part ban gayi thi.",
+"Aur in sab ke beech kahin Meera bhi thi."
+],
+
+highlightEnglish:"The summer had become a part of who he was.",
+highlightHinglish:"Summer ab Shiv ki personality aur memories ka ek part ban chuki thi.",
+
+thoughtEnglish:"Some seasons change us without asking permission.",
+thoughtHinglish:"Kuch seasons bina permission liye hi humein andar se change kar dete hain."
+
+});
+
+
+pages.push({
+
+page:37,
+chapter:"Chapter 3",
+title:"Before the Stars",
+
+english:[
+"That night, they decided to meet on the rooftop again.",
+"The town was quiet below them.",
+"The sky was clear.",
+"Neither knew that the next conversation would become one of the memories they would carry for years."
+],
+
+hinglish:[
+"Us raat dono ne phir rooftop par milne ka decide kiya.",
+"Neeche poora town quiet tha.",
+"Aasman bilkul clear tha.",
+"Dono ko nahi pata tha ki next conversation un memories mein se ek banne wali hai jo woh saalon tak apne saath carry karenge."
+],
+
+highlightEnglish:"Some nights become memories before they are even over.",
+highlightHinglish:"Kuch nights khatam hone se pehle hi memories ban jaati hain.",
+
+thoughtEnglish:"You never know which ordinary night will become unforgettable.",
+thoughtHinglish:"Kab kaunsi ordinary night unforgettable ban jaaye, ye pehle se kabhi pata nahi hota."
+
+});
+
+
+/* ---------------------------------------------------------
+   CHAPTER 4 — THE PROMISE UNDER STARS
+   Pages 38–55
+   --------------------------------------------------------- */
+
+pages.push({
+
+page:38,
+chapter:"Chapter 4",
+title:"The Promise Under Stars",
+
+english:[
+"The rooftop looked different that night.",
+"The sky was filled with stars, and the town below seemed unusually small.",
+"Meera sat quietly beside Shiv.",
+"There was something unfinished in the air."
+],
+
+hinglish:[
+"Us raat rooftop kuch alag hi lag rahi thi.",
+"Aasman stars se bhara hua tha aur neeche ka town unusually chhota lag raha tha.",
+"Meera Shiv ke paas quietly baithi thi.",
+"Hawa mein jaise koi unfinished baat thi."
+],
+
+highlightEnglish:"There was something unfinished in the air.",
+highlightHinglish:"Hawa mein jaise koi adhuri si baat thi.",
+
+thoughtEnglish:"Important conversations often begin with silence.",
+thoughtHinglish:"Important conversations aksar silence se start hoti hain."
+
+});
+
+
+pages.push({
+
+page:39,
+chapter:"Chapter 4",
+title:"What If?",
+
+english:[
+"Meera asked, 'What if this summer ends and everything changes?'",
+"Shiv looked at the stars.",
+"He did not want to give her a promise he could not control.",
+"So he chose a smaller truth."
+],
+
+hinglish:[
+"Meera ne poocha, 'Agar summer khatam ho gayi aur sab kuch change ho gaya toh?'",
+"Shiv ne stars ki taraf dekha.",
+"Woh aisa promise nahi karna chahta tha jise future mein control hi na kar sake.",
+"Isliye usne ek chhoti si sachchi baat choose ki."
+],
+
+highlightEnglish:"He could not promise forever. He could promise to remember.",
+highlightHinglish:"Woh forever ka promise nahi kar sakta tha. Lekin woh yaad rakhne ka promise kar sakta tha.",
+
+thoughtEnglish:"A promise is meaningful when it respects reality instead of pretending to control it.",
+thoughtHinglish:"Promise tab meaningful hota hai jab woh reality ko respect kare, na ki future ko control karne ka pretend kare."
+
+});
+
+
+pages.push({
+
+page:40,
+chapter:"Chapter 4",
+title:"The Promise",
+
+english:[
+"Shiv told Meera that no matter where life took them, he would remember this summer.",
+"Not every detail.",
+"Not every conversation.",
+"But the feeling of it.",
+"Meera looked at him and quietly agreed."
+],
+
+hinglish:[
+"Shiv ne Meera se kaha ki life unhe kahin bhi le jaaye, woh is summer ko yaad rakhega.",
+"Har detail nahi.",
+"Har conversation nahi.",
+"Lekin is summer ki feeling zaroor.",
+"Meera ne uski taraf dekha aur quietly agree kar diya."
+],
+
+highlightEnglish:"I will remember the feeling of this summer.",
+highlightHinglish:"Main is summer ki feeling ko yaad rakhunga.",
+
+thoughtEnglish:"Sometimes the strongest promise is not about staying. It is about remembering honestly.",
+thoughtHinglish:"Kabhi strongest promise saath rehne ka nahi, balki honestly yaad rakhne ka hota hai."
+
+});
+
+
+pages.push({
+
+page:41,
+chapter:"Chapter 4",
+title:"The Stars",
+
+english:[
+"They stayed on the rooftop longer than they planned.",
+"Neither wanted to be the first person to leave.",
+"The stars moved slowly above them.",
+"For a while, the future did not matter."
+],
+
+hinglish:[
+"Dono planned time se kaafi zyada rooftop par baithe rahe.",
+"Kisi ka mann nahi tha ki pehle woh wahan se uthe.",
+"Stars dheere-dheere aasman mein move kar rahe the.",
+"Kuch der ke liye future important nahi lag raha tha."
+],
+
+highlightEnglish:"For a while, the future did not matter.",
+highlightHinglish:"Kuch der ke liye future matter hi nahi karta tha.",
+
+thoughtEnglish:"There are moments when being present is more important than knowing what comes next.",
+thoughtHinglish:"Kuch moments mein present mein rehna next kya hoga ye jaane se zyada important hota hai."
+
+});
+
+
+pages.push({
+
+page:42,
+chapter:"Chapter 4",
+title:"A Walk Through the Town",
+
+english:[
+"They walked through the old town after leaving the rooftop.",
+"The streets were nearly empty.",
+"Meera pointed at places they had visited together.",
+"Each place carried a different version of their summer."
+],
+
+hinglish:[
+"Rooftop se nikalne ke baad dono old town ki streets se walk karte hue guzre.",
+"Streets almost empty thi.",
+"Meera un jagahon ki taraf point kar rahi thi jahan woh dono saath ja chuke the.",
+"Har jagah unki summer ka ek alag version carry karti thi."
+],
+
+highlightEnglish:"Places remember what people sometimes forget.",
+highlightHinglish:"Places kabhi-kabhi woh sab yaad rakh leti hain jo log bhool jaate hain.",
+
+thoughtEnglish:"A familiar place can hold years of emotion inside a single view.",
+thoughtHinglish:"Ek familiar place ek simple view ke andar saalon ki emotions hold kar sakti hai."
+
+});
+
+
+pages.push({
+
+page:43,
+chapter:"Chapter 4",
+title:"The Bookstore Door",
+
+english:[
+"The old bookstore was already closed.",
+"Meera stood outside and looked through the glass.",
+"Shiv stood beside her.",
+"They laughed quietly about the first day they had entered that shop together."
+],
+
+hinglish:[
+"Old bookstore already close ho chuki thi.",
+"Meera glass ke through andar dekh rahi thi.",
+"Shiv uske paas khada tha.",
+"Dono quietly us first day ko yaad karke hans pade jab woh pehli baar saath bookstore aaye the."
+],
+
+highlightEnglish:"The places stayed the same. They did not.",
+highlightHinglish:"Places same rahe. Lekin woh dono same nahi rahe.",
+
+thoughtEnglish:"Growing closer to someone also means becoming different versions of yourselves together.",
+thoughtHinglish:"Kisi ke close aana matlab ye bhi hai ki tum dono saath mein apne naye versions banate ho."
+
+});
+
+
+pages.push({
+
+page:44,
+chapter:"Chapter 4",
+title:"The Lake at Midnight",
+
+english:[
+"They returned to the lake before going home.",
+"The water reflected the moon.",
+"Meera stood near the edge while Shiv sat on the wooden pier.",
+"Neither wanted to turn the night into an ending."
+],
+
+hinglish:[
+"Ghar jaane se pehle dono lake par wapas aaye.",
+"Paani mein moon ka reflection dikh raha tha.",
+"Meera edge ke paas khadi thi aur Shiv wooden pier par baitha tha.",
+"Kisi ka mann nahi tha ki woh raat ko ending jaisa feel hone de."
+],
+
+highlightEnglish:"They were not ready to call a beautiful moment an ending.",
+highlightHinglish:"Dono kisi beautiful moment ko ending kehne ke liye ready nahi the.",
+
+thoughtEnglish:"Sometimes we avoid naming an ending because the present still feels alive.",
+thoughtHinglish:"Kabhi ending ko naam dena mushkil hota hai kyunki present abhi bhi alive feel ho raha hota hai."
+
+});
+
+
+pages.push({
+
+page:45,
+chapter:"Chapter 4",
+title:"The Next Day",
+
+english:[
+"The next morning, everything looked ordinary again.",
+"Shiv went through his usual routine.",
+"But the promise from the night before stayed in his mind.",
+"He wondered whether remembering would be enough."
+],
+
+hinglish:[
+"Agli morning sab phir ordinary lag raha tha.",
+"Shiv apni normal routine mein tha.",
+"Lekin previous night ka promise uske dimaag mein tha.",
+"Usse soch aayi ki kya sirf yaad rakhna enough hoga."
+],
+
+highlightEnglish:"Some promises become questions the moment they are spoken.",
+highlightHinglish:"Kuch promises bolte hi questions ban jaate hain.",
+
+thoughtEnglish:"A promise does not remove uncertainty. It gives meaning to what we choose to carry.",
+thoughtHinglish:"Promise uncertainty ko remove nahi karta. Bas ye meaning deta hai ki hum kya apne saath carry karna choose karte hain."
+
+});
+
+
+pages.push({
+
+page:46,
+chapter:"Chapter 4",
+title:"A Little More Honest",
+
+english:[
+"Meera became more open after that night.",
+"She told Shiv about small parts of her past.",
+"Not everything.",
+"But enough for him to understand that her silence had a reason."
+],
+
+hinglish:[
+"Us raat ke baad Meera thodi aur open ho gayi.",
+"Usne Shiv ko apne past ke kuch chhote parts bataye.",
+"Sab kuch nahi.",
+"Lekin itna zaroor ki Shiv samajh sake ki uski silence ke peeche koi reason tha."
+],
+
+highlightEnglish:"Trust does not arrive all at once. It appears in small pieces.",
+highlightHinglish:"Trust ek saath nahi aata. Woh chhote-chhote pieces mein saamne aata hai.",
+
+thoughtEnglish:"When someone shares a little more of themselves, treat it like something valuable.",
+thoughtHinglish:"Jab koi apne baare mein thoda zyada share kare, toh us trust ko valuable samjho."
+
+});
+
+
+pages.push({
+
+page:47,
+chapter:"Chapter 4",
+title:"The Fear of Leaving",
+
+english:[
+"Meera still had not told Shiv whether she would leave.",
+"Shiv wanted certainty.",
+"Instead, he learned to live with not knowing.",
+"It was harder than he expected."
+],
+
+hinglish:[
+"Meera ne abhi tak Shiv ko ye nahi bataya tha ki woh actually leave karegi ya nahi.",
+"Shiv certainty chahta tha.",
+"Lekin usse dheere-dheere not knowing ke saath rehna seekhna pada.",
+"Ye uski expectation se zyada difficult tha."
+],
+
+highlightEnglish:"Not knowing can be its own kind of fear.",
+highlightHinglish:"Not knowing bhi apne aap mein ek alag type ka fear hota hai.",
+
+thoughtEnglish:"Uncertainty is uncomfortable, but it is also a normal part of caring about something.",
+thoughtHinglish:"Uncertainty uncomfortable hoti hai, lekin kisi cheez ki care karne par ye normal bhi hai."
+
+});
+
+
+pages.push({
+
+page:48,
+chapter:"Chapter 4",
+title:"The Café Table",
+
+english:[
+"They returned to the café where they had once waited out the rain.",
+"This time there was no rain.",
+"Meera placed her cup down and said, 'I wish some days could stay exactly as they are.'",
+"Shiv understood."
+],
+
+hinglish:[
+"Dono usi café mein wapas gaye jahan kabhi rain ke time rukhe the.",
+"Is baar bahar rain nahi thi.",
+"Meera ne cup table par rakha aur kaha, 'Kaash kuch days bilkul aise hi stay kar sakte.'",
+"Shiv uski baat samajh gaya."
+],
+
+highlightEnglish:"I wish some days could stay exactly as they are.",
+highlightHinglish:"Kaash kuch days bilkul aise hi stay kar sakte.",
+
+thoughtEnglish:"We cannot freeze a moment, but we can be fully present inside it.",
+thoughtHinglish:"Hum kisi moment ko freeze nahi kar sakte, lekin uske andar completely present zaroor reh sakte hain."
+
+});
+
+
+pages.push({
+
+page:49,
+chapter:"Chapter 4",
+title:"A Photograph",
+
+english:[
+"Meera took a photograph of the lake.",
+"She said she wanted something to remember the summer by.",
+"Shiv joked that she already had enough memories.",
+"She replied that memories were never enough."
+],
+
+hinglish:[
+"Meera ne lake ki ek photograph li.",
+"Usne kaha ki woh summer ko yaad rakhne ke liye kuch save karna chahti hai.",
+"Shiv ne mazaak mein kaha ki uske paas already enough memories hain.",
+"Meera boli ki memories kabhi enough nahi hoti."
+],
+
+highlightEnglish:"Memories are never enough when a moment means everything.",
+highlightHinglish:"Jab koi moment bahut kuch mean karta ho, tab memories kabhi enough nahi lagti.",
+
+thoughtEnglish:"Wanting to remember is one way of saying that something mattered.",
+thoughtHinglish:"Kisi cheez ko yaad rakhna chahna bhi ek way hai ye kehne ka ki woh matter karti thi."
+
+});
+
+
+pages.push({
+
+page:50,
+chapter:"Chapter 4",
+title:"The Promise Again",
+
+english:[
+"Before they separated that evening, Meera reminded Shiv of the promise.",
+"Not because she doubted him.",
+"Because she wanted to know whether he still meant it.",
+"Shiv nodded."
+],
+
+hinglish:[
+"Us evening alag hone se pehle Meera ne Shiv ko promise yaad dilaya.",
+"Isliye nahi kyunki use Shiv par doubt tha.",
+"Bas isliye kyunki woh jaana chahti thi ki kya Shiv abhi bhi us promise ko mean karta hai.",
+"Shiv ne quietly nod kar diya."
+],
+
+highlightEnglish:"Some promises need no grand speech. A quiet yes is enough.",
+highlightHinglish:"Kuch promises ke liye grand speech ki zaroorat nahi hoti. Ek quiet sa yes enough hota hai.",
+
+thoughtEnglish:"Consistency gives words their real meaning.",
+thoughtHinglish:"Words ko real meaning consistency se milta hai."
+
+});
+
+
+pages.push({
+
+page:51,
+chapter:"Chapter 4",
+title:"The Last Clear Evening",
+
+english:[
+"The weather changed slowly over the next few days.",
+"Clouds appeared more often.",
+"The evenings became shorter.",
+"Summer was beginning to move toward its ending."
+],
+
+hinglish:[
+"Agale kuch days mein weather dheere-dheere change hone laga.",
+"Clouds zyada dikhne lage.",
+"Evenings chhoti hone lagi.",
+"Summer dheere-dheere apne end ki taraf badhne lagi."
+],
+
+highlightEnglish:"Every beautiful season carries the beginning of its ending.",
+highlightHinglish:"Har beautiful season apne end ki beginning ko saath lekar chalta hai.",
+
+thoughtEnglish:"Knowing that something will end does not make it less beautiful.",
+thoughtHinglish:"Kisi cheez ka end hona uski beauty ko kam nahi karta."
+
+});
+
+
+pages.push({
+
+page:52,
+chapter:"Chapter 4",
+title:"No Perfect Goodbye",
+
+english:[
+"Shiv began wondering whether he should ask Meera directly about leaving.",
+"He wanted the truth.",
+"But he also feared that hearing it would change everything.",
+"So he waited."
+],
+
+hinglish:[
+"Shiv sochne laga ki kya use Meera se directly pooch lena chahiye ki woh leave kar rahi hai ya nahi.",
+"Woh truth jaana chahta tha.",
+"Lekin use darr tha ki truth sunte hi sab kuch change ho jayega.",
+"Isliye woh wait karta raha."
+],
+
+highlightEnglish:"Sometimes we delay a question because we are afraid of its answer.",
+highlightHinglish:"Kabhi-kabhi hum question isliye delay karte hain kyunki humein uske answer se darr lagta hai.",
+
+thoughtEnglish:"Avoiding an answer does not always protect us from the truth.",
+thoughtHinglish:"Answer avoid karna hamesha humein truth se protect nahi karta."
+
+});
+
+
+pages.push({
+
+page:53,
+chapter:"Chapter 4",
+title:"The Last Walk",
+
+english:[
+"They took one more walk through the old streets.",
+"Meera was quieter than usual.",
+"Shiv noticed but said nothing.",
+"Their comfortable silence had started feeling different."
+],
+
+hinglish:[
+"Dono ne old streets mein ek aur walk ki.",
+"Meera usual se zyada quiet thi.",
+"Shiv ne notice kiya, lekin kuch nahi bola.",
+"Unki comfortable silence ab thodi different feel hone lagi thi."
+],
+
+highlightEnglish:"Silence can change meaning when something important remains unsaid.",
+highlightHinglish:"Jab koi important baat unsaid reh jaaye, toh silence ka meaning bhi change ho sakta hai.",
+
+thoughtEnglish:"The same silence can feel peaceful one day and heavy the next.",
+thoughtHinglish:"Wahi silence ek din peaceful aur doosre din heavy feel ho sakti hai."
+
+});
+
+
+pages.push({
+
+page:54,
+chapter:"Chapter 4",
+title:"Before the Rain",
+
+english:[
+"Clouds gathered above the lake.",
+"Meera looked at them and said the rain was coming.",
+"Shiv smiled and said they still had time.",
+"Neither knew how much time they actually had."
+],
+
+hinglish:[
+"Lake ke upar clouds gather hone lage.",
+"Meera ne unhe dekha aur kaha ki rain aane wali hai.",
+"Shiv smile karke bola ki abhi unke paas time hai.",
+"Dono ko nahi pata tha ki actually unke paas kitna time bacha tha."
+],
+
+highlightEnglish:"We often say we have time without knowing what time really means.",
+highlightHinglish:"Hum aksar kehte hain ki time hai, bina ye jaane ki actually time ka matlab kitna limited ho sakta hai.",
+
+thoughtEnglish:"Never assume that ordinary days will repeat forever.",
+thoughtHinglish:"Kabhi ye assume mat karo ki ordinary days hamesha repeat hote rahenge."
+
+});
+
+
+pages.push({
+
+page:55,
+chapter:"Chapter 4",
+title:"The End of the Promise",
+
+english:[
+"That night, they returned to the rooftop.",
+"They looked at the stars one more time.",
+"Nothing had ended yet.",
+"But both of them could feel that the summer was changing.",
+"The promise remained."
+],
+
+hinglish:[
+"Us raat dono phir rooftop par aaye.",
+"Unhone ek baar aur stars ko dekha.",
+"Abhi kuch end nahi hua tha.",
+"Lekin dono feel kar sakte the ki summer change ho rahi thi.",
+"Promise ab bhi wahi tha."
+],
+
+highlightEnglish:"The future could change. The promise to remember did not.",
+highlightHinglish:"Future change ho sakta tha. Lekin yaad rakhne ka promise nahi.",
+
+thoughtEnglish:"Some promises survive because they were never about controlling the future.",
+thoughtHinglish:"Kuch promises isliye survive karte hain kyunki woh future ko control karne ke baare mein kabhi the hi nahi."
+
+});
+
+
+/* ---------------------------------------------------------
+   CHAPTER 5 — WHEN RAIN REPLACED SUMMER
+   Pages 56–64
+   --------------------------------------------------------- */
+
+pages.push({
+
+page:56,
+chapter:"Chapter 5",
+title:"When Rain Replaced Summer",
+
+english:[
+"The rain arrived the next week.",
+"It stayed longer than usual.",
+"The lake became darker, the streets quieter, and the warm evenings disappeared.",
+"Summer was slowly becoming a memory."
+],
+
+hinglish:[
+"Agale week rain aa gayi.",
+"Is baar rain usual se zyada time tak rahi.",
+"Lake darker lagne lagi, streets quieter ho gayi aur warm evenings disappear hone lagi.",
+"Summer dheere-dheere memory banne lagi."
+],
+
+highlightEnglish:"The season changed before they were ready for it.",
+highlightHinglish:"Season unke ready hone se pehle hi change ho gaya.",
+
+thoughtEnglish:"Change rarely waits until we are ready.",
+thoughtHinglish:"Change aksar tab nahi aata jab hum ready hote hain."
+
+});
+
+
+pages.push({
+
+page:57,
+chapter:"Chapter 5",
+title:"Shorter Conversations",
+
+english:[
+"Meera's messages became shorter.",
+"She still replied, but something was missing.",
+"Shiv noticed every difference.",
+"He wanted to ask what was wrong."
+],
+
+hinglish:[
+"Meera ke messages chhote hone lage.",
+"Woh reply karti thi, lekin un replies mein pehle wali warmth missing thi.",
+"Shiv har difference notice kar raha tha.",
+"Uska mann karta tha pooche ki kya hua hai."
+],
+
+highlightEnglish:"Distance can begin long before people physically leave.",
+highlightHinglish:"Distance aksar log physically leave karne se bahut pehle start ho jaati hai.",
+
+thoughtEnglish:"Pay attention when a familiar connection begins to feel unfamiliar.",
+thoughtHinglish:"Jab familiar connection unfamiliar feel hone lage, toh us change ko ignore mat karo."
+
+});
+
+
+pages.push({
+
+page:58,
+chapter:"Chapter 5",
+title:"The Question",
+
+english:[
+"Finally, Shiv asked if something was wrong.",
+"Meera said she was fine.",
+"He knew she was not.",
+"But he also knew she was not ready to explain."
+],
+
+hinglish:[
+"Finally Shiv ne pooch hi liya ki kya kuch wrong hai.",
+"Meera ne kaha ki woh fine hai.",
+"Shiv jaanta tha ki woh fine nahi thi.",
+"Lekin woh ye bhi samajh raha tha ki Meera abhi explain karne ke liye ready nahi thi."
+],
+
+highlightEnglish:"Sometimes 'I'm fine' means 'I'm not ready to talk yet.'",
+highlightHinglish:"Kabhi 'I'm fine' ka matlab hota hai, 'Main abhi baat karne ke liye ready nahi hoon.'",
+
+thoughtEnglish:"Give people space without turning their silence into punishment.",
+thoughtHinglish:"Kisi ko space do, lekin unki silence ko punishment mat bana do."
+
+});
+
+
+pages.push({
+
+page:59,
+chapter:"Chapter 5",
+title:"The Empty Chair",
+
+english:[
+"At the café, Shiv sat across from an empty chair.",
+"Meera had cancelled their meeting.",
+"He looked outside at the rain.",
+"The same café suddenly felt unfamiliar."
+],
+
+hinglish:[
+"Café mein Shiv ek empty chair ke saamne baitha tha.",
+"Meera ne unki meeting cancel kar di thi.",
+"Woh bahar rain ko dekhta raha.",
+"Wahi café achanak unfamiliar sa lagne laga."
+],
+
+highlightEnglish:"A place can change when the person beside you is missing.",
+highlightHinglish:"Jab paas wala insaan missing ho, toh wahi place bhi different feel hone lagti hai.",
+
+thoughtEnglish:"Absence can make familiar places feel completely new.",
+thoughtHinglish:"Kisi ki absence familiar places ko bhi bilkul new feel karwa sakti hai."
+
+});
+
+
+pages.push({
+
+page:60,
+chapter:"Chapter 5",
+title:"The Truth Half Told",
+
+english:[
+"Meera finally told Shiv that her family was considering moving.",
+"She said she did not know when.",
+"Shiv asked how long she had known.",
+"She looked away."
+],
+
+hinglish:[
+"Meera ne finally Shiv ko bataya ki uski family move karne ke baare mein soch rahi thi.",
+"Usne kaha ki use exact time nahi pata.",
+"Shiv ne poocha ki use ye baat kab se pata thi.",
+"Meera ne nazrein hata li."
+],
+
+highlightEnglish:"Some truths hurt not because they are new, but because they were hidden.",
+highlightHinglish:"Kuch truths isliye hurt karte hain kyunki woh new nahi hote, balki isliye kyunki unhe hide kiya gaya hota hai.",
+
+thoughtEnglish:"Honesty becomes harder when fear gets involved.",
+thoughtHinglish:"Jab fear involve ho jaata hai, honesty aur difficult ho jaati hai."
+
+});
+
+
+pages.push({
+
+page:61,
+chapter:"Chapter 5",
+title:"The First Real Conflict",
+
+english:[
+"Shiv was hurt that Meera had not told him earlier.",
+"Meera said she did not want their summer to become a countdown.",
+"They both understood the other person's reason.",
+"Neither felt completely okay."
+],
+
+hinglish:[
+"Shiv hurt tha ki Meera ne use pehle nahi bataya.",
+"Meera ne kaha ki woh nahi chahti thi ki unki summer ek countdown ban jaaye.",
+"Dono ek doosre ka reason samajh rahe the.",
+"Lekin dono mein se koi bhi completely okay nahi tha."
+],
+
+highlightEnglish:"Understanding someone's reason does not always erase your own hurt.",
+highlightHinglish:"Kisi ka reason samajh lena tumhara khud ka hurt automatically erase nahi karta.",
+
+thoughtEnglish:"Two people can both have understandable reasons and still hurt each other.",
+thoughtHinglish:"Do logon ke reasons dono understandable ho sakte hain, phir bhi woh ek doosre ko hurt kar sakte hain."
+
+});
+
+
+pages.push({
+
+page:62,
+chapter:"Chapter 5",
+title:"The Rainy Pier",
+
+english:[
+"They met at the pier after several days.",
+"Rain covered the lake in small circles.",
+"Neither apologized first.",
+"They simply stood there."
+],
+
+hinglish:[
+"Kai days ke baad dono pier par mile.",
+"Rain lake ke surface par chhote-chhote circles bana rahi thi.",
+"Kisi ne pehle sorry nahi bola.",
+"Bas dono wahan khade rahe."
+],
+
+highlightEnglish:"Sometimes the first step toward repair is simply showing up.",
+highlightHinglish:"Kabhi repair ki first step bas itni hoti hai ki tum saamne aa jao.",
+
+thoughtEnglish:"You cannot fix a connection if you refuse to return to the conversation.",
+thoughtHinglish:"Agar tum conversation mein wapas hi nahi aate, toh connection ko fix karna mushkil hota hai."
+
+});
+
+
+pages.push({
+
+page:63,
+chapter:"Chapter 5",
+title:"No Easy Answer",
+
+english:[
+"Shiv finally said he was angry.",
+"Meera said she was scared.",
+"The words were simple, but saying them made the silence lighter.",
+"They did not solve everything."
+],
+
+hinglish:[
+"Shiv ne finally kaha ki woh angry tha.",
+"Meera ne kaha ki woh scared thi.",
+"Words simple the, lekin unhe bolne ke baad silence thodi light ho gayi.",
+"Sab kuch solve nahi hua tha."
+],
+
+highlightEnglish:"Naming a feeling does not solve it, but it gives it a place to exist.",
+highlightHinglish:"Feeling ko naam dene se woh solve nahi hoti, lekin usse exist karne ki jagah mil jaati hai.",
+
+thoughtEnglish:"Honest conversations do not always give answers. Sometimes they simply remove confusion.",
+thoughtHinglish:"Honest conversations hamesha answers nahi deti. Kabhi woh bas confusion kam kar deti hain."
+
+});
+
+
+pages.push({
+
+page:64,
+chapter:"Chapter 5",
+title:"The Last Warm Evening",
+
+english:[
+"That evening, the rain stopped for a while.",
+"They sat at the lake without talking about leaving.",
+"For a few minutes, summer returned.",
+"Neither of them said how much they needed that moment."
+],
+
+hinglish:[
+"Us evening rain kuch der ke liye ruk gayi.",
+"Dono lake par baithe, lekin leaving ke baare mein baat nahi ki.",
+"Kuch minutes ke liye summer jaise wapas aa gayi.",
+"Dono mein se kisi ne nahi kaha ki unhe woh moment kitna chahiye tha."
+],
+
+highlightEnglish:"For a few minutes, summer returned.",
+highlightHinglish:"Kuch minutes ke liye summer jaise wapas aa gayi.",
+
+thoughtEnglish:"Sometimes one peaceful moment can carry us through a difficult season.",
+thoughtHinglish:"Kabhi ek peaceful moment bhi humein difficult season se nikalne ki strength de sakta hai."
+
+});
+
+
+/* ---------------------------------------------------------
+   CHAPTER 6 — UNREAD MESSAGES
+   Pages 65–72
+   --------------------------------------------------------- */
+
+pages.push({
+
+page:65,
+chapter:"Chapter 6",
+title:"Unread Messages",
+
+english:[
+"The next morning, Shiv sent Meera a message.",
+"He waited.",
+"No reply came.",
+"He checked his phone again later."
+],
+
+hinglish:[
+"Agli morning Shiv ne Meera ko message kiya.",
+"Woh wait karta raha.",
+"Koi reply nahi aaya.",
+"Kuch der baad usne phir phone check kiya."
+],
+
+highlightEnglish:"Silence feels different when you are waiting for a reply.",
+highlightHinglish:"Jab tum reply ka wait kar rahe hote ho, tab silence bilkul different feel hoti hai.",
+
+thoughtEnglish:"Waiting can make minutes feel much longer than they are.",
+thoughtHinglish:"Wait karte waqt minutes actual time se bhi zyada long feel hone lagte hain."
+
+});
+
+
+pages.push({
+
+page:66,
+chapter:"Chapter 6",
+title:"Drafts",
+
+english:[
+"Shiv wrote another message and deleted it.",
+"He wrote a third one and deleted that too.",
+"He wanted to ask if she was okay without making her feel pressured.",
+"In the end, he sent nothing."
+],
+
+hinglish:[
+"Shiv ne ek aur message type kiya aur delete kar diya.",
+"Third message bhi likha aur phir delete kar diya.",
+"Woh poochna chahta tha ki Meera okay hai ya nahi, lekin woh use pressure bhi nahi dena chahta tha.",
+"End mein usne kuch send nahi kiya."
+],
+
+highlightEnglish:"Sometimes the message we delete says more than the one we send.",
+highlightHinglish:"Kabhi-kabhi jo message hum delete kar dete hain, woh sent message se zyada kuch keh raha hota hai.",
+
+thoughtEnglish:"Uncertainty often creates conversations inside our heads that never happen outside.",
+thoughtHinglish:"Uncertainty aksar dimaag ke andar aisi conversations create kar deti hai jo real life mein kabhi hoti hi nahi."
+
+});
+
+
+pages.push({
+
+page:67,
+chapter:"Chapter 6",
+title:"The Empty Notification",
+
+english:[
+"Every notification made Shiv look at his phone.",
+"None of them were from Meera.",
+"By evening, he stopped checking.",
+"Not because he stopped caring, but because he needed a break from waiting."
+],
+
+hinglish:[
+"Har notification par Shiv ka haath phone ki taraf chala jaata.",
+"Kisi bhi notification mein Meera ka naam nahi tha.",
+"Evening tak usne phone check karna kam kar diya.",
+"Isliye nahi kyunki usse care nahi thi, balki isliye kyunki waiting se thoda break chahiye tha."
+],
+
+highlightEnglish:"Taking a break from waiting is not the same as giving up.",
+highlightHinglish:"Waiting se break lena give up karna nahi hota.",
+
+thoughtEnglish:"Sometimes protecting your peace means stepping away from the thing you are waiting for.",
+thoughtHinglish:"Kabhi apni peace protect karne ke liye us cheez se thoda door hona padta hai jiska tum wait kar rahe ho."
+
+});
+
+
+pages.push({
+
+page:68,
+chapter:"Chapter 6",
+title:"The Lake Felt Different",
+
+english:[
+"Shiv went to the lake alone.",
+"The wooden pier looked exactly the same.",
+"Yet something felt missing.",
+"He sat where they had once watched the sunset."
+],
+
+hinglish:[
+"Shiv akela lake par gaya.",
+"Wooden pier bilkul same thi.",
+"Phir bhi kuch missing sa feel ho raha tha.",
+"Woh wahi baith gaya jahan dono ne ek saath sunset dekha tha."
+],
+
+highlightEnglish:"The place had not changed. The memory had.",
+highlightHinglish:"Place change nahi hui thi. Memory ka feeling change ho gaya tha.",
+
+thoughtEnglish:"Returning to an old place can show us how much we have changed.",
+thoughtHinglish:"Old place par wapas jaana kabhi-kabhi dikhata hai ki hum khud kitna change ho chuke hain."
+
+});
+
+
+pages.push({
+
+page:69,
+chapter:"Chapter 6",
+title:"Another Unread Message",
+
+english:[
+"Three days later, Meera sent a short message.",
+"Shiv replied immediately.",
+"This time, there was no answer.",
+"The silence became heavier."
+],
+
+hinglish:[
+"Teen days baad Meera ka ek short message aaya.",
+"Shiv ne turant reply kar diya.",
+"Is baar bhi koi answer nahi aaya.",
+"Silence aur heavy lagne lagi."
+],
+
+highlightEnglish:"Distance grows when silence becomes a habit.",
+highlightHinglish:"Jab silence habit ban jaaye, tab distance aur grow hone lagti hai.",
+
+thoughtEnglish:"Communication needs more than messages. It needs presence and honesty too.",
+thoughtHinglish:"Communication sirf messages se nahi chalti. Uske liye presence aur honesty bhi chahiye."
+
+});
+
+
+pages.push({
+
+page:70,
+chapter:"Chapter 6",
+title:"The Bookstore",
+
+english:[
+"Shiv entered the old bookstore alone.",
+"He found the shelf where Meera had once stood.",
+"He picked up a book, opened the first page, and then put it back.",
+"The place was full of memories."
+],
+
+hinglish:[
+"Shiv akela old bookstore mein gaya.",
+"Usne woh shelf dekhi jahan Meera kabhi khadi hui thi.",
+"Usne ek book uthai, first page khola aur phir wapas rakh di.",
+"Poora place memories se bhara hua tha."
+],
+
+highlightEnglish:"Some places become difficult because they remember too much.",
+highlightHinglish:"Kuch places difficult isliye lagne lagti hain kyunki woh bahut kuch yaad dila deti hain.",
+
+thoughtEnglish:"Memory can make an ordinary place feel heavy, but that does not mean the memory should be erased.",
+thoughtHinglish:"Memory kisi ordinary place ko heavy bana sakti hai, lekin iska matlab ye nahi ki memory ko erase kar dena chahiye."
+
+});
+
+
+pages.push({
+
+page:71,
+chapter:"Chapter 6",
+title:"The Draft He Kept",
+
+english:[
+"That night, Shiv wrote a message and did not delete it.",
+"He wrote that he missed their conversations.",
+"He wrote that he was angry.",
+"He wrote that he still cared.",
+"He saved the draft."
+],
+
+hinglish:[
+"Us raat Shiv ne ek message likha aur is baar delete nahi kiya.",
+"Usne likha ki use unki conversations miss hoti hain.",
+"Usne likha ki woh angry tha.",
+"Usne ye bhi likha ki usse abhi bhi care thi.",
+"Phir usne message draft mein save kar diya."
+],
+
+highlightEnglish:"Some words are not ready to be sent, but they are ready to be written.",
+highlightHinglish:"Kuch words send karne ke liye ready nahi hote, lekin likhne ke liye ready hote hain.",
+
+thoughtEnglish:"Writing can be a safe place for feelings that are not yet ready for another person.",
+thoughtHinglish:"Writing un feelings ke liye safe place ban sakti hai jo abhi kisi aur ko batane ke liye ready nahi hoti."
+
+});
+
+
+pages.push({
+
+page:72,
+chapter:"Chapter 6",
+title:"The Distance",
+
+english:[
+"By the end of the week, Shiv understood that something had changed.",
+"Nothing dramatic had happened.",
+"There had been no final argument.",
+"Just silence, shorter conversations, and too many things left unsaid."
+],
+
+hinglish:[
+"Week ke end tak Shiv samajh gaya ki kuch change ho chuka tha.",
+"Koi dramatic incident nahi hua tha.",
+"Koi final argument bhi nahi hua.",
+"Bas silence thi, chhoti conversations thi aur bahut si baatein unsaid reh gayi thi."
+],
+
+highlightEnglish:"Sometimes distance begins with silence, not goodbye.",
+highlightHinglish:"Kabhi distance goodbye se nahi, silence se start hoti hai.",
+
+thoughtEnglish:"Not every ending arrives with a clear final moment.",
+thoughtHinglish:"Har ending ka koi clear final moment nahi hota."
+
+});
+
+
+/* ---------------------------------------------------------
+   CHAPTER 7 — THE DAY SHE LEFT
+   Pages 73–82
+   --------------------------------------------------------- */
+
+pages.push({
+
+page:73,
+chapter:"Chapter 7",
+title:"The Day She Left",
+
+english:[
+"Shiv learned from someone else that Meera was leaving town.",
+"For a few seconds, he simply stood there.",
+"He thought he had more time.",
+"He did not."
+],
+
+hinglish:[
+"Shiv ko kisi aur se pata chala ki Meera town chhod kar ja rahi hai.",
+"Kuch seconds tak woh bas wahi khada raha.",
+"Usse lagta tha ki uske paas aur time hai.",
+"Lekin nahi tha."
+],
+
+highlightEnglish:"He thought there was more time.",
+highlightHinglish:"Use laga tha ki aur time hai.",
+
+thoughtEnglish:"One of life's hardest lessons is realizing that time does not always wait for closure.",
+thoughtHinglish:"Life ki difficult lessons mein se ek ye hai ki time hamesha closure ka wait nahi karta."
+
+});
+
+
+pages.push({
+
+page:74,
+chapter:"Chapter 7",
+title:"The Last Morning",
+
+english:[
+"The town looked normal on the morning Meera left.",
+"Buses moved through the streets.",
+"Shops opened.",
+"People continued with their ordinary lives."
+],
+
+hinglish:[
+"Jis morning Meera leave kar rahi thi, town bilkul normal lag raha tha.",
+"Buses streets se pass ho rahi thi.",
+"Shops open ho rahi thi.",
+"Sab log apni normal life continue kar rahe the."
+],
+
+highlightEnglish:"The world does not stop when one person's world changes.",
+highlightHinglish:"Jab ek insaan ki duniya change hoti hai, tab poori duniya ruk nahi jaati.",
+
+thoughtEnglish:"Personal endings can happen inside completely ordinary days.",
+thoughtHinglish:"Personal endings aksar bilkul ordinary days ke andar hi ho jaati hain."
+
+});
+
+
+pages.push({
+
+page:75,
+chapter:"Chapter 7",
+title:"At the Station",
+
+english:[
+"Shiv reached the station.",
+"Meera was standing near her family.",
+"When she saw him, her expression changed.",
+"Neither knew what the right first word was."
+],
+
+hinglish:[
+"Shiv station pahucha.",
+"Meera apni family ke paas khadi thi.",
+"Jab usne Shiv ko dekha, uska expression change ho gaya.",
+"Dono ko samajh nahi aaya ki first word kya hona chahiye."
+],
+
+highlightEnglish:"Sometimes goodbye is difficult because there is too much to say.",
+highlightHinglish:"Kabhi goodbye difficult isliye hota hai kyunki kehne ke liye bahut kuch hota hai.",
+
+thoughtEnglish:"When words fail, presence can still say: I came.",
+thoughtHinglish:"Jab words fail ho jaayein, tab presence phir bhi keh sakti hai: main aaya."
+
+});
+
+
+pages.push({
+
+page:76,
+chapter:"Chapter 7",
+title:"No Anger",
+
+english:[
+"Shiv did not ask why she had hidden everything.",
+"Meera did not explain every detail.",
+"They both knew that the moment was not meant for an argument.",
+"So they simply talked."
+],
+
+hinglish:[
+"Shiv ne nahi poocha ki Meera ne sab kuch kyun hide kiya.",
+"Meera ne bhi har detail explain nahi ki.",
+"Dono samajh rahe the ki ye moment argument ke liye nahi tha.",
+"Isliye dono bas baat karte rahe."
+],
+
+highlightEnglish:"Some goodbyes are not about winning an argument. They are about protecting the memory.",
+highlightHinglish:"Kuch goodbyes argument jeetne ke baare mein nahi hote. Woh memory ko protect karne ke baare mein hote hain.",
+
+thoughtEnglish:"Choose carefully what you want your last memory of someone to contain.",
+thoughtHinglish:"Kisi insaan ki last memory mein kya rehna chahiye, ye carefully choose karna chahiye."
+
+});
+
+
+pages.push({
+
+page:77,
+chapter:"Chapter 7",
+title:"The Last Conversation",
+
+english:[
+"Meera said she was sorry.",
+"Shiv said he understood.",
+"Neither of them pretended that it did not hurt.",
+"But neither wanted their final conversation to become only sadness."
+],
+
+hinglish:[
+"Meera ne kaha ki use sorry tha.",
+"Shiv ne kaha ki woh samajhta hai.",
+"Dono ne pretend nahi kiya ki ye hurt nahi kar raha.",
+"Lekin dono nahi chahte the ki unki final conversation sirf sadness ban kar reh jaaye."
+],
+
+highlightEnglish:"They did not pretend it was painless. They simply chose not to make pain the whole story.",
+highlightHinglish:"Dono ne ye pretend nahi kiya ki hurt nahi hua. Bas unhone pain ko poori story banne nahi diya.",
+
+thoughtEnglish:"Pain can be part of a memory without becoming the meaning of the memory.",
+thoughtHinglish:"Pain memory ka ek part ho sakta hai, lekin zaroori nahi ki wahi memory ka poora meaning ban jaaye."
+
+});
+
+
+pages.push({
+
+page:78,
+chapter:"Chapter 7",
+title:"The Promise",
+
+english:[
+"Before leaving, Meera reminded Shiv about the summer.",
+"She asked if he still remembered the promise.",
+"Shiv nodded.",
+"Some promises become heavier when the moment finally arrives."
+],
+
+hinglish:[
+"Jaane se pehle Meera ne Shiv ko summer yaad dilayi.",
+"Usne poocha ki kya Shiv ko abhi bhi promise yaad hai.",
+"Shiv ne nod kiya.",
+"Kuch promises jab actual moment aa jaata hai tab aur heavy feel hote hain."
+],
+
+highlightEnglish:"I remember.",
+highlightHinglish:"Mujhe yaad hai.",
+
+thoughtEnglish:"Sometimes three simple words can carry an entire season.",
+thoughtHinglish:"Kabhi teen simple words poori ek season ki feeling carry kar sakte hain."
+
+});
+
+
+pages.push({
+
+page:79,
+chapter:"Chapter 7",
+title:"The Departure",
+
+english:[
+"The train was ready.",
+"Meera looked back once before leaving.",
+"Shiv stood still.",
+"He watched until she disappeared from view."
+],
+
+hinglish:[
+"Train ready thi.",
+"Jaane se pehle Meera ne ek baar peeche mudkar dekha.",
+"Shiv wahi khada raha.",
+"Woh tab tak dekhta raha jab tak Meera uski nazron se disappear nahi ho gayi."
+],
+
+highlightEnglish:"Some goodbyes happen in seconds but stay for years.",
+highlightHinglish:"Kuch goodbyes seconds mein ho jaate hain, lekin saalon tak saath rehte hain.",
+
+thoughtEnglish:"A goodbye is a moment. Its meaning is something we understand over time.",
+thoughtHinglish:"Goodbye ek moment hota hai. Uska meaning humein time ke saath samajh aata hai."
+
+});
+
+
+pages.push({
+
+page:80,
+chapter:"Chapter 7",
+title:"The Empty Seat",
+
+english:[
+"On the way home, Shiv sat alone.",
+"The seat beside him was empty.",
+"He looked out of the window at the town they had walked through so many times.",
+"Everything looked familiar."
+],
+
+hinglish:[
+"Ghar jaate waqt Shiv akela baitha tha.",
+"Uske paas wali seat empty thi.",
+"Woh window se bahar un streets ko dekhta raha jahan dono kitni baar walk kar chuke the.",
+"Sab familiar tha."
+],
+
+highlightEnglish:"Everything looked familiar, but nothing felt the same.",
+highlightHinglish:"Sab kuch familiar tha, lekin kuch bhi same feel nahi ho raha tha.",
+
+thoughtEnglish:"Sometimes the world stays the same while your place inside it changes.",
+thoughtHinglish:"Kabhi duniya same rehti hai, lekin us duniya mein tumhari jagah change ho jaati hai."
+
+});
+
+
+pages.push({
+
+page:81,
+chapter:"Chapter 7",
+title:"Back at the Lake",
+
+english:[
+"That evening, Shiv went to the lake.",
+"The pier was empty.",
+"He sat down with his notebook.",
+"For the first time all summer, he had nothing to write."
+],
+
+hinglish:[
+"Us evening Shiv lake par gaya.",
+"Pier empty thi.",
+"Woh notebook lekar baith gaya.",
+"Poore summer mein pehli baar uske paas likhne ke liye kuch nahi tha."
+],
+
+highlightEnglish:"For the first time all summer, he had nothing to write.",
+highlightHinglish:"Poore summer mein pehli baar uske paas likhne ke liye kuch nahi tha.",
+
+thoughtEnglish:"Sometimes emotions are too full for words.",
+thoughtHinglish:"Kabhi emotions itni full hoti hain ki words hi nahi milte."
+
+});
+
+
+pages.push({
+
+page:82,
+chapter:"Chapter 7",
+title:"Summer Was Over",
+
+english:[
+"The next morning, Shiv realized the summer was over.",
+"Not because the calendar said so.",
+"Because the person who had given those days their meaning was gone.",
+"He closed his notebook."
+],
+
+hinglish:[
+"Agli morning Shiv ko realize hua ki summer over ho gayi hai.",
+"Calendar ki wajah se nahi.",
+"Isliye kyunki jis insaan ne un days ko meaning diya tha, woh ab wahan nahi thi.",
+"Usne notebook band kar di."
+],
+
+highlightEnglish:"Some summers end when someone leaves.",
+highlightHinglish:"Kuch summers kisi ke chale jaane ke saath khatam ho jaati hain.",
+
+thoughtEnglish:"An ending does not erase what came before it.",
+thoughtHinglish:"Ending pehle jo kuch hua tha, usse erase nahi karti."
+
+});
+
+
+/* ---------------------------------------------------------
+   CHAPTER 8 — LETTERS NEVER SENT
+   Pages 83–89
+   --------------------------------------------------------- */
+
+pages.push({
+
+page:83,
+chapter:"Chapter 8",
+title:"Letters Never Sent",
+
+english:[
+"Days became weeks.",
+"Shiv started writing letters to Meera that he never intended to send.",
+"He wrote about the lake, the bookstore, the rooftop, and the promise.",
+"Writing became a way to keep the memory alive without asking it to return."
+],
+
+hinglish:[
+"Days weeks mein badal gaye.",
+"Shiv Meera ke naam letters likhne laga, lekin unhe send karne ka plan nahi tha.",
+"Woh lake, bookstore, rooftop aur promise ke baare mein likhta.",
+"Writing uske liye memory ko alive rakhne ka ek way ban gayi, bina usse wapas aane ke liye force kiye."
+],
+
+highlightEnglish:"He wrote to remember, not to bring the past back.",
+highlightHinglish:"Woh past ko wapas laane ke liye nahi, bas yaad rakhne ke liye likhta tha.",
+
+thoughtEnglish:"Sometimes letting go begins with allowing a memory to exist without asking it to become the present again.",
+thoughtHinglish:"Kabhi letting go ki beginning tab hoti hai jab hum memory ko present mein wapas laane ki jagah bas usse exist karne dete hain."
+
+});
+
+
+pages.push({
+
+page:84,
+chapter:"Chapter 8",
+title:"The First Letter",
+
+english:[
+"Dear Meera,",
+"Shiv wrote about the first day at the pier.",
+"He remembered how ordinary the conversation had been.",
+"That was exactly why he loved remembering it."
+],
+
+hinglish:[
+"Dear Meera,",
+"Shiv ne pier wali first meeting ke baare mein likha.",
+"Usse yaad tha ki unki first conversation kitni ordinary thi.",
+"Shayad isi wajah se woh memory use itni achhi lagti thi."
+],
+
+highlightEnglish:"The beginning was ordinary. The memory was not.",
+highlightHinglish:"Beginning ordinary thi. Lekin memory ordinary nahi rahi.",
+
+thoughtEnglish:"We do not choose which simple moments will become important later.",
+thoughtHinglish:"Hum ye choose nahi karte ki kaunsa simple moment baad mein important banega."
+
+});
+
+
+pages.push({
+
+page:85,
+chapter:"Chapter 8",
+title:"Her Side",
+
+english:[
+"Far away, Meera also wrote letters.",
+"She wrote about the same summer from a different place.",
+"She wrote that leaving had not been easy.",
+"She never sent those letters either."
+],
+
+hinglish:[
+"Door kisi aur jagah Meera bhi letters likhti thi.",
+"Woh usi summer ke baare mein ek different place se likhti.",
+"Usne likha ki leave karna easy nahi tha.",
+"Usne bhi woh letters kabhi send nahi kiye."
+],
+
+highlightEnglish:"Two people can carry the same memory in completely different ways.",
+highlightHinglish:"Do log ek hi memory ko bilkul different ways mein carry kar sakte hain.",
+
+thoughtEnglish:"Silence does not always mean that the other person stopped caring.",
+thoughtHinglish:"Silence ka matlab hamesha ye nahi hota ki doosre person ne care karna chhod diya."
+
+});
+
+
+pages.push({
+
+page:86,
+chapter:"Chapter 8",
+title:"The Things She Could Not Say",
+
+english:[
+"Meera's letters contained things she had never said.",
+"She wrote about fear.",
+"She wrote about leaving before she became too attached.",
+"And she wrote about how much she missed the lake."
+],
+
+hinglish:[
+"Meera ke letters mein woh baatein thi jo usne kabhi directly nahi boli thi.",
+"Usne apne fear ke baare mein likha.",
+"Usne likha ki woh zyada attach hone se pehle hi leave karna chahti thi.",
+"Aur usne ye bhi likha ki use lake kitni miss hoti thi."
+],
+
+highlightEnglish:"Sometimes leaving is not proof that someone cared less. Sometimes it is proof that they were scared.",
+highlightHinglish:"Kabhi kisi ka chale jaana ye proof nahi hota ki usne kam care ki. Kabhi-kabhi woh bas scared hota hai.",
+
+thoughtEnglish:"People can make painful choices while still carrying genuine feelings.",
+thoughtHinglish:"Log painful choices le sakte hain aur phir bhi unke feelings genuine ho sakte hain."
+
+});
+
+
+pages.push({
+
+page:87,
+chapter:"Chapter 8",
+title:"The Unsent Page",
+
+english:[
+"Shiv finished another letter.",
+"He read it once.",
+"Then he placed it inside the notebook.",
+"He did not need to send it anymore."
+],
+
+hinglish:[
+"Shiv ne ek aur letter complete kiya.",
+"Usne use ek baar padha.",
+"Phir notebook ke andar rakh diya.",
+"Ab use send karne ki zaroorat feel nahi hui."
+],
+
+highlightEnglish:"Not every letter needs a destination.",
+highlightHinglish:"Har letter ko destination milna zaroori nahi hota.",
+
+thoughtEnglish:"Some writing is meant to change the writer, not reach the reader.",
+thoughtHinglish:"Kuch writing reader tak pahunchne ke liye nahi, writer ko change karne ke liye hoti hai."
+
+});
+
+
+pages.push({
+
+page:88,
+chapter:"Chapter 8",
+title:"The Memory Stayed",
+
+english:[
+"Months passed.",
+"The lake remained.",
+"The bookstore remained.",
+"The rooftop remained.",
+"The memory remained too, but it no longer hurt every day."
+],
+
+hinglish:[
+"Months pass ho gaye.",
+"Lake wahi rahi.",
+"Bookstore wahi rahi.",
+"Rooftop bhi wahi rahi.",
+"Memory bhi rahi, lekin ab har din hurt nahi karti thi."
+],
+
+highlightEnglish:"Healing did not erase the memory. It changed the way he carried it.",
+highlightHinglish:"Healing ne memory ko erase nahi kiya. Bas usse carry karne ka way change kar diya.",
+
+thoughtEnglish:"Healing is not forgetting. It is learning how to remember without being broken by the memory.",
+thoughtHinglish:"Healing bhoolna nahi hota. Healing ye seekhna hota hai ki memory ko yaad rakhkar bhi kaise theek raha jaaye."
+
+});
+
+
+pages.push({
+
+page:89,
+chapter:"Chapter 8",
+title:"The Last Letter",
+
+english:[
+"Shiv wrote one final letter.",
+"He did not begin with questions.",
+"He simply wrote about gratitude.",
+"Some people leave your life and still become part of who you are."
+],
+
+hinglish:[
+"Shiv ne ek final letter likha.",
+"Usne questions se start nahi kiya.",
+"Usne bas gratitude ke baare mein likha.",
+"Kuch log life se chale jaate hain, lekin phir bhi tumhari personality ka ek part ban jaate hain."
+],
+
+highlightEnglish:"Some people leave, but the version of you they helped create remains.",
+highlightHinglish:"Kuch log chale jaate hain, lekin unki wajah se tumhara jo version bana, woh reh jaata hai.",
+
+thoughtEnglish:"Be grateful for what a connection taught you, even when it did not last forever.",
+thoughtHinglish:"Kisi connection ne tumhe jo sikhaya, uske liye grateful raho, chahe woh forever nahi raha."
+
+});
+
+
+/* ---------------------------------------------------------
+   CHAPTER 9 — GHOSTS OF OLD MEMORIES
+   Pages 90–97
+   --------------------------------------------------------- */
+
+pages.push({
+
+page:90,
+chapter:"Chapter 9",
+title:"Ghosts of Old Memories",
+
+english:[
+"Years passed.",
+"Shiv changed.",
+"The town changed too.",
+"One day, he returned."
+],
+
+hinglish:[
+"Years pass ho gaye.",
+"Shiv change ho gaya.",
+"Town bhi change ho chuka tha.",
+"Ek din woh wapas aaya."
+],
+
+highlightEnglish:"Returning is different when you are no longer the person who left.",
+highlightHinglish:"Wapas aana tab different hota hai jab tum woh insaan nahi rahe hote jo kabhi yahan se gaya tha.",
+
+thoughtEnglish:"Sometimes we return to places not to relive the past, but to understand who we became after it.",
+thoughtHinglish:"Kabhi hum past ko relive karne nahi, balki ye samajhne wapas aate hain ki uske baad hum kya ban gaye."
+
+});
+
+
+pages.push({
+
+page:91,
+chapter:"Chapter 9",
+title:"The Town",
+
+english:[
+"The streets looked smaller than he remembered.",
+"The café had changed its sign.",
+"The bookstore had a new window display.",
+"Only the lake looked almost exactly the same."
+],
+
+hinglish:[
+"Streets uski memory se chhoti lag rahi thi.",
+"Café ka sign change ho gaya tha.",
+"Bookstore ki window display bhi new thi.",
+"Bas lake almost bilkul same lag rahi thi."
+],
+
+highlightEnglish:"Memory makes places larger than they really are.",
+highlightHinglish:"Memory places ko reality se zyada bada bana deti hai.",
+
+thoughtEnglish:"The past often lives in our memory more vividly than it lives in the place itself.",
+thoughtHinglish:"Past aksar place se zyada strongly humari memory mein alive rehta hai."
+
+});
+
+
+pages.push({
+
+page:92,
+chapter:"Chapter 9",
+title:"The Bookstore Again",
+
+english:[
+"Shiv entered the bookstore.",
+"The shelves were different.",
+"He smiled when he realized he could no longer remember exactly where Meera had stood.",
+"And somehow, that felt okay."
+],
+
+hinglish:[
+"Shiv bookstore ke andar gaya.",
+"Shelves change ho chuki thi.",
+"Usse smile aa gayi jab realize hua ki ab use exact yaad bhi nahi tha ki Meera us din kis shelf ke paas khadi thi.",
+"Aur strangely, ye okay feel hua."
+],
+
+highlightEnglish:"Forgetting a detail does not mean forgetting the meaning.",
+highlightHinglish:"Kisi detail ko bhool jaana memory ka meaning bhool jaana nahi hota.",
+
+thoughtEnglish:"Healing sometimes looks like being able to remember without needing every detail.",
+thoughtHinglish:"Healing kabhi aisi lagti hai jab tum memory ko yaad rakh pao bina har detail yaad rakhe."
+
+});
+
+
+pages.push({
+
+page:93,
+chapter:"Chapter 9",
+title:"The Old Pier",
+
+english:[
+"Shiv walked to the pier.",
+"The boards were older.",
+"The lake was quiet.",
+"He sat at the same place where he had once written Meera's name."
+],
+
+hinglish:[
+"Shiv pier ki taraf gaya.",
+"Boards aur old ho chuki thi.",
+"Lake quiet thi.",
+"Woh usi jagah baith gaya jahan kabhi usne Meera ka naam notebook mein likha tha."
+],
+
+highlightEnglish:"The place held the memory, but the memory no longer owned him.",
+highlightHinglish:"Place memory ko hold karti thi, lekin ab memory usse control nahi karti thi.",
+
+thoughtEnglish:"You can carry the past without allowing it to decide your future.",
+thoughtHinglish:"Tum past ko apne saath carry kar sakte ho bina use apna future decide karne diye."
+
+});
+
+
+pages.push({
+
+page:94,
+chapter:"Chapter 9",
+title:"The Rooftop",
+
+english:[
+"Shiv returned to the rooftop.",
+"The town below had more lights now.",
+"He remembered the night of the promise.",
+"For the first time, he smiled without sadness."
+],
+
+hinglish:[
+"Shiv rooftop par wapas gaya.",
+"Neeche town mein ab pehle se zyada lights thi.",
+"Usse promise wali night yaad aa gayi.",
+"Pehli baar usne us memory ko bina sadness ke smile ke saath yaad kiya."
+],
+
+highlightEnglish:"The memory had become something warm instead of something painful.",
+highlightHinglish:"Memory ab painful cheez nahi, balki ek warm feeling ban gayi thi.",
+
+thoughtEnglish:"Time does not always erase a memory. Sometimes it softens its edges.",
+thoughtHinglish:"Time hamesha memory erase nahi karta. Kabhi woh uske sharp edges ko soft kar deta hai."
+
+});
+
+
+pages.push({
+
+page:95,
+chapter:"Chapter 9",
+title:"The Notebook",
+
+english:[
+"Shiv opened the old notebook.",
+"The pages were yellowed.",
+"Meera's name was still there.",
+"He did not close the book immediately."
+],
+
+hinglish:[
+"Shiv ne old notebook kholi.",
+"Pages yellow ho chuke the.",
+"Meera ka naam abhi bhi wahan tha.",
+"Is baar usne notebook turant band nahi ki."
+],
+
+highlightEnglish:"Some names remain in old notebooks because they belong to old versions of us.",
+highlightHinglish:"Kuch names old notebooks mein isliye reh jaate hain kyunki woh humare old version ka part hote hain.",
+
+thoughtEnglish:"You can respect who you were without needing to become that person again.",
+thoughtHinglish:"Tum apne past version ko respect kar sakte ho bina dobara wahi person bane."
+
+});
+
+
+pages.push({
+
+page:96,
+chapter:"Chapter 9",
+title:"What He Learned",
+
+english:[
+"Shiv realized that the summer had taught him more than he knew.",
+"He had learned to listen.",
+"He had learned to trust.",
+"He had learned that some endings are not failures."
+],
+
+hinglish:[
+"Shiv ko realize hua ki summer ne use uski expectation se zyada sikhaya tha.",
+"Usne sunna seekha.",
+"Usne trust karna seekha.",
+"Aur usne ye bhi seekha ki har ending failure nahi hoti."
+],
+
+highlightEnglish:"Not every ending means something went wrong.",
+highlightHinglish:"Har ending ka matlab ye nahi hota ki kuch wrong hua tha.",
+
+thoughtEnglish:"Some chapters end because they have given us what we needed to become ready for the next one.",
+thoughtHinglish:"Kuch chapters isliye end hote hain kyunki woh humein woh sikha dete hain jo next chapter ke liye zaroori hota hai."
+
+});
+
+
+pages.push({
+
+page:97,
+chapter:"Chapter 9",
+title:"The Sunset Again",
+
+english:[
+"That evening, Shiv watched the sunset alone.",
+"It looked almost like the one from years ago.",
+"But he was different now.",
+"He was no longer waiting for the past to return."
+],
+
+hinglish:[
+"Us evening Shiv ne sunset akela dekha.",
+"Sunset almost wahi lag raha tha jo years pehle dekha tha.",
+"Lekin Shiv ab different tha.",
+"Ab woh past ke wapas aane ka wait nahi kar raha tha."
+],
+
+highlightEnglish:"He had stopped waiting for the past to become the present.",
+highlightHinglish:"Usne past ko present banne ka wait karna chhod diya tha.",
+
+thoughtEnglish:"Acceptance is not forgetting. It is allowing life to continue.",
+thoughtHinglish:"Acceptance bhoolna nahi hota. Acceptance life ko aage continue hone dena hota hai."
+
+});
+
+
+/* ---------------------------------------------------------
+   CHAPTER 10 — ONE LAST SUNSET
+   Pages 98–107
+   --------------------------------------------------------- */
+
+pages.push({
+
+page:98,
+chapter:"Chapter 10",
+title:"One Last Sunset",
+
+english:[
+"Shiv was leaving the lake when he heard a familiar voice.",
+"He turned around.",
+"For a second, time felt strangely still.",
+"Meera was standing a few steps away."
+],
+
+hinglish:[
+"Shiv lake se jaane wala tha jab usne ek familiar voice suni.",
+"Woh turn hua.",
+"Ek second ke liye time jaise ruk sa gaya.",
+"Meera kuch steps door khadi thi."
+],
+
+highlightEnglish:"Some meetings feel like the past opening a door to the present.",
+highlightHinglish:"Kuch meetings aisi lagti hain jaise past ne present ke liye ek door khol diya ho.",
+
+thoughtEnglish:"Life sometimes reconnects people when neither of them is waiting for it.",
+thoughtHinglish:"Kabhi life logon ko tab reconnect kar deti hai jab dono mein se koi bhi uska wait nahi kar raha hota."
+
+});
+
+
+pages.push({
+
+page:99,
+chapter:"Chapter 10",
+title:"Hello Again",
+
+english:[
+"They smiled awkwardly.",
+"Years had passed, but the first word was still simple.",
+"'Hi.'",
+"Some things do not need a better beginning."
+],
+
+hinglish:[
+"Dono awkwardly smile kiye.",
+"Years pass ho gaye the, lekin first word phir bhi simple hi tha.",
+"'Hi.'",
+"Kuch cheezon ko better beginning ki zaroorat nahi hoti."
+],
+
+highlightEnglish:"Years later, the first word was still just 'Hi.'",
+highlightHinglish:"Years baad bhi first word bas 'Hi' hi tha.",
+
+thoughtEnglish:"Sometimes familiarity survives time.",
+thoughtHinglish:"Kabhi familiarity time ke baad bhi survive kar jaati hai."
+
+});
+
+
+pages.push({
+
+page:100,
+chapter:"Chapter 10",
+title:"The Missing Years",
+
+english:[
+"They talked about the years they had missed.",
+"School, work, family, dreams, failures, and small victories.",
+"Neither tried to pretend nothing had changed.",
+"Everything had."
+],
+
+hinglish:[
+"Dono un years ke baare mein baat karne lage jo unhone alag-alag guzare the.",
+"School, work, family, dreams, failures aur chhoti victories sabke baare mein baat hui.",
+"Kisi ne pretend nahi kiya ki kuch change nahi hua.",
+"Sab kuch change ho chuka tha."
+],
+
+highlightEnglish:"They were not the same people who had said goodbye.",
+highlightHinglish:"Woh dono ab woh log nahi the jo kabhi goodbye kehkar alag hue the.",
+
+thoughtEnglish:"Reconnection is not returning to the past. It is meeting the person someone became.",
+thoughtHinglish:"Reconnection past mein wapas jaana nahi hota. Ye us insaan se milna hota hai jo time ke saath woh ban gaya."
+
+});
+
+
+pages.push({
+
+page:101,
+chapter:"Chapter 10",
+title:"Why She Left",
+
+english:[
+"Meera finally explained why she had left so suddenly.",
+"Her family had needed to move.",
+"She had been afraid that saying goodbye too early would turn every remaining day into sadness.",
+"Shiv finally understood."
+],
+
+hinglish:[
+"Meera ne finally bataya ki woh itni suddenly kyun leave hui thi.",
+"Uski family ko move karna pada tha.",
+"Use darr tha ki agar woh pehle hi goodbye bol degi toh bache hue har din mein sadness bhar jaayegi.",
+"Shiv ne finally uski baat samajh li."
+],
+
+highlightEnglish:"She had not left because the summer meant nothing. She had left because it meant too much.",
+highlightHinglish:"Woh isliye nahi gayi thi kyunki summer ka koi meaning nahi tha. Woh isliye gayi thi kyunki summer ka meaning bahut zyada tha.",
+
+thoughtEnglish:"Understanding someone's choice years later can bring peace, even when it cannot change the past.",
+thoughtHinglish:"Years baad kisi ki choice ko samajhna past change nahi karta, lekin peace zaroor de sakta hai."
+
+});
+
+
+pages.push({
+
+page:102,
+chapter:"Chapter 10",
+title:"The Letters",
+
+english:[
+"Meera told Shiv she had written letters too.",
+"Shiv smiled.",
+"He admitted that he had done the same.",
+"For a moment, neither knew whether to laugh or stay quiet."
+],
+
+hinglish:[
+"Meera ne bataya ki usne bhi letters likhe the.",
+"Shiv smile kar diya.",
+"Usne bhi maan liya ki usne same kiya tha.",
+"Ek moment ke liye dono ko samajh nahi aaya ki hasna chahiye ya quietly rehna."
+],
+
+highlightEnglish:"They had been carrying the same silence in different places.",
+highlightHinglish:"Dono different places par ek hi silence ko apne-apne way mein carry kar rahe the.",
+
+thoughtEnglish:"Two people can be far apart and still be holding the same unfinished conversation.",
+thoughtHinglish:"Do log physically door ho sakte hain, lekin phir bhi unke beech ek hi unfinished conversation reh sakti hai."
+
+});
+
+
+pages.push({
+
+page:103,
+chapter:"Chapter 10",
+title:"The Old Promise",
+
+english:[
+"Shiv mentioned the promise from the rooftop.",
+"Meera remembered it immediately.",
+"They both laughed softly at how serious they had felt that night.",
+"But neither regretted making it."
+],
+
+hinglish:[
+"Shiv ne rooftop wala promise yaad dilaya.",
+"Meera ko woh turant yaad aa gaya.",
+"Dono us night ko yaad karke softly hans diye ki tab woh kitne serious the.",
+"Lekin dono ko promise karne ka regret nahi tha."
+],
+
+highlightEnglish:"The promise was never about forever. It was about not pretending the summer never happened.",
+highlightHinglish:"Promise forever ka nahi tha. Promise bas itna tha ki summer kabhi hui hi nahi thi, aisa pretend nahi karna.",
+
+thoughtEnglish:"A meaningful memory does not need a perfect ending.",
+thoughtHinglish:"Meaningful memory ko perfect ending ki zaroorat nahi hoti."
+
+});
+
+
+pages.push({
+
+page:104,
+chapter:"Chapter 10",
+title:"Walking Again",
+
+english:[
+"They walked through the old streets again.",
+"Some places were gone.",
+"Some had changed.",
+"Yet the walk felt familiar."
+],
+
+hinglish:[
+"Dono phir old streets mein walk karne lage.",
+"Kuch places ab nahi thi.",
+"Kuch completely change ho chuki thi.",
+"Phir bhi walk somehow familiar feel ho rahi thi."
+],
+
+highlightEnglish:"They were walking through a changed town with memories that had never completely changed.",
+highlightHinglish:"Woh ek changed town mein walk kar rahe the, lekin unki kuch memories ab bhi almost same thi.",
+
+thoughtEnglish:"Life changes the scenery, but some feelings can remain quietly recognizable.",
+thoughtHinglish:"Life scenery change kar deti hai, lekin kuch feelings phir bhi quietly recognizable reh sakti hain."
+
+});
+
+
+pages.push({
+
+page:105,
+chapter:"Chapter 10",
+title:"The Lake",
+
+english:[
+"They reached the lake before sunset.",
+"The water was calm.",
+"Shiv remembered sitting on the pier years ago with a notebook in his hands.",
+"Meera remembered the same evening."
+],
+
+hinglish:[
+"Sunset se pehle dono lake par pahunch gaye.",
+"Paani bilkul calm tha.",
+"Shiv ko years pehle ka woh moment yaad aaya jab woh notebook lekar pier par baitha tha.",
+"Meera ko bhi wahi evening yaad thi."
+],
+
+highlightEnglish:"The lake had witnessed their beginning and their goodbye. Now it was witnessing their return.",
+highlightHinglish:"Lake ne unki beginning bhi dekhi thi aur goodbye bhi. Ab woh unki return ki witness thi.",
+
+thoughtEnglish:"Returning to an old place can turn a painful memory into a complete one.",
+thoughtHinglish:"Old place par wapas aana kabhi painful memory ko complete feeling mein badal sakta hai."
+
+});
+
+
+pages.push({
+
+page:106,
+chapter:"Chapter 10",
+title:"One Last Sunset",
+
+english:[
+"The sun began to fall behind the mountains.",
+"Neither talked about what would happen after this meeting.",
+"They simply watched the sunset.",
+"This time, there was no fear of holding onto the moment."
+],
+
+hinglish:[
+"Sun mountains ke peeche dheere-dheere set hone laga.",
+"Kisi ne ye baat nahi ki ki is meeting ke baad kya hoga.",
+"Dono bas sunset dekhte rahe.",
+"Is baar moment ko hold karne ka fear nahi tha."
+],
+
+highlightEnglish:"They did not need to make the moment last forever. They only needed to live it.",
+highlightHinglish:"Unhe moment ko forever banane ki zaroorat nahi thi. Bas use poori tarah jeena tha.",
+
+thoughtEnglish:"The beauty of a moment is not measured by how long it stays.",
+thoughtHinglish:"Kisi moment ki beauty is baat se decide nahi hoti ki woh kitni der tak raha."
+
+});
+
+
+pages.push({
+
+page:107,
+chapter:"Chapter 10",
+title:"Goodbye, Again",
+
+english:[
+"When the sun disappeared, they knew it was time to leave.",
+"This goodbye felt different.",
+"There was no unfinished anger.",
+"No unanswered question.",
+"Only gratitude."
+],
+
+hinglish:[
+"Jab sun completely disappear ho gaya, dono ko pata tha ki ab jaana chahiye.",
+"Ye goodbye pehle wale goodbye se different tha.",
+"Ab koi unfinished anger nahi tha.",
+"Koi unanswered question nahi tha.",
+"Bas gratitude thi."
+],
+
+highlightEnglish:"Some goodbyes become peaceful when we stop asking them to be something else.",
+highlightHinglish:"Kuch goodbyes peaceful tab ban jaate hain jab hum unse kuch aur banne ki expectation chhod dete hain.",
+
+thoughtEnglish:"Closure is not always another beginning. Sometimes it is simply peace with what happened.",
+thoughtHinglish:"Closure hamesha new beginning nahi hota. Kabhi closure bas jo hua uske saath peace bana lena hota hai."
+
+});
+
+
+/* ---------------------------------------------------------
+   EPILOGUE — SOME SUMMERS STAY FOREVER
+   Pages 108–112
+   --------------------------------------------------------- */
+
+pages.push({
+
+page:108,
+chapter:"Epilogue",
+title:"Some Summers Stay Forever",
+
+english:[
+"Years later, Shiv still remembered the summer.",
+"Not every conversation.",
+"Not every street.",
+"Not every sunset.",
+"But the feeling remained."
+],
+
+hinglish:[
+"Years baad bhi Shiv ko woh summer yaad thi.",
+"Har conversation nahi.",
+"Har street nahi.",
+"Har sunset nahi.",
+"Lekin us summer ki feeling ab bhi uske saath thi."
+],
+
+highlightEnglish:"Some summers end. Some summers stay forever.",
+highlightHinglish:"Kuch summers end ho jaati hain. Kuch summers forever stay karti hain.",
+
+thoughtEnglish:"A season can end on the calendar and still remain alive inside a person.",
+thoughtHinglish:"Calendar par season end ho sakta hai, lekin kisi insaan ke andar woh phir bhi alive reh sakta hai."
+
+});
+
+
+pages.push({
+
+page:109,
+chapter:"Epilogue",
+title:"The Notebook Closes",
+
+english:[
+"Shiv opened his notebook one final time.",
+"Meera's name was still there.",
+"He smiled.",
+"Then he closed the notebook without feeling the need to write anything more."
+],
+
+hinglish:[
+"Shiv ne ek final baar apni notebook kholi.",
+"Meera ka naam ab bhi wahan tha.",
+"Woh smile kiya.",
+"Phir usne notebook band kar di, bina kuch aur likhne ki need feel kiye."
+],
+
+highlightEnglish:"The story did not disappear when the notebook closed.",
+highlightHinglish:"Notebook band hone se story disappear nahi hui.",
+
+thoughtEnglish:"Some stories stop being something we tell and become something we carry.",
+thoughtHinglish:"Kuch stories aisi hoti hain jo sunane wali cheez nahi rehti, balki humare saath carry hone lagti hain."
+
+});
+
+
+pages.push({
+
+page:110,
+chapter:"Epilogue",
+title:"The Lake Remembers",
+
+english:[
+"The lake was still there.",
+"The wooden pier was older.",
+"The town was different.",
+"Shiv was different too."
+],
+
+hinglish:[
+"Lake ab bhi wahi thi.",
+"Wooden pier aur old ho chuki thi.",
+"Town change ho chuka tha.",
+"Shiv bhi change ho chuka tha."
+],
+
+highlightEnglish:"Everything changed, and somehow, the memory still felt real.",
+highlightHinglish:"Sab kuch change ho gaya tha, phir bhi memory ab bhi real feel hoti thi.",
+
+thoughtEnglish:"Change does not make the past meaningless. It makes us understand it differently.",
+thoughtHinglish:"Change past ko meaningless nahi banata. Bas humein usse different way mein samajhna sikha deta hai."
+
+});
+
+
+pages.push({
+
+page:111,
+chapter:"Epilogue",
+title:"The Meaning of Summer",
+
+english:[
+"Shiv finally understood what the summer had given him.",
+"It had not promised forever.",
+"It had given him a friendship, a memory, courage, and a new understanding of himself.",
+"That was enough."
+],
+
+hinglish:[
+"Shiv ko finally samajh aa gaya ki summer ne use kya diya tha.",
+"Usne forever ka promise nahi diya tha.",
+"Usne use friendship, memory, courage aur khud ko thoda aur samajhne ka chance diya tha.",
+"Uske liye itna enough tha."
+],
+
+highlightEnglish:"Not everything beautiful has to last forever to matter.",
+highlightHinglish:"Har beautiful cheez ko matter karne ke liye forever last karna zaroori nahi hota.",
+
+thoughtEnglish:"Sometimes the value of a chapter is not in how long it lasted, but in who you became while living it.",
+thoughtHinglish:"Kabhi kisi chapter ki value ismein nahi hoti ki woh kitna long chala, balki ismein hoti hai ki use jeete waqt tum kya ban gaye."
+
+});
+
+
+pages.push({
+
+page:112,
+chapter:"Epilogue",
+title:"The Last Page",
+
+english:[
+"Shiv looked at the sunset one last time.",
+"The lake was quiet.",
+"The sky slowly turned gold.",
+"He closed his eyes for a moment and remembered the summer exactly as it needed to be remembered.",
+"Then he smiled and walked home."
+],
+
+hinglish:[
+"Shiv ne ek last baar sunset ki taraf dekha.",
+"Lake bilkul quiet thi.",
+"Aasman dheere-dheere golden ho raha tha.",
+"Usne kuch seconds ke liye eyes close ki aur summer ko exactly waise yaad kiya jaise use yaad kiya jaana chahiye tha.",
+"Phir woh smile kiya aur ghar ki taraf walk karne laga."
+],
+
+highlightEnglish:"Some summers end. Some summers stay forever.",
+highlightHinglish:"Kuch summers end ho jaati hain. Kuch summers forever stay karti hain.",
+
+thoughtEnglish:"The end of a story is not always the end of its meaning.",
+thoughtHinglish:"Story ka end hamesha uske meaning ka end nahi hota."
+
+});
+
+
+/* =========================================================
+   BOOK ENGINE
+   ========================================================= */
+
+var currentPage = 0;
+var currentLanguage = "english";
+
+var cover = document.getElementById("cover");
+var reader = document.getElementById("reader");
+
+var startReading = document.getElementById("startReading");
+var story = document.getElementById("story");
+var thought = document.getElementById("thought");
+
+var chapterLabel = document.getElementById("chapterLabel");
+var pageTitle = document.getElementById("pageTitle");
+var progress = document.getElementById("progress");
+var pageSection = document.getElementById("pageSection");
+var pageNumber = document.getElementById("pageNumber");
+
+var englishBtn = document.getElementById("englishBtn");
+var hinglishBtn = document.getElementById("hinglishBtn");
+
+var prevButton = document.getElementById("prevButton");
+var nextButton = document.getElementById("nextButton");
+
+
+function escapeHTML(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
 }
+
+
+function showReader(){
+
+  cover.style.display="none";
+  reader.style.display="block";
+
+  currentPage=0;
+
+  renderPage();
+
+  window.scrollTo(0,0);
+
+}
+
+
+function renderPage(){
+
+  if(!pages[currentPage]){
+    return;
+  }
+
+  var item=pages[currentPage];
+
+  var languageData;
+  var highlightData;
+  var thoughtData;
+
+  if(currentLanguage==="hinglish"){
+
+    languageData=item.hinglish;
+    highlightData=item.highlightHinglish;
+    thoughtData=item.thoughtHinglish;
+
+  }else{
+
+    languageData=item.english;
+    highlightData=item.highlightEnglish;
+    thoughtData=item.thoughtEnglish;
+
+  }
+
+
+  chapterLabel.innerHTML=escapeHTML(item.chapter);
+
+  pageTitle.innerHTML=escapeHTML(item.title);
+
+  progress.innerHTML="Page "+item.page+" / "+pages.length;
+
+  pageSection.innerHTML=escapeHTML(item.chapter);
+
+  pageNumber.innerHTML="Page "+item.page;
+
+
+  var html="";
+  var i;
+
+  for(i=0;i<languageData.length;i++){
+
+    html += "<p>"+escapeHTML(languageData[i])+"</p>";
+
+  }
+
+
+  if(highlightData){
+
+    html += "<div class='story-highlight'>"+
+      escapeHTML(highlightData)+
+      "</div>";
+
+  }
+
+
+  story.innerHTML=html;
+
+  thought.innerHTML=escapeHTML(thoughtData);
+
+
+  if(currentPage===0){
+
+    prevButton.disabled=true;
+
+  }else{
+
+    prevButton.disabled=false;
+
+  }
+
+
+  if(currentPage===pages.length-1){
+
+    nextButton.innerHTML="Finish";
+
+  }else{
+
+    nextButton.innerHTML="Next →";
+
+  }
+
+
+  window.scrollTo(0,0);
+
+}
+
+
+function setLanguage(language){
+
+  currentLanguage=language;
+
+  if(language==="hinglish"){
+
+    hinglishBtn.className="lang-btn active";
+    englishBtn.className="lang-btn";
+
+  }else{
+
+    englishBtn.className="lang-btn active";
+    hinglishBtn.className="lang-btn";
+
+  }
+
+  renderPage();
+
+}
+
+
+function nextPage(){
+
+  if(currentPage < pages.length-1){
+
+    currentPage++;
+
+    renderPage();
+
+  }else{
+
+    renderFinalScreen();
+
+  }
+
+}
+
+
+function previousPage(){
+
+  if(currentPage>0){
+
+    currentPage--;
+
+    renderPage();
+
+  }
+
+}
+
+
+function renderFinalScreen(){
+
+  var finalTitle;
+  var finalText;
+
+  if(currentLanguage==="hinglish"){
+
+    finalTitle="The End";
+    finalText="Kuch summers end ho jaati hain. Kuch summers humare andar hamesha reh jaati hain.";
+
+  }else{
+
+    finalTitle="The End";
+    finalText="Some summers end. Some summers stay forever.";
+
+  }
+
+
+  story.innerHTML=
+    "<div class='end-screen'>"+
+    "<h2>"+escapeHTML(finalTitle)+"</h2>"+
+    "<p>"+escapeHTML(finalText)+"</p>"+
+    "</div>";
+
+  thought.innerHTML=
+    currentLanguage==="hinglish"
+    ?
+    "Jo memories humare andar kuch badal deti hain, unka end kabhi completely nahi hota."
+    :
+    "The memories that change us never truly have an ending.";
+
+  nextButton.innerHTML="Read Again";
+
+  nextButton.onclick=function(){
+
+    currentPage=0;
+    renderPage();
+
+  };
+
+  prevButton.disabled=false;
+
+  window.scrollTo(0,0);
+
+}
+
+
+/* BUTTONS */
+
+startReading.onclick=function(e){
+
+  e.preventDefault();
+
+  showReader();
+
+};
+
+
+englishBtn.onclick=function(){
+
+  setLanguage("english");
+
+};
+
+
+hinglishBtn.onclick=function(){
+
+  setLanguage("hinglish");
+
+};
+
+
+prevButton.onclick=function(){
+
+  previousPage();
+
+};
+
+
+nextButton.onclick=function(){
+
+  nextPage();
+
+};
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+(function(){
+
+  var button=document.getElementById("menuButton");
+  var menu=document.getElementById("navMenu");
+
+  if(!button || !menu){
+    return;
+  }
+
+  button.onclick=function(event){
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    if(menu.classList.contains("open")){
+
+      menu.classList.remove("open");
+
+    }else{
+
+      menu.classList.add("open");
+
+    }
+
+  };
+
+
+  var links=menu.getElementsByTagName("a");
+  var i;
+
+  for(i=0;i<links.length;i++){
+
+    links[i].onclick=function(){
+
+      menu.classList.remove("open");
+
+    };
+
+  }
+
+})();
+
 </script>
 
 </body>

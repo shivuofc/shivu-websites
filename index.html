@@ -1,344 +1,1957 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="theme-color" content="#070711">
 
-    <title>Shivu — Personal Universe</title>
+  <title>360° Universe — Shivu</title>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    /* =========================================
+       GLOBAL POLISH
+    ========================================= */
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+    img,
+    video,
+    iframe {
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    strong {
+      font-weight: 700;
+    }
+
+    p {
+      line-height: 1.75;
+    }
+
+
+    /* =========================================
+       COMPACT PREMIUM NAVBAR
+    ========================================= */
+
+    .navbar {
+      padding-top: 10px !important;
+      padding-bottom: 10px !important;
+      background: rgba(7, 7, 17, 0.78) !important;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .nav-container {
+      width: 100%;
+      max-width: 1180px;
+      min-height: 54px;
+      margin: auto;
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+
+    .nav-logo {
+      font-size: 16px !important;
+      font-weight: 750 !important;
+      letter-spacing: -0.2px;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .nav-menu {
+      gap: 6px !important;
+    }
+
+    .nav-menu a {
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.1px;
+      padding: 9px 12px !important;
+      border-radius: 10px;
+      white-space: nowrap;
+      transition: all 0.25s ease;
+    }
+
+    .nav-menu a:hover {
+      background: rgba(255,255,255,0.06);
+    }
+
+
+    /* =========================================
+       HERO
+    ========================================= */
+
+    .hero {
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      width: 100%;
+      max-width: 850px;
+      margin: auto;
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+
+    .hero .eyebrow {
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 38px;
+      padding: 8px 17px !important;
+
+      font-size: 10px !important;
+      font-weight: 700 !important;
+      letter-spacing: 2.4px !important;
+      line-height: 1.4 !important;
+
+      border-radius: 999px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(145,92,255,0.13),
+          rgba(64,145,255,0.10)
+        );
+
+      border: 1px solid rgba(170,130,255,0.22);
+
+      box-shadow:
+        0 0 25px rgba(120,80,255,0.08);
+
+      white-space: normal;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-weight: 800 !important;
+      letter-spacing: -1.8px;
+      line-height: 1.05 !important;
+    }
+
+    .hero h1 span {
+      font-weight: 800 !important;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 15px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.67);
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px !important;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .hero-actions a {
+      font-weight: 650 !important;
+    }
+
+
+    /* =========================================
+       SECTION TYPOGRAPHY
+    ========================================= */
+
+    .section-heading {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .section-kicker {
+      display: inline-block;
+      font-size: 10px !important;
+      font-weight: 750 !important;
+      letter-spacing: 2.4px !important;
+      text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(28px, 5vw, 44px) !important;
+      font-weight: 800 !important;
+      letter-spacing: -1.2px;
+      line-height: 1.1 !important;
+    }
+
+    .section-heading p {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.58);
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+
+
+    /* =========================================
+       WORLD CARDS
+    ========================================= */
+
+    .world-grid {
+      width: 100%;
+      max-width: 1180px;
+      margin-left: auto;
+      margin-right: auto;
+
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .world-card {
+      position: relative;
+      min-width: 0;
+      padding: 28px !important;
+      border-radius: 22px !important;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.055),
+          rgba(255,255,255,0.018)
+        ) !important;
+
+      border: 1px solid rgba(255,255,255,0.08) !important;
+
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        0 18px 45px rgba(0,0,0,0.16);
+    }
+
+    .world-card h3 {
+      font-size: 21px !important;
+      font-weight: 750 !important;
+      letter-spacing: -0.4px;
+    }
+
+    .world-card p {
+      font-size: 13px !important;
+      color: rgba(255,255,255,0.59) !important;
+      padding-right: 5px;
+    }
+
+    .world-card-content span {
+      font-size: 9px !important;
+      font-weight: 750 !important;
+      letter-spacing: 1.8px;
+    }
+
+
+    /* =========================================
+       WHAT I'M BUILDING
+    ========================================= */
+
+    .building-section {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .building-showcase {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .building-card {
+      position: relative;
+      width: 100%;
+      min-width: 0;
+      min-height: 300px;
+
+      padding: 30px !important;
+
+      border-radius: 26px !important;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.065),
+          rgba(255,255,255,0.018)
+        ) !important;
+
+      border: 1px solid rgba(255,255,255,0.085) !important;
+
+      overflow: hidden;
+
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        0 25px 65px rgba(0,0,0,0.22);
+
+      transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .building-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(150,110,255,0.25) !important;
+
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 30px 75px rgba(0,0,0,0.3);
+    }
+
+    /* First project becomes wide featured card */
+
+    .building-feature {
+      grid-column: 1 / -1;
+      min-height: 330px;
+
+      background:
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(115,80,255,0.18),
+          transparent 32%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.07),
+          rgba(255,255,255,0.018)
+        ) !important;
+    }
+
+    .building-card-content {
+      position: relative;
+      z-index: 3;
+
+      width: 100%;
+      max-width: 620px;
+      padding-right: 8px;
+    }
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      margin-bottom: 20px;
+
+      font-size: 9px;
+      font-weight: 750;
+      letter-spacing: 1.7px;
+
+      color: rgba(255,255,255,0.45);
+    }
+
+    .project-meta span:first-child {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 29px;
+      height: 29px;
+
+      border-radius: 50%;
+
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.09);
+
+      color: rgba(255,255,255,0.85);
+      font-size: 9px;
+    }
+
+    .building-card h3 {
+      margin: 0 0 14px;
+
+      font-size: clamp(25px, 4vw, 38px) !important;
+      font-weight: 800 !important;
+      letter-spacing: -1px;
+      line-height: 1.1 !important;
+
+      color: #fff;
+    }
+
+    .building-card p {
+      margin: 0;
+
+      max-width: 580px;
+
+      font-size: 14px !important;
+      font-weight: 400 !important;
+      line-height: 1.8 !important;
+
+      color: rgba(255,255,255,0.59) !important;
+
+      padding-right: 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      margin-top: 25px;
+    }
+
+    .project-tags span {
+      padding: 7px 11px;
+
+      border-radius: 999px;
+
+      font-size: 9px;
+      font-weight: 650;
+
+      color: rgba(255,255,255,0.7);
+
+      background: rgba(255,255,255,0.045);
+
+      border: 1px solid rgba(255,255,255,0.075);
+    }
+
+    /* Decorative featured glow */
+
+    .building-glow {
+      position: absolute;
+
+      width: 300px;
+      height: 300px;
+
+      right: -100px;
+      top: -110px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(125,80,255,0.28),
+          rgba(85,130,255,0.08) 40%,
+          transparent 70%
+        );
+
+      filter: blur(4px);
+
+      pointer-events: none;
+    }
+
+    .building-icon {
+      position: absolute;
+
+      right: 55px;
+      bottom: 45px;
+
+      width: 105px;
+      height: 105px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 30px;
+
+      font-size: 43px;
+
+      color: rgba(255,255,255,0.9);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(150,110,255,0.16),
+          rgba(70,120,255,0.07)
+        );
+
+      border: 1px solid rgba(170,130,255,0.16);
+
+      box-shadow:
+        0 0 55px rgba(110,80,255,0.13),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+
+      transform: rotate(-7deg);
+    }
+
+
+    /* =========================================
+       BOOK CARD
+    ========================================= */
+
+    .building-book-visual {
+      position: absolute;
+
+      right: 35px;
+      bottom: 28px;
+
+      width: 135px;
+      height: 175px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      pointer-events: none;
+    }
+
+    .mini-book-cover {
+      width: 112px;
+      height: 158px;
+
+      padding: 18px 14px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+
+      text-align: center;
+
+      border-radius: 5px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #191626,
+          #0d0c15
+        );
+
+      border: 1px solid rgba(255,255,255,0.13);
+
+      box-shadow:
+        -12px 15px 35px rgba(0,0,0,0.4),
+        0 0 35px rgba(110,80,255,0.08);
+
+      transform: rotate(5deg);
+    }
+
+    .mini-book-cover small {
+      font-size: 6px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .mini-book-cover strong {
+      font-size: 8px;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .mini-book-cover span {
+      font-family: Georgia, serif;
+      font-size: 17px;
+      line-height: 1.1;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .mini-book-cover em {
+      font-family: Georgia, serif;
+      font-size: 7px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .project-link {
+      display: inline-block;
+
+      margin-top: 22px;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      color: rgba(175,150,255,0.9);
+
+      letter-spacing: 0.2px;
+    }
+
+
+    /* =========================================
+       ORBIT CARD
+    ========================================= */
+
+    .building-orbit {
+      position: absolute;
+
+      right: 35px;
+      bottom: 35px;
+
+      width: 125px;
+      height: 125px;
+
+      border: 1px solid rgba(145,110,255,0.18);
+      border-radius: 50%;
+
+      transform: rotate(-18deg);
+    }
+
+    .building-orbit::before,
+    .building-orbit::after {
+      content: "";
+
+      position: absolute;
+
+      left: 50%;
+      top: 50%;
+
+      width: 92px;
+      height: 92px;
+
+      transform:
+        translate(-50%, -50%)
+        rotate(55deg);
+
+      border: 1px solid rgba(90,145,255,0.15);
+
+      border-radius: 50%;
+    }
+
+    .building-orbit::after {
+      width: 58px;
+      height: 58px;
+
+      transform:
+        translate(-50%, -50%)
+        rotate(-35deg);
+    }
+
+    .building-orbit div {
+      position: absolute;
+
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: rgba(175,145,255,0.8);
+
+      box-shadow:
+        0 0 15px rgba(150,110,255,0.65);
+    }
+
+    .building-orbit div:nth-child(1) {
+      top: 6px;
+      left: 58px;
+    }
+
+    .building-orbit div:nth-child(2) {
+      right: 9px;
+      bottom: 32px;
+    }
+
+    .building-orbit div:nth-child(3) {
+      left: 18px;
+      bottom: 18px;
+    }
+
+
+    /* =========================================
+       ABOUT
+    ========================================= */
+
+    .about-content {
+      max-width: 820px;
+      margin: auto;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .about-content h2 {
+      font-weight: 800 !important;
+      letter-spacing: -1px;
+      line-height: 1.15 !important;
+    }
+
+    .about-content p {
+      padding-right: 8px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.62);
+    }
+
+    .text-link {
+      font-weight: 700 !important;
+    }
+
+
+    /* =========================================
+       QUOTE
+    ========================================= */
+
+    .quote-box {
+      width: 100%;
+      max-width: 900px;
+      margin: auto;
+
+      padding: 35px 30px !important;
+
+      border-radius: 24px !important;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.055),
+          rgba(255,255,255,0.018)
+        ) !important;
+
+      border: 1px solid rgba(255,255,255,0.08);
+
+      text-align: center;
+    }
+
+    .quote-box > span {
+      font-size: 9px !important;
+      font-weight: 750 !important;
+      letter-spacing: 2px;
+    }
+
+    .quote-box p {
+      font-family: Georgia, serif;
+
+      font-size: clamp(19px, 4vw, 28px) !important;
+      font-weight: 500 !important;
+      line-height: 1.55 !important;
+
+      padding-left: 7px;
+      padding-right: 7px;
+
+      color: rgba(255,255,255,0.88);
+    }
+
+
+    /* =========================================
+       FINAL CTA
+    ========================================= */
+
+    .final-cta h2 {
+      font-weight: 800 !important;
+      letter-spacing: -1px;
+    }
+
+    .final-cta p {
+      font-weight: 400;
+      color: rgba(255,255,255,0.58);
+    }
+
+    .final-cta .btn {
+      font-weight: 700 !important;
+    }
+
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    .footer strong {
+      font-weight: 750 !important;
+    }
+
+    .footer p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .footer-links a {
+      font-weight: 600 !important;
+    }
+
+
+    /* =========================================
+       MOBILE NAV
+    ========================================= */
+
+    @media (max-width: 900px) {
+
+      .navbar {
+        padding-top: 7px !important;
+        padding-bottom: 7px !important;
+      }
+
+      .nav-container {
+        min-height: 50px;
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .nav-logo {
+        font-size: 14px !important;
+      }
+
+      .menu-toggle {
+        display: flex !important;
+
+        width: 40px !important;
+        height: 40px !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+        flex-direction: column !important;
+
+        gap: 5px !important;
+
+        padding: 0 !important;
+
+        flex-shrink: 0 !important;
+
+        border-radius: 11px !important;
+
+        background: rgba(255,255,255,0.045) !important;
+        border: 1px solid rgba(255,255,255,0.08) !important;
+      }
+
+      .menu-toggle span {
+        display: block !important;
+
+        width: 19px !important;
+        height: 2px !important;
+
+        background: #fff !important;
+        border-radius: 10px !important;
+      }
+
+      .nav-menu {
+        display: none !important;
+
+        position: absolute !important;
+
+        top: 64px !important;
+        left: 10px !important;
+        right: 10px !important;
+
+        width: auto !important;
+        max-width: none !important;
+
+        padding: 12px !important;
+
+        flex-direction: column !important;
+        gap: 5px !important;
+
+        border-radius: 17px !important;
+
+        background:
+          rgba(10,10,20,0.96) !important;
+
+        border: 1px solid rgba(255,255,255,0.09) !important;
+
+        box-shadow:
+          0 25px 60px rgba(0,0,0,0.4);
+
+        backdrop-filter: blur(20px);
+      }
+
+      .nav-menu.open {
+        display: flex !important;
+      }
+
+      .nav-menu a {
+        width: 100% !important;
+
+        padding: 11px 10px !important;
+
+        text-align: center !important;
+
+        font-size: 12px !important;
+      }
+
+
+      /* Mobile building */
+
+      .building-showcase {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .building-feature {
+        grid-column: auto;
+      }
+
+      .building-card {
+        min-height: 300px;
+        padding: 24px !important;
+      }
+
+      .building-feature {
+        min-height: 330px;
+      }
+
+      .building-icon {
+        right: 25px;
+        bottom: 25px;
+
+        width: 75px;
+        height: 75px;
+
+        font-size: 31px;
+        border-radius: 22px;
+      }
+
+      .building-book-visual {
+        right: 5px;
+        bottom: 15px;
+
+        transform: scale(0.78);
+        transform-origin: bottom right;
+      }
+
+      .building-card:nth-child(2) .building-card-content {
+        max-width: 62%;
+      }
+
+      .building-orbit {
+        right: 20px;
+        bottom: 22px;
+
+        transform: scale(0.8) rotate(-18deg);
+        transform-origin: bottom right;
+      }
+
+      .world-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .hero-actions {
+        gap: 14px !important;
+      }
+
+    }
+
+
+    /* =========================================
+       SMALL PHONES
+    ========================================= */
+
+    @media (max-width: 380px) {
+
+      .nav-logo {
+        font-size: 13px !important;
+      }
+
+      .hero-content {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .hero .eyebrow {
+        font-size: 9px !important;
+        letter-spacing: 1.7px !important;
+        padding: 7px 12px !important;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        gap: 11px !important;
+      }
+
+      .hero-actions a {
+        width: 100%;
+        max-width: 275px;
+      }
+
+      .building-card {
+        padding: 21px !important;
+      }
+
+      .building-card h3 {
+        font-size: 25px !important;
+      }
+
+      .building-card p {
+        font-size: 13px !important;
+      }
+
+      .building-card:nth-child(2) .building-card-content {
+        max-width: 65%;
+      }
+
+    }
+
+  </style>
 </head>
+
 
 <body>
 
-    <!-- NAVBAR -->
-    <header class="navbar">
-        <div class="nav-container">
 
-            <a href="index.html" class="logo">
-                360° <span>Universe</span>
-            </a>
+  <!-- =========================================
+       LOADER
+  ========================================== -->
 
-            <button class="menu-toggle"
-                    onclick="toggleMenu()"
-                    aria-label="Open Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+  <div class="page-loader" id="pageLoader">
 
-            <nav class="nav-menu" id="navMenu">
-                <a href="index.html">Home</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="book.html">Book</a>
-                <a href="thoughts.html">Thoughts</a>
-                <a href="course.html">Growth Lab</a>
-                <a href="contact.html">Contact</a>
-            </nav>
+    <div class="loader-inner">
 
+      <div class="loader-logo">
+        360° Universe
+      </div>
+
+      <div class="loader-line"></div>
+
+      <div class="loader-text">
+        360° Universe
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================================
+       NAVBAR
+  ========================================== -->
+
+  <header class="navbar">
+
+    <div class="nav-container">
+
+      <a href="index.html" class="nav-logo">
+        360° Universe
+      </a>
+
+
+      <button
+        class="menu-toggle"
+        id="menuButton"
+        type="button"
+        aria-label="Open menu"
+      >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+      </button>
+
+
+      <nav class="nav-menu" id="navMenu">
+
+        <a href="index.html" class="active">
+          Home
+        </a>
+
+        <a href="portfolio.html">
+          Portfolio
+        </a>
+
+        <a href="book.html">
+          Book
+        </a>
+
+        <a href="thoughts.html">
+          Thoughts
+        </a>
+
+        <a href="course.html">
+          Growth Lab
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+
+  <main>
+
+
+    <!-- =========================================
+         HERO
+    ========================================== -->
+
+    <section class="hero">
+
+      <div class="hero-bg-glow"></div>
+
+
+      <div class="hero-content reveal">
+
+        <div class="eyebrow">
+          WELCOME TO MY WORLD
         </div>
-    </header>
 
 
-    <!-- HERO -->
-    <main>
+        <h1>
 
-        <section class="home-hero">
+          Welcome to<br>
 
-            <div class="hero-glow"></div>
+          <span>
+            Shivu’s Universe.
+          </span>
 
-            <div class="hero-content reveal">
+        </h1>
 
-                <div class="eyebrow">
-                    WELCOME TO MY WORLD
-                </div>
 
-                <h1>
-                    This is <span>Shivu.</span>
-                </h1>
+        <p>
+          A personal space where creativity, ideas, writing,
+          digital projects and future plans come together.
+        </p>
 
-                <p>
-                    A creator, writer and dreamer building something
-                    meaningful — one idea at a time.
-                </p>
 
-                <div class="hero-actions">
+        <div class="hero-actions">
 
-                    <a href="portfolio.html"
-                       class="btn btn-primary">
-                        Explore My Work →
-                    </a>
+          <a
+            href="portfolio.html"
+            class="btn btn-primary"
+          >
+            Explore My Work
+          </a>
 
-                    <a href="book.html"
-                       class="btn btn-secondary">
-                        Read My Story
-                    </a>
 
-                </div>
-
-            </div>
-
-            <div class="hero-scroll">
-                SCROLL TO EXPLORE
-                <span>↓</span>
-            </div>
-
-        </section>
-
-
-        <!-- MY WORLD -->
-        <section class="world-section section-padding">
-
-            <div class="section-heading reveal">
-
-                <div class="eyebrow">
-                    MY WORLD
-                </div>
-
-                <h2>
-                    Different sides of <span>Shivu.</span>
-                </h2>
-
-                <p>
-                    Everything I create has a story behind it.
-                </p>
-
-            </div>
-
-
-            <div class="world-grid">
-
-                <a href="portfolio.html"
-                   class="world-card reveal">
-
-                    <div class="world-number">
-                        01
-                    </div>
-
-                    <div class="world-card-content">
-                        <h3>Portfolio</h3>
-
-                        <p>
-                            My work, creations, experiments and projects.
-                        </p>
-
-                        <span>Explore →</span>
-                    </div>
-
-                </a>
-
-
-                <a href="book.html"
-                   class="world-card reveal">
-
-                    <div class="world-number">
-                        02
-                    </div>
-
-                    <div class="world-card-content">
-                        <h3>The Last Summer</h3>
-
-                        <p>
-                            A story written from memories, emotions
-                            and moments.
-                        </p>
-
-                        <span>Enter the story →</span>
-                    </div>
-
-                </a>
-
-
-                <a href="thoughts.html"
-                   class="world-card reveal">
-
-                    <div class="world-number">
-                        03
-                    </div>
-
-                    <div class="world-card-content">
-                        <h3>My Thoughts</h3>
-
-                        <p>
-                            Small thoughts, quiet moments and
-                            things worth remembering.
-                        </p>
-
-                        <span>Read thoughts →</span>
-                    </div>
-
-                </a>
-
-
-                <a href="course.html"
-                   class="world-card reveal">
-
-                    <div class="world-number">
-                        04
-                    </div>
-
-                    <div class="world-card-content">
-                        <h3>Growth Lab</h3>
-
-                        <p>
-                            What I have learned about creating,
-                            growing and building online.
-                        </p>
-
-                        <span>Enter Growth Lab →</span>
-                    </div>
-
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <!-- QUOTE -->
-        <section class="quote-section section-padding">
-
-            <div class="quote-box reveal">
-
-                <div class="quote-mark">
-                    “
-                </div>
-
-                <p>
-                    I'm not trying to build a perfect life.
-                    I'm trying to build a life that feels like mine.
-                </p>
-
-                <span>
-                    — Shivu
-                </span>
-
-            </div>
-
-        </section>
-
-
-        <!-- ABOUT -->
-        <section class="home-about section-padding">
-
-            <div class="about-grid">
-
-                <div class="about-content reveal">
-
-                    <div class="eyebrow">
-                        ABOUT SHIVU
-                    </div>
-
-                    <h2>
-                        More than just a
-                        <span>creator.</span>
-                    </h2>
-
-                    <p>
-                        Shivu is a space for creativity, stories,
-                        experiments and ideas.
-                    </p>
-
-                    <p>
-                        From writing a book to creating content,
-                        every project is another step forward.
-                    </p>
-
-                    <a href="portfolio.html"
-                       class="btn btn-secondary">
-                        Discover More →
-                    </a>
-
-                </div>
-
-
-                <div class="about-visual reveal">
-
-                    <div class="visual-card">
-
-                        <div class="visual-card-top">
-                            SHIVU
-                        </div>
-
-                        <div class="visual-card-main">
-                            CREATE
-                            <br>
-                            <span>EXPLORE</span>
-                            <br>
-                            DREAM
-                        </div>
-
-                        <div class="visual-card-bottom">
-                            PERSONAL UNIVERSE
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- FINAL CTA -->
-        <section class="final-cta section-padding">
-
-            <div class="cta-content reveal">
-
-                <div class="eyebrow">
-                    THIS IS JUST THE BEGINNING
-                </div>
-
-                <h2>
-                    Welcome to
-                    <span>Shivu's world.</span>
-                </h2>
-
-                <p>
-                    Explore the work. Read the story.
-                    Stay for the journey.
-                </p>
-
-                <a href="contact.html"
-                   class="btn btn-primary">
-                    Let's Connect →
-                </a>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- FOOTER -->
-    <footer class="footer">
-
-        <div class="nav-container">
-
-            <div>
-                <div class="logo">
-                    Shivu
-                </div>
-
-                <p>
-                    Creating. Growing. Writing. Exploring.
-                </p>
-            </div>
-
-            <div class="footer-bottom">
-                © 2026 Shivu. All rights reserved.
-                <br>
-                Created by Shivu.
-            </div>
+          <a
+            href="#building"
+            class="btn btn-secondary"
+          >
+            See What I’m Building
+          </a>
 
         </div>
 
-    </footer>
+      </div>
+
+    </section>
 
 
-    <script src="script.js"></script>
+
+    <!-- =========================================
+         EXPLORE
+    ========================================== -->
+
+    <section class="section">
+
+
+      <div class="section-heading reveal">
+
+        <span class="section-kicker">
+          EXPLORE
+        </span>
+
+        <h2>
+          Step Into My World
+        </h2>
+
+        <p>
+          Different sides of the same journey.
+        </p>
+
+      </div>
+
+
+
+      <div class="world-grid">
+
+
+        <a
+          href="portfolio.html"
+          class="world-card reveal"
+        >
+
+          <div class="card-number">
+            01
+          </div>
+
+          <div class="world-card-content">
+
+            <span>
+              CREATIVE WORK
+            </span>
+
+            <h3>
+              My Portfolio
+            </h3>
+
+            <p>
+              Projects, experiments and ideas I’ve worked on.
+            </p>
+
+          </div>
+
+          <div class="card-arrow">
+            →
+          </div>
+
+        </a>
+
+
+
+        <a
+          href="book.html"
+          class="world-card reveal"
+        >
+
+          <div class="card-number">
+            02
+          </div>
+
+          <div class="world-card-content">
+
+            <span>
+              WRITING
+            </span>
+
+            <h3>
+              The Last Summer
+            </h3>
+
+            <p>
+              A story about memories, people and a summer
+              that stayed forever.
+            </p>
+
+          </div>
+
+          <div class="card-arrow">
+            →
+          </div>
+
+        </a>
+
+
+
+        <a
+          href="thoughts.html"
+          class="world-card reveal"
+        >
+
+          <div class="card-number">
+            03
+          </div>
+
+          <div class="world-card-content">
+
+            <span>
+              PERSONAL
+            </span>
+
+            <h3>
+              My Thoughts
+            </h3>
+
+            <p>
+              Ideas, lessons and thoughts collected along
+              the way.
+            </p>
+
+          </div>
+
+          <div class="card-arrow">
+            →
+          </div>
+
+        </a>
+
+
+
+        <a
+          href="course.html"
+          class="world-card reveal"
+        >
+
+          <div class="card-number">
+            04
+          </div>
+
+          <div class="world-card-content">
+
+            <span>
+              GROWTH
+            </span>
+
+            <h3>
+              Growth Lab
+            </h3>
+
+            <p>
+              What I’m learning about content, creativity
+              and building online.
+            </p>
+
+          </div>
+
+          <div class="card-arrow">
+            →
+          </div>
+
+        </a>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         WHAT I'M BUILDING
+    ========================================== -->
+
+    <section
+      class="section building-section"
+      id="building"
+    >
+
+
+      <div class="section-heading reveal">
+
+        <span class="section-kicker">
+          CURRENTLY BUILDING
+        </span>
+
+        <h2>
+          What I’m Building
+        </h2>
+
+        <p>
+          Ideas are better when they become something real.
+        </p>
+
+      </div>
+
+
+
+      <div class="building-showcase">
+
+
+        <!-- =====================================
+             STUDY PILOT
+        ====================================== -->
+
+        <article
+          class="building-card building-feature reveal"
+        >
+
+          <div class="building-glow"></div>
+
+
+          <div class="building-card-content">
+
+            <div class="project-meta">
+
+              <span>
+                01
+              </span>
+
+              <span>
+                EDUCATION • AI
+              </span>
+
+            </div>
+
+
+            <h3>
+              Study Pilot
+            </h3>
+
+
+            <p>
+              An education-focused digital project designed
+              around learning, school resources and a smarter
+              study experience.
+            </p>
+
+
+            <div class="project-tags">
+
+              <span>
+                AI
+              </span>
+
+              <span>
+                Education
+              </span>
+
+              <span>
+                HBSE
+              </span>
+
+              <span>
+                NCERT
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="building-icon">
+            ✦
+          </div>
+
+        </article>
+
+
+
+        <!-- =====================================
+             THE LAST SUMMER
+        ====================================== -->
+
+        <article
+          class="building-card reveal"
+        >
+
+          <div class="building-card-content">
+
+            <div class="project-meta">
+
+              <span>
+                02
+              </span>
+
+              <span>
+                WRITING
+              </span>
+
+            </div>
+
+
+            <h3>
+              The Last Summer
+            </h3>
+
+
+            <p>
+              A personal fiction project built around a
+              lakeside town, memories, quiet conversations
+              and the people we never completely forget.
+            </p>
+
+
+            <div class="project-link">
+              Explore the story →
+            </div>
+
+          </div>
+
+
+          <div class="building-book-visual">
+
+            <div class="mini-book-cover">
+
+              <small>
+                A STORY BY
+              </small>
+
+              <strong>
+                SHIVU
+              </strong>
+
+              <span>
+                THE LAST<br>
+                SUMMER
+              </span>
+
+              <em>
+                Some summers stay forever.
+              </em>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- =====================================
+             CREATIVE EXPERIMENTS
+        ====================================== -->
+
+        <article
+          class="building-card reveal"
+        >
+
+          <div class="building-card-content">
+
+            <div class="project-meta">
+
+              <span>
+                03
+              </span>
+
+              <span>
+                CREATIVE
+              </span>
+
+            </div>
+
+
+            <h3>
+              Creative Experiments
+            </h3>
+
+
+            <p>
+              From visual ideas and content to digital
+              projects, I’m constantly experimenting with
+              new ways to create.
+            </p>
+
+
+            <div class="project-tags">
+
+              <span>
+                Visuals
+              </span>
+
+              <span>
+                Content
+              </span>
+
+              <span>
+                Digital
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="building-orbit">
+
+            <div></div>
+            <div></div>
+            <div></div>
+
+          </div>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         ABOUT
+    ========================================== -->
+
+    <section class="section about-section">
+
+
+      <div class="about-content reveal">
+
+        <span class="section-kicker">
+          ABOUT SHIVU
+        </span>
+
+
+        <h2>
+          Still figuring it out.
+          Still building anyway.
+        </h2>
+
+
+        <p>
+          I’m Shiv Kundu from Haryana, currently pursuing
+          my Class 12 studies. I’m interested in fashion,
+          business, writing, content creation and digital
+          projects.
+        </p>
+
+
+        <p>
+          I don’t have everything figured out yet.
+          And maybe that’s the point.
+        </p>
+
+
+        <p>
+          This website is a small reflection of that journey.
+        </p>
+
+
+        <a
+          href="portfolio.html"
+          class="text-link"
+        >
+          Explore my journey →
+        </a>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         CREATIVE SIDE
+    ========================================== -->
+
+    <section class="section creative-section">
+
+
+      <div class="section-heading reveal">
+
+        <span class="section-kicker">
+          MY CREATIVE SIDE
+        </span>
+
+
+        <h2>
+          More Than One Direction
+        </h2>
+
+
+        <p>
+          I like exploring different fields instead of
+          putting everything into one box.
+        </p>
+
+      </div>
+
+
+
+      <div class="world-grid">
+
+
+        <div class="world-card reveal">
+
+          <div class="card-number">
+            01
+          </div>
+
+          <div class="world-card-content">
+
+            <span>
+              FUTURE
+            </span>
+
+            <h3>
+              Fashion
+            </h3>
+
+            <p>
+              Exploring fashion designing and the creative
+              world behind it.
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="world-card reveal">
+
+          <div class="card-number">
+            02
+          </div>
+
+          <div class="world-card-content">
+
+            <span>
+              BUSINESS
+            </span>
+
+            <h3>
+              Entrepreneurship
+            </h3>
+
+            <p>
+              Learning how ideas can turn into useful
+              products, projects and businesses.
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="world-card reveal">
+
+          <div class="card-number">
+            03
+          </div>
+
+          <div class="world-card-content">
+
+            <span>
+              STORIES
+            </span>
+
+            <h3>
+              Writing
+            </h3>
+
+            <p>
+              Turning thoughts and emotions into stories
+              that people can connect with.
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="world-card reveal">
+
+          <div class="card-number">
+            04
+          </div>
+
+          <div class="world-card-content">
+
+            <span>
+              DIGITAL
+            </span>
+
+            <h3>
+              Creating
+            </h3>
+
+            <p>
+              Building websites, experimenting with ideas
+              and learning by doing.
+            </p>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         QUOTE
+    ========================================== -->
+
+    <section class="section">
+
+
+      <div class="quote-box reveal">
+
+        <span>
+          A NOTE TO MYSELF
+        </span>
+
+
+        <p>
+          “You don’t need to have the whole path figured
+          out. You just need to take the next step.”
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         FINAL CTA
+    ========================================== -->
+
+    <section class="section final-cta">
+
+
+      <div class="reveal">
+
+        <span class="section-kicker">
+          LET’S CONNECT
+        </span>
+
+
+        <h2>
+          Want to know what comes next?
+        </h2>
+
+
+        <p>
+          Explore the projects, stories and ideas behind
+          Shivu’s journey.
+        </p>
+
+
+        <a
+          href="contact.html"
+          class="btn btn-primary"
+        >
+          Let’s Talk
+        </a>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <footer class="footer">
+
+
+    <div class="footer-inner">
+
+
+      <div>
+
+        <strong>
+          Shivu
+        </strong>
+
+        <p>
+          Creating. Learning. Building.
+        </p>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <a href="portfolio.html">
+          Portfolio
+        </a>
+
+        <a href="book.html">
+          Book
+        </a>
+
+        <a href="thoughts.html">
+          Thoughts
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      © <span id="currentYear"></span>
+      Shivu. All rights reserved.
+
+    </div>
+
+
+  </footer>
+
+
+
+  <!-- =========================================
+       MOBILE MENU
+  ========================================== -->
+
+  <script>
+
+    (function () {
+
+      var button =
+        document.getElementById("menuButton");
+
+      var menu =
+        document.getElementById("navMenu");
+
+
+      if (!button || !menu) {
+        return;
+      }
+
+
+      button.onclick = function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+
+        if (
+          menu.classList.contains("open")
+        ) {
+
+          menu.classList.remove("open");
+
+        } else {
+
+          menu.classList.add("open");
+
+        }
+
+      };
+
+
+      var links =
+        menu.getElementsByTagName("a");
+
+      var i;
+
+
+      for (
+        i = 0;
+        i < links.length;
+        i++
+      ) {
+
+        links[i].onclick = function () {
+
+          menu.classList.remove("open");
+
+        };
+
+      }
+
+
+    })();
+
+  </script>
+
+
+
+  <script src="script.js"></script>
+
 
 </body>
 </html>

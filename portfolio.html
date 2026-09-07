@@ -1,831 +1,1476 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>My Portfolio — Shivu</title>
+  <title>My Portfolio — Shivu</title>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ===============================
+       GLOBAL SAFE LAYOUT
+       =============================== */
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      width: 100%;
+      max-width: 100%;
+      min-height: 100%;
+      background: #080812 !important;
+      overflow-x: hidden;
+    }
+
+    body {
+      width: 100%;
+      max-width: 100%;
+      min-height: 100vh;
+      margin: 0;
+      color: #fff !important;
+      background:
+        radial-gradient(
+          circle at 80% 5%,
+          rgba(124, 92, 255, 0.14),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 10% 55%,
+          rgba(80, 120, 255, 0.08),
+          transparent 28%
+        ),
+        linear-gradient(
+          180deg,
+          #080812 0%,
+          #0a0a16 50%,
+          #07070e 100%
+        ) !important;
+      overflow-x: hidden;
+    }
+
+    img,
+    video,
+    iframe {
+      max-width: 100%;
+    }
+
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ===============================
+       NAVBAR
+       =============================== */
+
+    .nav-logo {
+      font-size: 16px !important;
+      letter-spacing: -0.02em;
+      font-weight: 800 !important;
+    }
+
+    .nav-menu a {
+      font-size: 12px !important;
+      font-weight: 600 !important;
+    }
+
+    /* ===============================
+       HERO
+       =============================== */
+
+    .portfolio-hero {
+      position: relative;
+      padding: 120px 20px 70px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .portfolio-hero::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: rgba(111, 76, 255, 0.12);
+      filter: blur(90px);
+      top: -180px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .portfolio-eyebrow {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.045);
+      backdrop-filter: blur(14px);
+      color: rgba(255,255,255,0.68);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      margin-bottom: 22px;
+    }
+
+    .portfolio-hero h1 {
+      position: relative;
+      margin: 0 auto;
+      max-width: 850px;
+      color: #fff !important;
+      font-size: clamp(42px, 8vw, 82px);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      font-weight: 900 !important;
+    }
+
+    .portfolio-hero h1 span {
+      background: linear-gradient(
+        120deg,
+        #ffffff,
+        #a78bfa 48%,
+        #7dd3fc
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .portfolio-hero p {
+      position: relative;
+      max-width: 620px;
+      margin: 25px auto 0;
+      color: rgba(255,255,255,0.62) !important;
+      font-size: 15px;
+      line-height: 1.8;
+      font-weight: 500;
+      padding: 0 10px;
+      overflow-wrap: anywhere;
+    }
+
+    /* ===============================
+       MAIN
+       =============================== */
+
+    .portfolio-main {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px 90px;
+    }
+
+    .portfolio-label {
+      margin-bottom: 18px;
+      color: rgba(255,255,255,0.42) !important;
+      font-size: 11px;
+      font-weight: 800 !important;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    /* ===============================
+       FEATURED PROJECT
+       =============================== */
+
+    .featured-project {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 30px;
+      padding: 34px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.075),
+          rgba(255,255,255,0.025)
+        ) !important;
+      box-shadow:
+        0 30px 90px rgba(0,0,0,0.35),
+        inset 0 1px rgba(255,255,255,0.06);
+    }
+
+    .featured-project::before {
+      content: "";
+      position: absolute;
+      width: 330px;
+      height: 330px;
+      right: -100px;
+      top: -130px;
+      background: rgba(104,76,255,0.14);
+      filter: blur(75px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .featured-top {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 34px;
+    }
+
+    .project-number {
+      color: rgba(255,255,255,0.35) !important;
+      font-size: 12px;
+      font-weight: 800 !important;
+      letter-spacing: 0.12em;
+    }
+
+    .project-status {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(124,92,255,0.10);
+      border: 1px solid rgba(124,92,255,0.20);
+      color: #b9a8ff !important;
+      font-size: 10px;
+      font-weight: 800 !important;
+      letter-spacing: 0.08em;
+    }
+
+    .featured-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 0.85fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .featured-copy h2 {
+      margin: 0;
+      color: #fff !important;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1;
+      letter-spacing: -0.045em;
+      font-weight: 900 !important;
+    }
+
+    .featured-copy h2 span {
+      display: block;
+      margin-top: 7px;
+      background: linear-gradient(
+        120deg,
+        #a78bfa,
+        #7dd3fc
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .featured-copy p {
+      margin: 22px 0 0;
+      max-width: 500px;
+      color: rgba(255,255,255,0.60) !important;
+      font-size: 14px;
+      line-height: 1.85;
+      font-weight: 500;
+      overflow-wrap: anywhere;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 23px;
+    }
+
+    .project-tags span {
+      padding: 7px 11px;
+      border-radius: 9px;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.60) !important;
+      font-size: 10px;
+      font-weight: 700 !important;
+    }
+
+    /* ===============================
+       STUDY PILOT VISUAL
+       =============================== */
+
+    .project-visual {
+      position: relative;
+      min-height: 310px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(
+          circle at 50% 40%,
+          rgba(124,92,255,0.22),
+          transparent 35%
+        ),
+        rgba(7,8,18,0.85) !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .visual-grid {
+      position: absolute;
+      inset: 0;
+      opacity: 0.25;
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,0.05) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.05) 1px,
+          transparent 1px
+        );
+      background-size: 32px 32px;
+    }
+
+    .visual-orbit {
+      position: absolute;
+      width: 235px;
+      height: 235px;
+      border: 1px solid rgba(167,139,250,0.24);
+      border-radius: 50%;
+      transform: rotate(-18deg);
+    }
+
+    .visual-orbit.two {
+      width: 165px;
+      height: 165px;
+      transform: rotate(42deg);
+      border-color: rgba(125,211,252,0.20);
+    }
+
+    .visual-core {
+      position: relative;
+      z-index: 3;
+      width: 100px;
+      height: 100px;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(167,139,250,0.20),
+          rgba(125,211,252,0.08)
+        );
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow:
+        0 0 55px rgba(124,92,255,0.30),
+        inset 0 1px rgba(255,255,255,0.12);
+      color: #fff !important;
+      font-size: 34px;
+      font-weight: 900 !important;
+    }
+
+    .visual-text {
+      position: absolute;
+      z-index: 4;
+      bottom: 20px;
+      left: 20px;
+      color: rgba(255,255,255,0.45) !important;
+      font-size: 10px;
+      font-weight: 800 !important;
+      letter-spacing: 0.12em;
+    }
+
+    /* ===============================
+       SELECTED WORK
+       =============================== */
+
+    .projects-section {
+      margin-top: 80px;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      color: #fff !important;
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing: -0.04em;
+      font-weight: 900 !important;
+    }
+
+    .section-heading p {
+      max-width: 400px;
+      margin: 0;
+      color: rgba(255,255,255,0.48) !important;
+      font-size: 12px;
+      line-height: 1.7;
+      font-weight: 500;
+      overflow-wrap: anywhere;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      position: relative;
+      min-width: 0;
+      width: 100%;
+      min-height: 350px;
+      overflow: hidden;
+      padding: 27px;
+      border-radius: 25px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.055),
+          rgba(255,255,255,0.018)
+        ) !important;
+      transition:
+        transform .35s ease,
+        border-color .35s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(167,139,250,0.24);
+    }
+
+    .project-card.large {
+      grid-column: span 2;
+      min-height: 300px;
+    }
+
+    .card-number {
+      color: rgba(255,255,255,0.30) !important;
+      font-size: 10px;
+      font-weight: 800 !important;
+      letter-spacing: 0.12em;
+    }
+
+    .card-category {
+      margin-top: 7px;
+      color: #a78bfa !important;
+      font-size: 10px;
+      font-weight: 800 !important;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+
+    .project-card h3 {
+      margin: 18px 0 0;
+      color: #fff !important;
+      font-size: 26px;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      font-weight: 900 !important;
+    }
+
+    .project-card p {
+      margin: 14px 0 0;
+      max-width: 580px;
+      color: rgba(255,255,255,0.55) !important;
+      font-size: 12px;
+      line-height: 1.8;
+      font-weight: 500;
+      overflow-wrap: anywhere;
+    }
+
+    .card-line {
+      position: absolute;
+      left: 27px;
+      right: 27px;
+      bottom: 27px;
+      height: 1px;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(167,139,250,0.28),
+          transparent
+        );
+    }
+
+    .card-arrow {
+      position: absolute;
+      right: 27px;
+      bottom: 19px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.65) !important;
+      font-size: 15px;
+    }
+
+    /* ===============================
+       BOOK
+       =============================== */
+
+    .book-card {
+      display: grid;
+      grid-template-columns: 0.7fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .mini-book {
+      width: 155px;
+      height: 210px;
+      margin: 0 auto;
+      padding: 22px 17px;
+      border-radius: 5px 13px 13px 5px;
+      background:
+        linear-gradient(
+          145deg,
+          #151526,
+          #29204b
+        ) !important;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow:
+        14px 20px 45px rgba(0,0,0,0.45),
+        inset 3px 0 rgba(255,255,255,0.04);
+      position: relative;
+    }
+
+    .mini-book::after {
+      content: "";
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(167,139,250,0.20);
+      filter: blur(22px);
+      top: 45px;
+      left: 42px;
+    }
+
+    .mini-book small {
+      position: relative;
+      z-index: 2;
+      color: rgba(255,255,255,0.50) !important;
+      font-size: 7px;
+      font-weight: 800 !important;
+      letter-spacing: 0.16em;
+    }
+
+    .mini-book strong {
+      position: relative;
+      z-index: 2;
+      display: block;
+      margin-top: 62px;
+      color: #fff !important;
+      font-size: 17px;
+      line-height: 1.05;
+      font-weight: 900 !important;
+    }
+
+    .mini-book em {
+      position: absolute;
+      z-index: 2;
+      bottom: 17px;
+      left: 17px;
+      color: rgba(255,255,255,0.45) !important;
+      font-size: 7px;
+      font-style: normal;
+      font-weight: 700 !important;
+    }
+
+    /* ===============================
+       CREATIVE VISUAL
+       =============================== */
+
+    .creative-visual {
+      position: absolute;
+      right: -25px;
+      bottom: -40px;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      border: 1px solid rgba(125,211,252,0.13);
+    }
+
+    .creative-visual::before,
+    .creative-visual::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(167,139,250,0.13);
+    }
+
+    .creative-visual::before {
+      inset: 25px;
+    }
+
+    .creative-visual::after {
+      inset: 55px;
+    }
+
+    /* ===============================
+       DIRECTION
+       =============================== */
+
+    .direction-section {
+      margin-top: 80px;
+      padding: 38px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.055),
+          rgba(255,255,255,0.018)
+        ) !important;
+    }
+
+    .direction-section h2 {
+      margin: 0;
+      color: #fff !important;
+      font-size: clamp(28px,4vw,40px);
+      letter-spacing: -0.04em;
+      font-weight: 900 !important;
+    }
+
+    .direction-section > p {
+      max-width: 650px;
+      margin: 15px 0 30px;
+      color: rgba(255,255,255,0.50) !important;
+      font-size: 13px;
+      line-height: 1.8;
+      font-weight: 500;
+    }
+
+    .direction-grid {
+      display: grid;
+      grid-template-columns: repeat(4,minmax(0,1fr));
+      gap: 10px;
+    }
+
+    .direction-item {
+      padding: 18px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.035) !important;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .direction-item strong {
+      display: block;
+      color: #fff !important;
+      font-size: 13px;
+      font-weight: 800 !important;
+    }
+
+    .direction-item span {
+      display: block;
+      margin-top: 7px;
+      color: rgba(255,255,255,0.42) !important;
+      font-size: 10px;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    /* ===============================
+       CTA
+       =============================== */
+
+    .portfolio-cta {
+      margin-top: 70px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .portfolio-cta h2 {
+      margin: 0;
+      color: #fff !important;
+      font-size: clamp(28px,5vw,48px);
+      letter-spacing: -0.04em;
+      font-weight: 900 !important;
+    }
+
+    .portfolio-cta p {
+      max-width: 520px;
+      margin: 14px auto 24px;
+      color: rgba(255,255,255,0.48) !important;
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 500;
+    }
+
+    /* ===============================
+       MOBILE
+       =============================== */
+
+    @media (max-width:900px) {
+
+      .portfolio-hero {
+        padding: 100px 17px 55px;
+      }
+
+      .portfolio-hero h1 {
+        font-size: clamp(39px,12vw,65px);
+      }
+
+      .portfolio-main {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .featured-project {
+        padding: 23px;
+        border-radius: 23px;
+      }
+
+      .featured-content {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .project-visual {
+        min-height: 260px;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card.large {
+        grid-column: span 1;
+      }
+
+      .book-card {
+        grid-template-columns: 1fr;
+      }
+
+      .direction-section {
+        padding: 25px;
+      }
+
+      .direction-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-heading p {
+        margin-top: 10px;
+      }
+    }
+
+    @media (max-width:520px) {
+
+      .portfolio-hero {
+        padding-top: 92px;
+      }
+
+      .portfolio-eyebrow {
+        font-size: 9px;
+        padding: 7px 11px;
+      }
+
+      .portfolio-hero p {
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      .featured-project {
+        padding: 20px;
+      }
+
+      .featured-copy h2 {
+        font-size: 34px;
+      }
+
+      .project-visual {
+        min-height: 225px;
+      }
+
+      .project-card {
+        min-height: 320px;
+        padding: 22px;
+      }
+
+      .card-line {
+        left: 22px;
+        right: 22px;
+        bottom: 22px;
+      }
+
+      .card-arrow {
+        right: 22px;
+        bottom: 14px;
+      }
+
+      .direction-section {
+        padding: 22px;
+      }
+
+      .direction-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-book {
+        width: 135px;
+        height: 185px;
+      }
+
+      .nav-logo {
+        font-size: 14px !important;
+      }
+    }
+
+    /* ===============================
+       MOBILE MENU
+       =============================== */
+
+    @media(max-width:900px){
+
+      .menu-toggle{
+        display:flex!important;
+        width:44px!important;
+        height:44px!important;
+        align-items:center!important;
+        justify-content:center!important;
+        flex-direction:column!important;
+        gap:5px!important;
+        border:1px solid rgba(255,255,255,.10)!important;
+        border-radius:12px!important;
+        background:rgba(255,255,255,.045)!important;
+        cursor:pointer!important;
+      }
+
+      .menu-toggle span{
+        display:block!important;
+        width:20px!important;
+        height:2px!important;
+        background:#fff!important;
+        border-radius:10px!important;
+      }
+
+      .nav-menu{
+        display:none!important;
+        position:absolute!important;
+        top:70px!important;
+        left:10px!important;
+        right:10px!important;
+        width:auto!important;
+        max-width:calc(100% - 20px)!important;
+        min-width:0!important;
+        flex-direction:column!important;
+        padding:12px!important;
+        gap:4px!important;
+        border:1px solid rgba(255,255,255,.10)!important;
+        border-radius:18px!important;
+        background:rgba(10,10,20,.97)!important;
+        backdrop-filter:blur(22px)!important;
+        box-shadow:0 20px 60px rgba(0,0,0,.45)!important;
+      }
+
+      .nav-menu.open{
+        display:flex!important;
+      }
+
+      .nav-menu a{
+        width:100%!important;
+        padding:13px 14px!important;
+        border-radius:10px!important;
+      }
+
+      .nav-menu a:hover,
+      .nav-menu a.active{
+        background:rgba(255,255,255,.06)!important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
-    <header class="navbar">
-        <div class="nav-container">
+  <!-- LOADER -->
+  <div class="page-loader">
+    <div class="loader-content">
+      <div class="loader-logo">My Portfolio</div>
+      <div class="loader-line"></div>
+    </div>
+  </div>
 
-            <a href="index.html" class="logo">
-                360° <span>Universe</span>
-            </a>
 
-            <button class="menu-toggle"
-                    onclick="toggleMenu()"
-                    aria-label="Open Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+  <!-- NAVBAR -->
+  <header class="navbar">
 
-            <nav class="nav-menu" id="navMenu">
-                <a href="index.html">Home</a>
-                <a href="portfolio.html" class="active">Portfolio</a>
-                <a href="book.html">Book</a>
-                <a href="thoughts.html">Thoughts</a>
-                <a href="course.html">Growth Lab</a>
-                <a href="contact.html">Contact</a>
-            </nav>
+    <div class="nav-container">
+
+      <a href="index.html" class="nav-logo">
+        360° Universe
+      </a>
+
+      <button
+        id="menuButton"
+        class="menu-toggle"
+        aria-label="Open menu"
+        type="button">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+      </button>
+
+      <nav id="navMenu" class="nav-menu">
+
+        <a href="index.html">Home</a>
+
+        <a href="portfolio.html" class="active">
+          Portfolio
+        </a>
+
+        <a href="book.html">
+          Book
+        </a>
+
+        <a href="thoughts.html">
+          Thoughts
+        </a>
+
+        <a href="course.html">
+          Growth Lab
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <!-- HERO -->
+
+  <main>
+
+    <section class="portfolio-hero reveal">
+
+      <div class="portfolio-eyebrow">
+        MY CREATIVE JOURNEY
+      </div>
+
+      <h1>
+        Things I've
+        <span>Built.</span>
+      </h1>
+
+      <p>
+        A collection of ideas, experiments and projects that represent
+        what I'm learning, creating and becoming along the way.
+      </p>
+
+    </section>
+
+
+    <div class="portfolio-main">
+
+
+      <!-- FEATURED PROJECT -->
+
+      <section class="reveal">
+
+        <div class="portfolio-label">
+          01 — FEATURED PROJECT
+        </div>
+
+        <div class="featured-project">
+
+          <div class="featured-top">
+
+            <div class="project-number">
+              PROJECT / 001
+            </div>
+
+            <div class="project-status">
+              BUILDING
+            </div>
+
+          </div>
+
+
+          <div class="featured-content">
+
+            <div class="featured-copy">
+
+              <h2>
+                Study
+                <span>Pilot.</span>
+              </h2>
+
+              <p>
+                An ambitious education project designed around the idea
+                of making study resources, learning tools and academic
+                content feel simpler and more accessible.
+              </p>
+
+              <div class="project-tags">
+
+                <span>Education</span>
+                <span>AI</span>
+                <span>Android</span>
+                <span>HBSE</span>
+
+              </div>
+
+            </div>
+
+
+            <div class="project-visual">
+
+              <div class="visual-grid"></div>
+
+              <div class="visual-orbit"></div>
+
+              <div class="visual-orbit two"></div>
+
+              <div class="visual-core">
+                SP
+              </div>
+
+              <div class="visual-text">
+                YOUR PERSONAL AI SCHOOL
+              </div>
+
+            </div>
+
+          </div>
 
         </div>
-    </header>
+
+      </section>
 
 
-    <!-- HERO -->
-    <main>
+      <!-- SELECTED WORK -->
 
-        <section class="page-hero">
+      <section class="projects-section reveal">
 
-            <div class="hero-glow"></div>
+        <div class="section-heading">
 
-            <div class="page-hero-content reveal">
+          <div>
 
-                <div class="eyebrow">
-                    MY JOURNEY
-                </div>
+            <div class="portfolio-label">
+              02 — SELECTED WORK
+            </div>
 
-                <h1>
-                    Things I've
-                    <span>built.</span>
-                </h1>
+            <h2>
+              More things
+              <br>
+              I've created.
+            </h2>
 
-                <p>
-                    Not everything here is finished. Some projects are live,
-                    some are paused, and some are still becoming what I
-                    originally imagined.
-                </p>
+          </div>
+
+          <p>
+            Different projects, different directions —
+            but all of them started with one simple thing:
+            an idea worth exploring.
+          </p>
+
+        </div>
+
+
+        <div class="project-grid">
+
+
+          <!-- BOOK -->
+
+          <article class="project-card book-card large">
+
+            <div class="mini-book">
+
+              <small>
+                A NOVEL BY SHIVU
+              </small>
+
+              <strong>
+                THE<br>
+                LAST<br>
+                SUMMER
+              </strong>
+
+              <em>
+                Some summers stay forever.
+              </em>
 
             </div>
 
-        </section>
-
-
-        <!-- INTRO -->
-        <section class="section-padding">
-
-            <div class="section-heading reveal">
-
-                <div class="eyebrow">
-                    A LITTLE CONTEXT
-                </div>
-
-                <h2>
-                    This portfolio is a
-                    <span>journey.</span>
-                </h2>
-
-                <p>
-                    I don't want to show only the polished side of my work.
-                    I also want to show the ideas behind it, the problems
-                    I faced, the lessons I learned and the things I still
-                    want to finish.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- STUDY PILOT -->
-        <section class="portfolio-section section-padding">
-
-            <div class="portfolio-grid">
-
-                <article class="portfolio-item portfolio-featured reveal">
-
-                    <div class="portfolio-number">
-                        01
-                    </div>
-
-                    <div class="portfolio-content">
-
-                        <div class="eyebrow">
-                            EDUCATION • APP DEVELOPMENT
-                        </div>
-
-                        <h2>
-                            Study Pilot
-                        </h2>
-
-                        <p class="portfolio-lead">
-                            An ambitious education app designed to become
-                            a smart study companion for students.
-                        </p>
-
-                        <p>
-                            Study Pilot was one of my biggest ideas.
-                            The goal was to create a single platform where
-                            students could find useful study resources,
-                            organize their preparation and get help while
-                            studying.
-                        </p>
-
-                        <p>
-                            The original vision included support for
-                            <strong>HBSE and NCERT students from Classes
-                            6 to 12</strong>. I wanted the app to bring
-                            different parts of the student journey together
-                            instead of making students search through
-                            multiple places for everything.
-                        </p>
-
-                        <p>
-                            The planned experience included an AI study
-                            assistant, NCERT resources, HBSE syllabus,
-                            previous-year questions, notes, quizzes,
-                            practice tests, study planning and offline
-                            functionality.
-                        </p>
-
-                        <p>
-                            I also wanted Study Pilot to work well on
-                            lower-end phones and slower internet
-                            connections. The idea was not just to make
-                            something visually attractive, but something
-                            genuinely useful for students who may not have
-                            expensive devices or unlimited data.
-                        </p>
-
-                        <div class="portfolio-grid">
-
-                            <div class="portfolio-item reveal">
-
-                                <div class="portfolio-content">
-
-                                    <div class="eyebrow">
-                                        THE VISION
-                                    </div>
-
-                                    <h3>
-                                        One place for studying.
-                                    </h3>
-
-                                    <p>
-                                        The long-term vision was to make
-                                        studying more organized by combining
-                                        resources, practice and intelligent
-                                        assistance into one simple experience.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="portfolio-item reveal">
-
-                                <div class="portfolio-content">
-
-                                    <div class="eyebrow">
-                                        WHAT I LEARNED
-                                    </div>
-
-                                    <h3>
-                                        Ideas need execution.
-                                    </h3>
-
-                                    <p>
-                                        Building an app is very different
-                                        from imagining one. I learned about
-                                        UI design, application structure,
-                                        data handling, technical limitations
-                                        and the amount of work required to
-                                        turn an idea into a reliable product.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="portfolio-item reveal">
-
-                            <div class="portfolio-content">
-
-                                <div class="eyebrow">
-                                    WHY I PAUSED IT
-                                </div>
-
-                                <h3>
-                                    A temporary pause, not an ending.
-                                </h3>
-
-                                <p>
-                                    Study Pilot had to be paused before I
-                                    could complete the full vision.
-                                </p>
-
-                                <p>
-                                    One major reason was the financial side
-                                    of development. Building and maintaining
-                                    a complete application can require
-                                    hosting, backend services, databases,
-                                    development tools and other resources.
-                                    At that stage, I did not have enough
-                                    budget to keep everything running and
-                                    develop it at the level I wanted.
-                                </p>
-
-                                <p>
-                                    There were also technical issues that
-                                    made development more difficult than I
-                                    expected. Some parts of the system needed
-                                    more testing, better architecture and
-                                    more reliable implementation before they
-                                    could become a proper public product.
-                                </p>
-
-                                <p>
-                                    Instead of releasing something unfinished
-                                    and unreliable, I decided to step back,
-                                    learn more and return to the project with
-                                    a stronger foundation.
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="portfolio-item reveal">
-
-                            <div class="portfolio-content">
-
-                                <div class="eyebrow">
-                                    WHAT'S NEXT
-                                </div>
-
-                                <h3>
-                                    Study Pilot is not forgotten.
-                                </h3>
-
-                                <p>
-                                    I still want to complete Study Pilot.
-                                    The project taught me too much to simply
-                                    abandon it.
-                                </p>
-
-                                <p>
-                                    I plan to return to it when I have the
-                                    required resources, stronger technical
-                                    knowledge and a better development setup.
-                                    The goal will be to rebuild the important
-                                    parts properly instead of simply continuing
-                                    from where I stopped.
-                                </p>
-
-                                <p>
-                                    <strong>
-                                        The project is paused — not cancelled.
-                                        I hope to complete it soon.
-                                    </strong>
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- VISUALS -->
-        <section class="portfolio-section section-padding">
-
-            <div class="section-heading reveal">
-
-                <div class="eyebrow">
-                    VISUALS
-                </div>
-
-                <h2>
-                    Creating through
-                    <span>visuals.</span>
-                </h2>
-
-                <p>
-                    Visual content became one of the earliest ways I
-                    experimented with creativity and digital storytelling.
-                </p>
-
-            </div>
-
-
-            <div class="portfolio-grid">
-
-                <article class="portfolio-item reveal">
-
-                    <div class="portfolio-number">
-                        02
-                    </div>
-
-                    <div class="portfolio-content">
-
-                        <div class="eyebrow">
-                            CONTENT CREATION
-                        </div>
-
-                        <h2>
-                            Visuals & Content
-                        </h2>
-
-                        <p>
-                            I have spent a lot of time experimenting with
-                            visual content, short-form videos, designs,
-                            edits and social-media focused ideas.
-                        </p>
-
-                        <p>
-                            The interesting part of visual creation for me
-                            has never been only the final image or video.
-                            I enjoy thinking about the complete experience:
-                            the first impression, the typography, the
-                            composition, the mood, the pacing and the story
-                            behind the content.
-                        </p>
-
-                        <p>
-                            Social media also taught me how quickly people
-                            decide whether something is worth watching.
-                            That pushed me to understand hooks, presentation,
-                            consistency and audience attention.
-                        </p>
-
-                        <p>
-                            Some experiments worked well. Others didn't.
-                            But every experiment gave me information about
-                            what I should improve next.
-                        </p>
-
-                        <p>
-                            Visual creation is still an ongoing part of my
-                            journey, and I want to keep improving the quality
-                            and originality of everything I publish.
-                        </p>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- STORIES -->
-        <section class="portfolio-section section-padding">
-
-            <div class="section-heading reveal">
-
-                <div class="eyebrow">
-                    WRITING
-                </div>
-
-                <h2>
-                    Turning ideas into
-                    <span>stories.</span>
-                </h2>
-
-                <p>
-                    One of my most personal projects is writing
-                    <em>The Last Summer.</em>
-                </p>
-
-            </div>
-
-
-            <div class="portfolio-grid">
-
-                <article class="portfolio-item portfolio-featured reveal">
-
-                    <div class="portfolio-number">
-                        03
-                    </div>
-
-                    <div class="portfolio-content">
-
-                        <div class="eyebrow">
-                            THE LAST SUMMER
-                        </div>
-
-                        <h2>
-                            My Storytelling Journey
-                        </h2>
-
-                        <p class="portfolio-lead">
-                            A personal attempt to turn emotions, memories
-                            and imagination into a complete story.
-                        </p>
-
-                        <p>
-                            Writing The Last Summer became a completely
-                            different kind of creative experience for me.
-                            Unlike a social-media post that can be created
-                            and forgotten quickly, a book requires patience,
-                            consistency and attention to the smallest details.
-                        </p>
-
-                        <p>
-                            The story follows emotional moments, relationships,
-                            memories, conversations and the feeling of a
-                            summer that becomes much more meaningful than
-                            it initially appears.
-                        </p>
-
-                        <p>
-                            I wanted the book to feel cinematic while still
-                            feeling personal. The goal was to make readers
-                            remember the atmosphere of the story rather than
-                            simply remember its events.
-                        </p>
-
-                        <p>
-                            Writing also taught me that creativity does not
-                            always arrive when you want it to. Sometimes a
-                            paragraph works immediately. Sometimes an idea
-                            needs to be rewritten several times.
-                        </p>
-
-                        <p>
-                            That process has made The Last Summer more than
-                            just a writing project. It has become a record of
-                            how my creative thinking has developed.
-                        </p>
-
-                        <a href="book.html" class="btn btn-primary">
-                            Explore The Last Summer →
-                        </a>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- MY THOUGHTS -->
-        <section class="portfolio-section section-padding">
-
-            <div class="portfolio-grid">
-
-                <article class="portfolio-item reveal">
-
-                    <div class="portfolio-number">
-                        04
-                    </div>
-
-                    <div class="portfolio-content">
-
-                        <div class="eyebrow">
-                            JOURNAL • IDEAS • REFLECTIONS
-                        </div>
-
-                        <h2>
-                            My Thoughts
-                        </h2>
-
-                        <p>
-                            My Thoughts is the quieter side of everything
-                            I create.
-                        </p>
-
-                        <p>
-                            Not every idea needs to become a project.
-                            Sometimes I simply want to write down something
-                            I noticed, something I learned, something I
-                            questioned or something that stayed in my mind.
-                        </p>
-
-                        <p>
-                            This space is built around short reflections,
-                            personal observations, creative thoughts and
-                            lessons from everyday experiences.
-                        </p>
-
-                        <p>
-                            I also see it as a timeline of growth. When I
-                            look back at old thoughts, I can see how my
-                            priorities, ideas and perspective have changed.
-                        </p>
-
-                        <p>
-                            The purpose is not to pretend that every thought
-                            is a life lesson. Sometimes a thought is simply
-                            a thought — and that is enough.
-                        </p>
-
-                        <a href="thoughts.html" class="btn btn-secondary">
-                            Read My Thoughts →
-                        </a>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- GROWTH LAB -->
-        <section class="portfolio-section section-padding">
-
-            <div class="portfolio-grid">
-
-                <article class="portfolio-item portfolio-featured reveal">
-
-                    <div class="portfolio-number">
-                        05
-                    </div>
-
-                    <div class="portfolio-content">
-
-                        <div class="eyebrow">
-                            SOCIAL MEDIA • LEARNING
-                        </div>
-
-                        <h2>
-                            Growth Lab
-                        </h2>
-
-                        <p class="portfolio-lead">
-                            A collection of things I have learned while
-                            experimenting with content creation and social
-                            media growth.
-                        </p>
-
-                        <p>
-                            Growth Lab started from my own curiosity about
-                            how creators grow online.
-                        </p>
-
-                        <p>
-                            I experimented with different types of content,
-                            hooks, editing styles, posting strategies,
-                            audience behaviour and ways of presenting an
-                            account.
-                        </p>
-
-                        <p>
-                            Over time, I realized that growth is not simply
-                            about getting one viral video. Sustainable
-                            improvement comes from understanding your audience,
-                            creating consistently, testing ideas and learning
-                            from results.
-                        </p>
-
-                        <p>
-                            Growth Lab is where I want to organize those
-                            lessons into something easier to understand.
-                            Instead of presenting growth as a magic formula,
-                            the goal is to explain the creative and strategic
-                            thinking behind content.
-                        </p>
-
-                        <p>
-                            Topics can include content ideas, hooks,
-                            presentation, consistency, audience retention,
-                            experimentation and building a recognizable
-                            creator identity.
-                        </p>
-
-                        <p>
-                            Most importantly, I want Growth Lab to represent
-                            learning rather than pretending to know everything.
-                            Social media changes constantly, so there is always
-                            something new to test.
-                        </p>
-
-                        <a href="course.html" class="btn btn-primary">
-                            Enter Growth Lab →
-                        </a>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- LESSONS -->
-        <section class="quote-section section-padding">
-
-            <div class="quote-box reveal">
-
-                <div class="quote-mark">
-                    “
-                </div>
-
-                <p>
-                    Some projects become finished products.
-                    Others become lessons that prepare you
-                    for the next project.
-                </p>
-
-                <span>
-                    — Shivu
-                </span>
-
-            </div>
-
-        </section>
-
-
-        <!-- CURRENT STATUS -->
-        <section class="section-padding">
-
-            <div class="section-heading reveal">
-
-                <div class="eyebrow">
-                    WHERE I AM NOW
-                </div>
-
-                <h2>
-                    Still <span>building.</span>
-                </h2>
-
-                <p>
-                    My portfolio is not a final destination.
-                    It will keep changing as I learn, create and
-                    complete the projects that are still in progress.
-                </p>
-
-            </div>
-
-
-            <div class="world-grid">
-
-                <div class="world-card reveal">
-
-                    <div class="world-number">
-                        01
-                    </div>
-
-                    <div class="world-card-content">
-
-                        <h3>
-                            Learn
-                        </h3>
-
-                        <p>
-                            Keep improving my creative and technical skills.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="world-card reveal">
-
-                    <div class="world-number">
-                        02
-                    </div>
-
-                    <div class="world-card-content">
-
-                        <h3>
-                            Build
-                        </h3>
-
-                        <p>
-                            Turn ideas into real projects instead of leaving
-                            them only in my notes.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="world-card reveal">
-
-                    <div class="world-number">
-                        03
-                    </div>
-
-                    <div class="world-card-content">
-
-                        <h3>
-                            Improve
-                        </h3>
-
-                        <p>
-                            Learn from mistakes, technical problems and
-                            experiments.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="world-card reveal">
-
-                    <div class="world-number">
-                        04
-                    </div>
-
-                    <div class="world-card-content">
-
-                        <h3>
-                            Finish
-                        </h3>
-
-                        <p>
-                            Return to unfinished ideas and give them the
-                            execution they deserve.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- FINAL CTA -->
-        <section class="final-cta section-padding">
-
-            <div class="cta-content reveal">
-
-                <div class="eyebrow">
-                    KEEP EXPLORING
-                </div>
-
-                <h2>
-                    There's more to
-                    <span>Shivu.</span>
-                </h2>
-
-                <p>
-                    Read the story, explore my thoughts or step into
-                    Growth Lab.
-                </p>
-
-                <a href="book.html" class="btn btn-primary">
-                    Explore The Last Summer →
-                </a>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- FOOTER -->
-    <footer class="footer">
-
-        <div class="nav-container">
 
             <div>
 
-                <div class="logo">
-                    Shivu
-                </div>
+              <div class="card-number">
+                PROJECT / 002
+              </div>
 
-                <p>
-                    Creating. Growing. Writing. Exploring.
-                </p>
+              <div class="card-category">
+                Writing · Storytelling
+              </div>
+
+              <h3>
+                The Last Summer
+              </h3>
+
+              <p>
+                A nostalgic story about a summer, a lakeside town,
+                two people and the memories that refuse to disappear.
+                A personal creative project built around emotion,
+                atmosphere and storytelling.
+              </p>
 
             </div>
 
 
-            <div class="footer-bottom">
-                © 2026 Shivu. All rights reserved.
-                <br>
-                Created by Shivu.
+            <div class="card-line"></div>
+
+            <div class="card-arrow">
+              ↗
             </div>
+
+          </article>
+
+
+          <!-- VISUALS -->
+
+          <article class="project-card">
+
+            <div class="card-number">
+              PROJECT / 003
+            </div>
+
+            <div class="card-category">
+              Visuals
+            </div>
+
+            <h3>
+              Visual
+              Experiments.
+            </h3>
+
+            <p>
+              Exploring aesthetics, layouts, visual identities and
+              digital designs to understand what makes something
+              feel memorable.
+            </p>
+
+            <div class="creative-visual"></div>
+
+            <div class="card-line"></div>
+
+            <div class="card-arrow">
+              ↗
+            </div>
+
+          </article>
+
+
+          <!-- CONTENT -->
+
+          <article class="project-card">
+
+            <div class="card-number">
+              PROJECT / 004
+            </div>
+
+            <div class="card-category">
+              Content Creation
+            </div>
+
+            <h3>
+              Creating
+              Online.
+            </h3>
+
+            <p>
+              Reels, ideas, experiments and social media projects —
+              learning how to turn simple concepts into content
+              people actually want to see.
+            </p>
+
+            <div class="card-line"></div>
+
+            <div class="card-arrow">
+              ↗
+            </div>
+
+          </article>
+
+
+          <!-- DIGITAL -->
+
+          <article class="project-card">
+
+            <div class="card-number">
+              PROJECT / 005
+            </div>
+
+            <div class="card-category">
+              Digital Projects
+            </div>
+
+            <h3>
+              Ideas Into
+              Digital.
+            </h3>
+
+            <p>
+              Websites, app concepts and small digital experiments
+              created to learn by actually building instead of
+              only thinking about it.
+            </p>
+
+            <div class="card-line"></div>
+
+            <div class="card-arrow">
+              ↗
+            </div>
+
+          </article>
+
+
+          <!-- FUTURE -->
+
+          <article class="project-card">
+
+            <div class="card-number">
+              PROJECT / 006
+            </div>
+
+            <div class="card-category">
+              Future Direction
+            </div>
+
+            <h3>
+              What's
+              Next?
+            </h3>
+
+            <p>
+              Fashion, business, entrepreneurship and new creative
+              experiments are some of the directions I'm interested
+              in exploring next.
+            </p>
+
+            <div class="card-line"></div>
+
+            <div class="card-arrow">
+              ↗
+            </div>
+
+          </article>
+
 
         </div>
 
-    </footer>
+      </section>
 
 
-    <script src="script.js"></script>
+      <!-- DIRECTION -->
+
+      <section class="direction-section reveal">
+
+        <div class="portfolio-label">
+          03 — WHERE I'M HEADING
+        </div>
+
+        <h2>
+          Still building the
+          <br>
+          bigger picture.
+        </h2>
+
+        <p>
+          I don't think a portfolio has to show a finished version
+          of someone. Mine is more like a snapshot of the things
+          I'm learning and the directions I'm exploring.
+        </p>
+
+
+        <div class="direction-grid">
+
+          <div class="direction-item">
+
+            <strong>
+              Fashion
+            </strong>
+
+            <span>
+              Exploring design & creativity.
+            </span>
+
+          </div>
+
+
+          <div class="direction-item">
+
+            <strong>
+              Business
+            </strong>
+
+            <span>
+              Learning how ideas become something bigger.
+            </span>
+
+          </div>
+
+
+          <div class="direction-item">
+
+            <strong>
+              Writing
+            </strong>
+
+            <span>
+              Turning thoughts into stories.
+            </span>
+
+          </div>
+
+
+          <div class="direction-item">
+
+            <strong>
+              Creating
+            </strong>
+
+            <span>
+              Building instead of only imagining.
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- CTA -->
+
+      <section class="portfolio-cta reveal">
+
+        <h2>
+          This is only
+          the beginning.
+        </h2>
+
+        <p>
+          Every project teaches something.
+          The next one might be completely different.
+        </p>
+
+        <a href="contact.html" class="btn btn-primary">
+          Let's Connect
+        </a>
+
+      </section>
+
+
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+
+        <strong>
+          Shivu
+        </strong>
+
+        <span>
+          Creating. Learning. Growing.
+        </span>
+
+      </div>
+
+      <div class="footer-copy">
+
+        © <span id="currentYear"></span>
+        Shivu. All rights reserved.
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- MOBILE MENU SCRIPT -->
+
+  <script>
+  (function(){
+
+    var button = document.getElementById("menuButton");
+    var menu = document.getElementById("navMenu");
+
+    if(!button || !menu){
+      return;
+    }
+
+    button.onclick = function(event){
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      if(menu.classList.contains("open")){
+
+        menu.classList.remove("open");
+
+      }else{
+
+        menu.classList.add("open");
+
+      }
+
+    };
+
+
+    var links = menu.getElementsByTagName("a");
+    var i;
+
+    for(i = 0; i < links.length; i++){
+
+      links[i].onclick = function(){
+
+        menu.classList.remove("open");
+
+      };
+
+    }
+
+  })();
+  </script>
 
 </body>
 </html>

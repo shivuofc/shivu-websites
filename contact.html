@@ -1,248 +1,520 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080812">
 
-    <title>Let's Connect — Shivu</title>
+  <title>Contact — Shivu</title>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      background: #080812 !important;
+    }
+
+    body {
+      color: #ffffff !important;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(115, 75, 255, 0.16), transparent 30%),
+        radial-gradient(circle at 85% 25%, rgba(50, 130, 255, 0.12), transparent 28%),
+        linear-gradient(180deg, #080812 0%, #0b0b18 55%, #080812 100%) !important;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .navbar {
+      padding: 14px 0 !important;
+    }
+
+    .logo {
+      font-size: 16px !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-menu a {
+      font-size: 12px !important;
+      font-weight: 600 !important;
+    }
+
+    .contact-page {
+      width: 100%;
+      max-width: 1180px;
+      margin: auto;
+      padding: 90px 22px 70px;
+    }
+
+    .contact-hero {
+      max-width: 760px;
+      margin-bottom: 55px;
+    }
+
+    .contact-eyebrow {
+      display: inline-flex;
+      padding: 8px 13px;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.045);
+      color: #a9a4ff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.7px;
+      margin-bottom: 20px;
+    }
+
+    .contact-hero h1 {
+      margin: 0;
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: 0.98;
+      letter-spacing: -3px;
+      font-weight: 900;
+    }
+
+    .contact-hero h1 span {
+      background: linear-gradient(90deg, #ffffff, #aaa4ff, #78a9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .contact-hero p {
+      max-width: 650px;
+      margin-top: 23px;
+      color: rgba(255,255,255,0.62);
+      font-size: 17px;
+      line-height: 1.75;
+      padding-right: 10px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .contact-card {
+      position: relative;
+      min-width: 0;
+      padding: 30px;
+      border-radius: 25px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025));
+      box-shadow: 0 20px 70px rgba(0,0,0,0.25);
+      overflow: hidden;
+      text-decoration: none;
+      color: #fff;
+      transition: transform .3s ease, border-color .3s ease;
+    }
+
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      right: -70px;
+      top: -70px;
+      border-radius: 50%;
+      background: rgba(120,100,255,0.18);
+      filter: blur(20px);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(150,140,255,0.32);
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.075);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 21px;
+      margin-bottom: 22px;
+    }
+
+    .contact-card h3 {
+      margin: 0 0 9px;
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .contact-card p {
+      margin: 0;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-card .action {
+      display: inline-block;
+      margin-top: 20px;
+      color: #aaa4ff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+
+    .message-box {
+      margin-top: 22px;
+      padding: 40px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background:
+        radial-gradient(circle at 80% 20%, rgba(112,91,255,0.14), transparent 28%),
+        rgba(255,255,255,0.035);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .message-box h2 {
+      margin: 0;
+      font-size: 30px;
+      font-weight: 850;
+      letter-spacing: -1px;
+    }
+
+    .message-box p {
+      max-width: 650px;
+      margin: 13px 0 0;
+      color: rgba(255,255,255,0.58);
+      line-height: 1.7;
+      font-size: 15px;
+      padding-right: 10px;
+    }
+
+    .message-box .button {
+      display: inline-flex;
+      margin-top: 25px;
+      text-decoration: none;
+    }
+
+    .social-note {
+      margin-top: 50px;
+      text-align: center;
+      color: rgba(255,255,255,0.38);
+      font-size: 12px;
+      letter-spacing: .5px;
+    }
+
+    @media (max-width: 900px) {
+      .contact-page {
+        padding: 70px 18px 55px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .contact-hero p {
+        font-size: 15px;
+      }
+
+      .contact-card,
+      .message-box {
+        padding: 25px;
+      }
+
+      .menu-toggle {
+        display: flex !important;
+        width: 44px !important;
+        height: 44px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+        background: rgba(255,255,255,0.06) !important;
+        border: 1px solid rgba(255,255,255,0.10) !important;
+        border-radius: 13px !important;
+      }
+
+      .menu-toggle span {
+        display: block !important;
+        width: 20px !important;
+        height: 2px !important;
+        background: #fff !important;
+        border-radius: 5px !important;
+      }
+
+      .nav-menu {
+        display: none !important;
+        position: absolute !important;
+        top: 70px !important;
+        left: 12px !important;
+        right: 12px !important;
+        width: auto !important;
+        max-width: calc(100% - 24px) !important;
+        flex-direction: column !important;
+        padding: 12px !important;
+        gap: 4px !important;
+        border-radius: 18px !important;
+        background: rgba(10,10,20,0.97) !important;
+        border: 1px solid rgba(255,255,255,0.10) !important;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.45) !important;
+        z-index: 9999 !important;
+      }
+
+      .nav-menu.open {
+        display: flex !important;
+      }
+
+      .nav-menu a {
+        width: 100% !important;
+        padding: 13px 14px !important;
+        border-radius: 11px !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
-    <header class="navbar">
-        <div class="nav-container">
+  <!-- LOADER -->
+  <div class="page-loader">
+    <div class="loader-content">
+      <div class="loader-ring"></div>
+      <div class="loader-title">Let's Connect</div>
+      <div class="loader-subtitle">Shivu</div>
+    </div>
+  </div>
 
-            <a href="index.html" class="logo">
-                360° <span>Universe</span>
-            </a>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container nav-container">
 
-            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+      <a href="index.html" class="logo">
+        360° Universe
+      </a>
 
-            <nav class="nav-menu" id="navMenu">
-                <a href="index.html">Home</a>
-                <a href="portfolio.html">Portfolio</a>
-                <a href="book.html">Book</a>
-                <a href="thoughts.html">Thoughts</a>
-                <a href="course.html">Growth Lab</a>
-                <a href="contact.html" class="active">Contact</a>
-            </nav>
+      <button
+        class="menu-toggle"
+        id="menuButton"
+        type="button"
+        aria-label="Open menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-        </div>
-    </header>
+      <nav class="nav-menu" id="navMenu">
+        <a href="index.html">Home</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="book.html">Book</a>
+        <a href="thoughts.html">Thoughts</a>
+        <a href="course.html">Growth Lab</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
 
+    </div>
+  </header>
+
+
+  <main class="contact-page">
 
     <!-- HERO -->
-    <main>
+    <section class="contact-hero reveal">
 
-        <section class="page-hero">
-            <div class="hero-glow"></div>
+      <div class="contact-eyebrow">
+        LET'S CONNECT
+      </div>
 
-            <div class="page-hero-content reveal">
+      <h1>
+        Let’s <span>Talk.</span>
+      </h1>
 
-                <div class="eyebrow">
-                    LET'S CONNECT
-                </div>
+      <p>
+        Have an idea, collaboration, project, or simply want to say hello?
+        You can reach me through any of the options below.
+      </p>
 
-                <h1>
-                    Talk to <span>Shivu.</span>
-                </h1>
+    </section>
 
-                <p>
-                    Got an idea, collaboration, question, or just want to say hi?
-                    This is the place to connect.
-                </p>
 
-            </div>
-        </section>
+    <!-- CONTACT OPTIONS -->
+    <section class="contact-grid">
 
+      <!-- WHATSAPP -->
+      <a
+        href="https://wa.me/919992899629"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="contact-card reveal"
+      >
+        <div class="contact-icon">◉</div>
 
-        <!-- CONTACT OPTIONS -->
-        <section class="section-padding">
+        <h3>WhatsApp</h3>
 
-            <div class="section-heading reveal">
+        <p>
+          Send me a message directly on WhatsApp.
+        </p>
 
-                <div class="eyebrow">
-                    FIND ME
-                </div>
+        <span class="action">
+          OPEN WHATSAPP →
+        </span>
+      </a>
 
-                <h2>
-                    Choose your way.
-                </h2>
 
-                <p>
-                    Connect with Shivu through your preferred platform.
-                </p>
+      <!-- EMAIL -->
+      <a
+        href="mailto:shivuofc@gmail.com"
+        class="contact-card reveal"
+      >
+        <div class="contact-icon">✉</div>
 
-            </div>
+        <h3>Email</h3>
 
+        <p>
+          For projects, ideas, collaborations, or anything worth discussing.
+        </p>
 
-            <div class="contact-grid">
+        <span class="action">
+          SEND AN EMAIL →
+        </span>
+      </a>
 
-                <div class="contact-card reveal">
 
-                    <div class="contact-icon">
-                        ◎
-                    </div>
+      <!-- TELEGRAM -->
+      <a
+        href="https://t.me/ShivuOfc"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="contact-card reveal"
+      >
+        <div class="contact-icon">➤</div>
 
-                    <h3>Instagram</h3>
+        <h3>Telegram</h3>
 
-                    <p>
-                        Follow the journey, reels, ideas and latest updates.
-                    </p>
+        <p>
+          Connect with me on Telegram for a quick conversation.
+        </p>
 
-                    <span class="btn btn-secondary">
-                        Your Instagram
-                    </span>
+        <span class="action">
+          OPEN TELEGRAM →
+        </span>
+      </a>
 
-                </div>
 
+      <!-- INSTAGRAM -->
+      <div class="contact-card reveal">
 
-                <div class="contact-card reveal">
+        <div class="contact-icon">◎</div>
 
-                    <div class="contact-icon">
-                        ◇
-                    </div>
+        <h3>Instagram</h3>
 
-                    <h3>WhatsApp</h3>
+        <p>
+          My Instagram presence is being prepared. Something new is coming.
+        </p>
 
-                    <p>
-                        For updates, conversations and selected content.
-                    </p>
+        <span class="action">
+          COMING SOON
+        </span>
 
-                    <span class="btn btn-secondary">
-                        Your WhatsApp
-                    </span>
+      </div>
 
-                </div>
+    </section>
 
 
-                <div class="contact-card reveal">
+    <!-- MESSAGE -->
+    <section class="message-box reveal">
 
-                    <div class="contact-icon">
-                        ✦
-                    </div>
+      <h2>
+        Let’s build something meaningful.
+      </h2>
 
-                    <h3>Telegram</h3>
+      <p>
+        I’m interested in creative ideas, digital projects, writing,
+        content, fashion, business, and things that can become something
+        bigger over time.
+      </p>
 
-                    <p>
-                        Join the space for exclusive updates and community posts.
-                    </p>
+      <a
+        href="mailto:shivuofc@gmail.com"
+        class="button button-primary"
+      >
+        Start a Conversation →
+      </a>
 
-                    <span class="btn btn-secondary">
-                        Your Telegram
-                    </span>
+    </section>
 
-                </div>
 
+    <div class="social-note">
+      Made with ideas, curiosity & a little bit of chaos — Shivu.
+    </div>
 
-                <div class="contact-card reveal">
+  </main>
 
-                    <div class="contact-icon">
-                        @
-                    </div>
 
-                    <h3>Email</h3>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>© <span class="current-year"></span> Shivu. All rights reserved.</p>
+    </div>
+  </footer>
 
-                    <p>
-                        For serious collaborations, projects and enquiries.
-                    </p>
 
-                    <span class="btn btn-secondary">
-                        Your Email
-                    </span>
+  <!-- GLOBAL JS -->
+  <script src="script.js"></script>
 
-                </div>
 
-            </div>
+  <!-- MOBILE MENU -->
+  <script>
+    (function () {
 
-        </section>
+      var button = document.getElementById("menuButton");
+      var menu = document.getElementById("navMenu");
 
+      if (!button || !menu) {
+        return;
+      }
 
-        <!-- MESSAGE -->
-        <section class="quote-section section-padding">
+      button.onclick = function (event) {
 
-            <div class="quote-box reveal">
+        event.preventDefault();
+        event.stopPropagation();
 
-                <div class="quote-mark">
-                    “
-                </div>
+        if (menu.classList.contains("open")) {
+          menu.classList.remove("open");
+        } else {
+          menu.classList.add("open");
+        }
 
-                <p>
-                    Every connection starts with a simple message.
-                    You never know where one conversation can lead.
-                </p>
+      };
 
-                <span>
-                    — Shivu
-                </span>
+      var links = menu.getElementsByTagName("a");
+      var i;
 
-            </div>
+      for (i = 0; i < links.length; i++) {
 
-        </section>
+        links[i].onclick = function () {
+          menu.classList.remove("open");
+        };
 
+      }
 
-        <!-- CTA -->
-        <section class="final-cta section-padding">
-
-            <div class="cta-content reveal">
-
-                <div class="eyebrow">
-                    ONE LAST THING
-                </div>
-
-                <h2>
-                    Keep exploring.
-                </h2>
-
-                <p>
-                    There is more of Shivu's world waiting for you.
-                </p>
-
-                <a href="index.html" class="btn btn-primary">
-                    Back to Home →
-                </a>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- FOOTER -->
-    <footer class="footer">
-
-        <div class="nav-container">
-
-            <div>
-                <div class="logo">
-                    Shivu
-                </div>
-
-                <p>
-                    Creating. Growing. Writing. Exploring.
-                </p>
-            </div>
-
-            <div class="footer-bottom">
-                © 2026 Shivu. All rights reserved.
-                <br>
-                Created by Shivu.
-            </div>
-
-        </div>
-
-    </footer>
-
-
-    <script src="script.js"></script>
+    })();
+  </script>
 
 </body>
 </html>

@@ -1,417 +1,170 @@
-/* SHIVU WEBSITE - MAIN SCRIPT */
+/* =====================================================
+   SHIVU — 360° UNIVERSE
+   CLEAN JAVASCRIPT
+   NO LOADING SCREEN
+===================================================== */
+
+(function () {
+
+  "use strict";
 
 
-/* PAGE LOADER NAMES */
+  /* ==========================================
+     MOBILE NAVIGATION
+  ========================================== */
 
-var loaderNames = {
-    "index.html": "360\u00B0 Universe",
-    "portfolio.html": "My Portfolio",
-    "book.html": "The Last Summer",
-    "thoughts.html": "My Thoughts",
-    "course.html": "Growth Lab",
-    "contact.html": "Let's Connect"
-};
+  var menuButton = document.getElementById("menuButton");
+  var navMenu = document.getElementById("navMenu");
 
 
-/* GET CURRENT PAGE */
+  if (menuButton && navMenu) {
 
-function getCurrentPage() {
-    var page = window.location.pathname.split("/").pop();
+    menuButton.addEventListener("click", function (event) {
 
-    if (page === "" || page === null) {
-        page = "index.html";
-    }
+      event.preventDefault();
+      event.stopPropagation();
 
-    return page;
-}
+      navMenu.classList.toggle("open");
 
-
-/* MOBILE MENU */
-
-function toggleMenu() {
-    var menu = document.getElementById("navMenu");
-
-    if (!menu) {
-        return;
-    }
-
-    if (menu.classList.contains("active")) {
-        menu.classList.remove("active");
-    } else {
-        menu.classList.add("active");
-    }
-}
-
-window.toggleMenu = toggleMenu;
-
-
-function closeMobileMenu() {
-    var menu = document.getElementById("navMenu");
-
-    if (!menu) {
-        return;
-    }
-
-    menu.classList.remove("active");
-}
-
-
-/* LOADER */
-
-function createLoader() {
-
-    if (document.querySelector(".premium-loader")) {
-        return;
-    }
-
-    var page = getCurrentPage();
-    var name = loaderNames[page];
-
-    if (!name) {
-        name = "360\u00B0 Universe";
-    }
-
-    var loader = document.createElement("div");
-    loader.className = "premium-loader";
-
-    var inner = document.createElement("div");
-    inner.className = "loader-inner";
-
-    var logo = document.createElement("div");
-    logo.className = "loader-logo";
-    logo.textContent = name;
-
-    var subtitle = document.createElement("div");
-    subtitle.className = "loader-subtitle";
-    subtitle.textContent = "ENTERING MY UNIVERSE";
-
-    var line = document.createElement("div");
-    line.className = "loader-line";
-
-    inner.appendChild(logo);
-    inner.appendChild(subtitle);
-    inner.appendChild(line);
-
-    loader.appendChild(inner);
-    document.body.appendChild(loader);
-
-    setTimeout(function () {
-        loader.classList.add("hide");
-    }, 900);
-
-    setTimeout(function () {
-        if (loader.parentNode) {
-            loader.parentNode.removeChild(loader);
-        }
-    }, 1600);
-}
-
-
-/* REVEAL ANIMATION */
-
-function setupReveal() {
-
-    var items = document.querySelectorAll(".reveal");
-    var i;
-
-    if (!items.length) {
-        return;
-    }
-
-    if (!window.IntersectionObserver) {
-
-        for (i = 0; i < items.length; i++) {
-            items[i].classList.add("visible");
-        }
-
-        return;
-    }
-
-    var observer = new IntersectionObserver(function (entries) {
-
-        var j;
-
-        for (j = 0; j < entries.length; j++) {
-
-            if (entries[j].isIntersecting) {
-                entries[j].target.classList.add("visible");
-                observer.unobserve(entries[j].target);
-            }
-        }
-
-    }, {
-        threshold: 0.12
     });
 
-    for (i = 0; i < items.length; i++) {
-        observer.observe(items[i]);
-    }
-}
 
+    /* Close menu after clicking a link */
 
-/* SMOOTH LINKS */
+    var navLinks = navMenu.getElementsByTagName("a");
 
-function setupSmoothLinks() {
-
-    var links = document.querySelectorAll('a[href^="#"]');
     var i;
 
-    for (i = 0; i < links.length; i++) {
+    for (i = 0; i < navLinks.length; i++) {
 
-        links[i].addEventListener("click", function (event) {
+      navLinks[i].addEventListener("click", function () {
 
-            var id = this.getAttribute("href");
+        navMenu.classList.remove("open");
 
-            if (!id || id === "#") {
-                return;
-            }
-
-            var target = document.querySelector(id);
-
-            if (!target) {
-                return;
-            }
-
-            event.preventDefault();
-
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-        });
-    }
-}
-
-
-/* MENU LINKS */
-
-function setupMenuLinks() {
-
-    var links = document.querySelectorAll(".nav-menu a");
-    var i;
-
-    for (i = 0; i < links.length; i++) {
-
-        links[i].addEventListener("click", function () {
-            closeMobileMenu();
-        });
+      });
 
     }
-}
 
 
-/* ESCAPE KEY */
+    /* Close menu when clicking outside */
 
-function setupEscapeKey() {
+    document.addEventListener("click", function (event) {
 
-    document.addEventListener("keydown", function (event) {
+      if (
+        !navMenu.contains(event.target) &&
+        !menuButton.contains(event.target)
+      ) {
 
-        if (event.key === "Escape") {
-            closeMobileMenu();
-        }
+        navMenu.classList.remove("open");
+
+      }
 
     });
-}
+
+  }
 
 
-/* BOOK PAGE SYSTEM */
+  /* ==========================================
+     CLOSE MENU WHEN RESIZING TO DESKTOP
+  ========================================== */
 
-function setupBookReader() {
+  window.addEventListener("resize", function () {
 
-    var pages = document.querySelectorAll(".book-page");
+    if (window.innerWidth > 900) {
 
-    if (!pages.length) {
-        return;
+      if (navMenu) {
+        navMenu.classList.remove("open");
+      }
+
     }
 
-    var nextButton = document.getElementById("nextPage");
-    var previousButton = document.getElementById("previousPage");
-    var pageNumber = document.getElementById("pageNumber");
+  });
 
-    var currentPage = 0;
 
-    function showPage(number) {
+  /* ==========================================
+     REMOVE ANY OLD LOADER
+     NO NEW LOADER IS CREATED
+  ========================================== */
 
-        var i;
+  function removeOldLoader() {
 
-        if (number < 0) {
-            number = 0;
+    var selectors = [
+      ".site-loader",
+      "#siteLoader",
+      "#loader",
+      ".loading-screen",
+      ".loader-screen",
+      ".page-loader"
+    ];
+
+    var i;
+    var j;
+    var elements;
+
+    for (i = 0; i < selectors.length; i++) {
+
+      elements = document.querySelectorAll(selectors[i]);
+
+      for (j = 0; j < elements.length; j++) {
+
+        if (
+          elements[j] &&
+          elements[j].parentNode
+        ) {
+
+          elements[j].parentNode.removeChild(
+            elements[j]
+          );
+
         }
 
-        if (number >= pages.length) {
-            number = pages.length - 1;
-        }
+      }
 
-        currentPage = number;
-
-        for (i = 0; i < pages.length; i++) {
-
-            if (i === currentPage) {
-                pages[i].classList.add("active");
-            } else {
-                pages[i].classList.remove("active");
-            }
-        }
-
-        if (pageNumber) {
-            pageNumber.textContent =
-                (currentPage + 1) + " / " + pages.length;
-        }
-
-        if (previousButton) {
-
-            if (currentPage === 0) {
-                previousButton.disabled = true;
-            } else {
-                previousButton.disabled = false;
-            }
-        }
-
-        if (nextButton) {
-
-            if (currentPage === pages.length - 1) {
-                nextButton.disabled = true;
-            } else {
-                nextButton.disabled = false;
-            }
-        }
-
-        window.scrollTo(0, 0);
     }
 
-
-    if (nextButton) {
-
-        nextButton.addEventListener("click", function () {
-
-            if (currentPage < pages.length - 1) {
-                showPage(currentPage + 1);
-            }
-
-        });
-    }
+  }
 
 
-    if (previousButton) {
-
-        previousButton.addEventListener("click", function () {
-
-            if (currentPage > 0) {
-                showPage(currentPage - 1);
-            }
-
-        });
-    }
+  removeOldLoader();
 
 
-    showPage(0);
-}
+  /* ==========================================
+     MAKE SURE PAGE CONTENT IS VISIBLE
+  ========================================== */
 
+  function showPageContent() {
 
-/* KEYBOARD BOOK NAVIGATION */
+    var elements =
+      document.querySelectorAll(".reveal");
 
-function setupBookKeyboard() {
-
-    var pages = document.querySelectorAll(".book-page");
-
-    if (!pages.length) {
-        return;
-    }
-
-    document.addEventListener("keydown", function (event) {
-
-        var nextButton = document.getElementById("nextPage");
-        var previousButton = document.getElementById("previousPage");
-
-        if (event.key === "ArrowRight") {
-
-            if (nextButton && !nextButton.disabled) {
-                nextButton.click();
-            }
-        }
-
-        if (event.key === "ArrowLeft") {
-
-            if (previousButton && !previousButton.disabled) {
-                previousButton.click();
-            }
-        }
-
-    });
-}
-
-
-/* PAGE TRANSITION */
-
-function setupPageTransitions() {
-
-    var links = document.querySelectorAll('a[href$=".html"]');
     var i;
 
-    for (i = 0; i < links.length; i++) {
+    for (i = 0; i < elements.length; i++) {
 
-        links[i].addEventListener("click", function (event) {
+      elements[i].classList.add("show");
 
-            var href = this.getAttribute("href");
+      elements[i].style.opacity = "1";
+      elements[i].style.visibility = "visible";
+      elements[i].style.transform = "none";
 
-            if (!href) {
-                return;
-            }
-
-            if (href.indexOf("http") === 0) {
-                return;
-            }
-
-            if (href.indexOf("#") === 0) {
-                return;
-            }
-
-            if (href === getCurrentPage()) {
-                return;
-            }
-
-            event.preventDefault();
-
-            var transition = document.querySelector(".page-transition");
-
-            if (!transition) {
-
-                transition = document.createElement("div");
-                transition.className = "page-transition";
-
-                document.body.appendChild(transition);
-            }
-
-            transition.classList.add("active");
-
-            setTimeout(function () {
-                window.location.href = href;
-            }, 300);
-
-        });
     }
-}
+
+  }
 
 
-/* START EVERYTHING */
+  showPageContent();
 
-document.addEventListener("DOMContentLoaded", function () {
 
-    createLoader();
+  /* ==========================================
+     PAGE LOAD
+  ========================================== */
 
-    setupReveal();
+  window.addEventListener("load", function () {
 
-    setupSmoothLinks();
+    removeOldLoader();
+    showPageContent();
 
-    setupMenuLinks();
+  });
 
-    setupEscapeKey();
 
-    setupPageTransitions();
-
-    setupBookReader();
-
-    setupBookKeyboard();
-
-});
+})();
